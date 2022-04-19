@@ -44,3 +44,5 @@ Thumbs.db
 # Ignore built ts files
 .nuxt
 dist
+
+.parcel-cache
