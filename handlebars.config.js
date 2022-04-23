@@ -1,3 +1,3 @@
 module.exports = {
-    pages: "src/pages",
+	pages: 'src/pages',
 };
