@@ -4,7 +4,7 @@
   "source": "./src/index.html",
   "scripts": {
     "start": "npm run build && node server.js",
-    "build": "parcel build src/index.html --no-optimize",
+    "build": "parcel build src/index.html",
     "dev": "parcel src/index.html",
     "lint": "eslint --fix --ext .js ./"
   },
