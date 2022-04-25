@@ -2,13 +2,20 @@
 
 Потемкинские деревни в стиле WhatsApp
 
-# Demo
+## Demo
 
 ```
 https://frabjous-paletas-38af62.netlify.app
 ```
 
-# В работе использовались:
+
+## Макет
+
+```
+https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3A1
+```
+
+## В работе использовались:
 
 - HTML
 - Less
@@ -16,7 +23,7 @@ https://frabjous-paletas-38af62.netlify.app
 - Parcel
 
 
-# Установка
+## Установка
 
 Перед началом работы необходимо проверить наличие установленного node.js и npm
 
@@ -32,19 +39,19 @@ git clone https://github.com/TolkachevPeter/middle.messenger.praktikum.yandex.gi
 npm install
 ```
 
-# Сборка для разработки
+## Сборка для разработки
 
 ```
 npm run dev
 ```
 
-# Сборка для продакшена
+## Сборка для продакшена
 
 ```
 npm run build
 ```
 
-# Локальный сервер
+## Локальный сервер
 
 ```
 npm run start
