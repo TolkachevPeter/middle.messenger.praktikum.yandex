@@ -2,6 +2,12 @@
 
 Потемкинские деревни в стиле WhatsApp
 
+# Demo
+
+```
+https://frabjous-paletas-38af62.netlify.app
+```
+
 # В работе использовались:
 
 - HTML
