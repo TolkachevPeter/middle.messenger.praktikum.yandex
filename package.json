@@ -5,8 +5,8 @@
   "scripts": {
     "start": "npm run build && node server.js",
     "build": "parcel build src/index.html --no-optimize",
-    "dev": "parcel index.html",
-    "lint": "./node_modules/.bin/eslint --fix --ext .js ./"
+    "dev": "parcel src/index.html",
+    "lint": "eslint --fix --ext .js ./"
   },
   "devDependencies": {
     "@parcel/transformer-css": "^2.5.0",

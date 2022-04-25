@@ -6,6 +6,6 @@ const template = Handlebars.compile(error);
 
 export default (errorCode, errorDescription) =>
 	template({
-		errorCode: errorCode,
-		errorDescription: errorDescription,
+		errorCode,
+		errorDescription,
 	});

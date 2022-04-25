@@ -12,9 +12,9 @@ export default (
 	inputFieldValue = ''
 ) =>
 	template({
-		inputFieldId: inputFieldId,
-		inputFieldText: inputFieldText,
-		inputFieldPlaceholder: inputFieldPlaceholder,
-		inputFieldType: inputFieldType,
-		inputFieldValue: inputFieldValue,
+		inputFieldId,
+		inputFieldText,
+		inputFieldPlaceholder,
+		inputFieldType,
+		inputFieldValue,
 	});
