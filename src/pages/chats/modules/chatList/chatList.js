@@ -17,6 +17,11 @@ const chatContacts = [
 		lastMessage: 'Верстка слегка скучна',
 		lastMessageTime: '10:05',
 	},
+	{
+		name: 'review',
+		lastMessage: window.location.href,
+		lastMessageTime: new Date().toLocaleTimeString(),
+	},
 ];
 
 Handlebars.registerPartial('searchField', generateSearchField());
