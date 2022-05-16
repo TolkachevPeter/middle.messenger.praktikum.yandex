@@ -4,5 +4,5 @@ import './button.less';
 
 const template = Handlebars.compile(button);
 
-export default (buttonId, buttonText) =>
+export default (buttonId, buttonText): string =>
 	template({ buttonId, buttonText });

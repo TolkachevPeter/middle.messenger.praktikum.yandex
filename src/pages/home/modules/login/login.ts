@@ -2,7 +2,7 @@ import Handlebars from 'handlebars';
 import login from './login.tmpl';
 import './login.less';
 import { generateButton } from '../../../../components/button';
-import { generateInpField } from '../input/index.js';
+import { generateInpField } from '../input/index';
 
 Handlebars.registerPartial(
 	'signInButton',

@@ -7,7 +7,7 @@ import { generateErrorPage } from './pages/errors';
 
 function errorPageLoaded() {
 	document
-		.getElementById('navToChats')
+		.getElementById('navToChats')!
 		.addEventListener('click', function navToChats() {
 			document.body.innerHTML = generateChatPage();
 			chatPageLoaded();
@@ -16,14 +16,14 @@ function errorPageLoaded() {
 
 function profilePageLoaded() {
 	document
-		.getElementById('navToChats')
+		.getElementById('navToChats')!
 		.addEventListener('click', function navToChats() {
 			document.body.innerHTML = generateChatPage();
 			chatPageLoaded();
 		});
 
 	document
-		.querySelector('.profileConfigs__changeUserSettings')
+		.querySelector('.profileConfigs__changeUserSettings')!
 		.addEventListener('click', function navToErrorPage() {
 			document.body.innerHTML = generateErrorPage(
 				404,
@@ -33,7 +33,7 @@ function profilePageLoaded() {
 		});
 
 	document
-		.querySelector('.profileConfigs__logout')
+		.querySelector('.profileConfigs__logout')!
 		.addEventListener('click', function navToErrorPage() {
 			document.body.innerHTML = generateErrorPage(
 				500,
@@ -45,7 +45,7 @@ function profilePageLoaded() {
 
 function chatPageLoaded() {
 	document
-		.querySelector('.chatListContainer__profileLinkText')
+		.querySelector('.chatListContainer__profileLinkText')!
 		.addEventListener('click', function navToProfile() {
 			document.body.innerHTML = generateUserPage();
 			profilePageLoaded();
@@ -54,14 +54,14 @@ function chatPageLoaded() {
 
 function registrationPageLoaded() {
 	document
-		.getElementById('navToSignIn')
+		.getElementById('navToSignIn')!
 		.addEventListener('click', function navToRegistration() {
 			document.body.innerHTML = generateLoginModule();
 			loginPageLoaded();
 		});
 
 	document
-		.getElementById('navToChats')
+		.getElementById('navToChats')!
 		.addEventListener('click', function navToChats() {
 			document.body.innerHTML = generateChatPage();
 			chatPageLoaded();
@@ -70,14 +70,14 @@ function registrationPageLoaded() {
 
 function loginPageLoaded() {
 	document
-		.getElementById('navToRegistration')
+		.getElementById('navToRegistration')!
 		.addEventListener('click', function navToRegistration() {
 			document.body.innerHTML = generateRegistrationModule();
 			registrationPageLoaded();
 		});
 
 	document
-		.getElementById('navToChats')
+		.getElementById('navToChats')!
 		.addEventListener('click', function navToChats() {
 			document.body.innerHTML = generateChatPage();
 			chatPageLoaded();

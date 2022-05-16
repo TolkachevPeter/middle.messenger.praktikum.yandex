@@ -1,4 +1,3 @@
-// language=hbs
 export default `
 <div class="container">
   <form class="registrationForm">
