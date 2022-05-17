@@ -6,7 +6,7 @@
     "start": "npm run build && node server.js",
     "build": "parcel build src/index.html",
     "dev": "parcel src/index.html",
-    "lint": "eslint --fix --ext .js ./"
+    "lint": "eslint --fix --ext .ts ./"
   },
   "devDependencies": {
     "@parcel/transformer-css": "2.5.0",

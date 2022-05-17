@@ -4,7 +4,7 @@ import chatList from './chatList.tmpl';
 import './chatList.tmpl';
 import './chatList.less';
 
-import { generateSearchField } from '../../../../components/search/index.js';
+import { generateSearchField } from '../../../../components/search/index';
 
 const chatContacts = [
 	{
