@@ -1,1 +1,3 @@
-export { default as generateButton } from './button';
+import Button from './button';
+
+export default Button;

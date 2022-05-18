@@ -13,7 +13,9 @@ export class Block {
     };
     props: any;
     eventBus: () => EventBus;
-    private _element: HTMLElement | {innerHTML: void, style: {display: string}};
+    private _element:
+        | HTMLElement
+        | { innerHTML: void; style: { display: string } };
     /** JSDoc
      * @param {string} tagName
      * @param {Object} props
@@ -35,7 +37,7 @@ export class Block {
         eventBus.emit(Block.EVENTS.INIT);
     }
 
-    _registerEvents(eventBus) {
+    _registerEvents(eventBus: EventBus) {
         eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
@@ -57,13 +59,13 @@ export class Block {
         this.componentDidMount();
     }
 
-    componentDidMount(oldProps?) {}
+    componentDidMount() {}
 
     dispatchComponentDidMount() {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
     }
 
-    _componentDidUpdate(oldProps, newProps) {
+    _componentDidUpdate(oldProps: string, newProps: string) {
         const response = this.componentDidUpdate(oldProps, newProps);
         if (!response) {
             return;
@@ -71,7 +73,7 @@ export class Block {
         this._render();
     }
 
-    componentDidUpdate(oldProps, newProps) {
+    componentDidUpdate(): boolean {
         return true;
     }
 
