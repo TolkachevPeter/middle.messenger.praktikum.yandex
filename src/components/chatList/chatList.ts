@@ -1,10 +1,10 @@
 import Handlebars from 'handlebars';
 import chatList from './chatList.tmpl';
+import Block from '../../commonClasses/Block';
 
-import './chatList.tmpl';
 import './chatList.less';
 
-import { generateSearchField } from '../../../../components/search/index';
+import { generateSearchField } from '../search/index';
 
 const chatContacts = [
 	{

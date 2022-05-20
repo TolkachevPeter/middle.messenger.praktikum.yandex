@@ -1,5 +1,5 @@
 import Handlebars from 'handlebars';
-import { chatList } from './modules/chatList/index';
+import { chatList } from '../../components/chatList/index';
 import chat from './chat.tmpl';
 import './chat.less';
 
