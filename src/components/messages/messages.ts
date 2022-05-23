@@ -2,3 +2,11 @@ import messages from './messages.tmpl';
 import Button from '../button';
 import Block from "../../commonClasses/Block";
 import RenderHelper from "../../commonClasses/RenderHelper";
+import { noEmptyStringCheck } from '../../global/regex';
+
+
+export default class Messages extends Block {
+	constructor() {
+		super('div');
+	}
+}
