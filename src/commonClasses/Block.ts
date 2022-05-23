@@ -15,7 +15,7 @@ export default class Block {
     eventBus: () => EventBus;
     private _element:
         | HTMLElement
-        | { innerHTML: void; style: { display: string } };
+        // | { innerHTML: void; style: { display: string } };
     /** JSDoc
      * @param {string} tagName
      * @param {Object} props
@@ -85,7 +85,7 @@ export default class Block {
         Object.assign(this.props, nextProps);
     };
 
-    get element() {
+    getElement(): HTMLElement {
         return this._element;
     }
 
