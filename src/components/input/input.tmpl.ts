@@ -11,7 +11,7 @@ export default `
         type="{{inputType}}"
         value="{{inputValue}}"
         name="{{inputText}}"
-        class="input {{inpFieldStyle}}"
+        class="input {{inputStyle}}"
         {{#if readOnly}}readonly{{/if}}>
     </div>
     {{#unless isValid}}
