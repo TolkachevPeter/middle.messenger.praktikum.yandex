@@ -1,5 +1,5 @@
-@import '../../../../global/fonts.less';
-@import '../../../../global/styles.less';
+@import '../../global/fonts.less';
+@import '../../global/styles.less';
 
 html,
 body {
@@ -29,7 +29,7 @@ body {
 	line-height: 1.4rem;
 	margin-top: 4rem;
 	text-align: center;
-	color: #1E1E1E;
+	color: @eerieBlack;
 }
 
 .formBottom {
@@ -39,18 +39,34 @@ body {
 	margin-top: 3rem;
 }
 
-.login__registrationText {
+.link-registration {
 	.fontRegular;
-	color: #3369F3;
+	font-style: normal;
+	color: @ultramarineBlue;
 	font-size: 0.8rem;
 	line-height: 0.8rem;
+	margin: 1rem 0;
+	cursor: pointer;
+}
 
-	a {
-		color: #3369F3;
-		text-decoration: none;
-	}
+.link-registration:hover {
+	text-decoration: underline;
+}
 
-	a:hover {
-		text-decoration: underline;
-	}
+.loginLabelStyle {
+	.fontMedium;
+	display: none;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 0.6rem;
+	line-height: 0.6rem;
+	color: @baseGray;
+}
+
+.loginInputStyle {
+	outline: 0;
+	margin-top: 1.8rem;
+	height: 1.5rem;
+	border-width: 0 0 1px;
+	border-color: @ultramarineBlue;
 }

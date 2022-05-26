@@ -1,10 +1,16 @@
-import login from "./login.tmpl";
+import registration from "./registration.tmpl";
 import "./login.less";
 import Button from "../../components/button";
 import Block from "../../commonClasses/Block";
 import { Form } from "../../types/types";
 import Input from "../../components/input/input";
-import { loginCheck, passwordCheck } from "../../global/regex";
+import {
+    emailCheck,
+    loginCheck,
+    nameOrSurnameCheck,
+    passwordCheck,
+    phoneCheck,
+} from "../../global/regex";
 import Link from "../../components/link";
 import { navTo } from "../../router";
 import RenderHelper from "../../commonClasses/RenderHelper";
@@ -14,6 +20,10 @@ export default class Login extends Block {
     loginInput: Input;
     passwordInput: Input;
     linkToRegistration: Link;
+    emailInput: Input;
+    nameInput: Input;
+    surnameInput: Input;
+    phoneInput: Input;
     constructor() {
         super("div");
     }
@@ -21,19 +31,55 @@ export default class Login extends Block {
     componentDidMount() {
         this.button = new Button({
             buttonStyle: "button_style_default",
-            buttonText: "Sign in",
+            buttonText: "Complete registration",
             events: {
-                click: this.onClickSignIn.bind(this),
+                click: this.onClickRegistration.bind(this),
             },
         });
         this.loginInput = new Input({
             inputText: "Login",
             inputPlaceholder: "Login",
-            inputStyle: "loginInputStyle",
-            labelStyle: "loginLabelStyle",
+            inputStyle: "registrationInputStyle",
+            labelStyle: "registrationInputStyle",
             readOnly: false,
             mediumMarginHorizontally: true,
             validation: loginCheck,
+        });
+        this.emailInput = new Input({
+            inputText: "Email",
+            inputPlaceholder: "Email",
+            inputStyle: "registrationInputStyle",
+            labelStyle: "registrationInputStyle",
+            readOnly: false,
+            mediumMarginHorizontally: true,
+            validation: emailCheck,
+        });
+        this.nameInput = new Input({
+            inputText: "Name",
+            inputPlaceholder: "Name",
+            inputStyle: "registrationInputStyle",
+            labelStyle: "registrationInputStyle",
+            readOnly: false,
+            mediumMarginHorizontally: true,
+            validation: nameOrSurnameCheck,
+        });
+        this.surnameInput = new Input({
+            inputText: "Surname",
+            inputPlaceholder: "Surname",
+            inputStyle: "registrationInputStyle",
+            labelStyle: "registrationInputStyle",
+            readOnly: false,
+            mediumMarginHorizontally: true,
+            validation: nameOrSurnameCheck,
+        });
+        this.phoneInput = new Input({
+            inputText: "Phone",
+            inputPlaceholder: "Phone",
+            inputStyle: "registrationInputStyle",
+            labelStyle: "registrationInputStyle",
+            readOnly: false,
+            mediumMarginHorizontally: true,
+            validation: phoneCheck,
         });
         this.passwordInput = new Input({
             inputText: "Password",
@@ -45,10 +91,10 @@ export default class Login extends Block {
             validation: passwordCheck,
         });
         this.linkToRegistration = new Link({
-            linkText: "Registration",
-            linkStyle: "link-registration",
+            linkText: "Sign In",
+            linkStyle: "link-signin",
             event: {
-                click: this.onClickLinkToRegistration.bind(this),
+                click: this.onClickLinkToSignIn.bind(this),
             },
         });
     }
@@ -59,8 +105,8 @@ export default class Login extends Block {
         this.loginInput.validateInput();
     }
 
-    onClickLinkToRegistration() {
-        navTo("registrationPage");
+    onClickLinkToSignIn() {
+        navTo("loginPage");
     }
 
     render() {

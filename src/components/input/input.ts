@@ -4,19 +4,22 @@ import Block from "../../commonClasses/Block";
 import RenderHelper from "../../commonClasses/RenderHelper";
 
 type Props = {
-    inputText: string;
-    inputPlaceholder: string;
-    inputType: string;
-    inputValue: string;
-    inputStyle: string;
-    labelStyle: string;
-    readOnly: boolean;
-    mediumMarginHorizontally: boolean;
-    vbox: boolean;
-    style_justifyContentSpaceBetween: boolean;
-    isValid: boolean;
-    validationMessage: string;
-    isLabelEnabled: boolean;
+    inputText?: string;
+    inputPlaceholder?: string;
+    inputType?: string;
+    inputValue?: string;
+    inputStyle?: string;
+    labelStyle?: string;
+    readOnly?: boolean;
+    mediumMarginHorizontally?: boolean;
+    vbox?: boolean;
+    style_justifyContentSpaceBetween?: boolean;
+    isValid?: boolean;
+    isLabelEnabled?: boolean;
+    validation?: {
+        regex: RegExp;
+        validationMessage: string;
+    };
 };
 
 export default class Input extends Block {
@@ -87,6 +90,10 @@ export default class Input extends Block {
         return (this.getElement().querySelector(".input") as HTMLInputElement)
             .value;
     }
+
+	validateInput(){
+		this.getElement().querySelector(".input")?.dispatchEvent(new Event('blur'))
+	}
 
     render() {
         const renderHelper = new RenderHelper();

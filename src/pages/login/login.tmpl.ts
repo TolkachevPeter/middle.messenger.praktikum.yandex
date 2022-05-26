@@ -3,8 +3,8 @@ export default `
   <form class="loginForm">
     <div>
       <p class="form__header">Login</p>
-      {{> loginInputField}}
-      {{> passwordInputField}}
+      {{> loginInput}}
+      {{> passwordInput}}
     </div>
     <div class="formBottom">
       {{> signInButton}}
