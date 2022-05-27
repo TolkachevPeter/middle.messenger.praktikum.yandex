@@ -3,13 +3,13 @@ export default `
   <form class="registrationForm">
     <div>
       <p class="form__header">Registration</p>
-      {{> emailInputFieldReg }}
-      {{> loginInputFieldReg }}
-      {{> nameInputFieldReg }}
-      {{> surnameInputFieldReg }}
-      {{> phoneInputFieldReg }}
-      {{> passwordInputFieldReg }}
-      {{> passwordAgainInputFieldReg }}
+      {{> emailInput }}
+      {{> loginInput }}
+      {{> nameInput }}
+      {{> surnameInput }}
+      {{> phoneInput }}
+      {{> passwordInput }}
+      {{> passwordSecondInput }}
     </div>
     <div class="formBottom">
       {{> completeRegistration}}

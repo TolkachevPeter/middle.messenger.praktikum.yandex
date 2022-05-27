@@ -1,5 +1,5 @@
-@import '../../../../global/fonts.less';
-@import '../../../../global/styles.less';
+@import '../../global/fonts.less';
+@import '../../global/styles.less';
 
 html,
 body {
@@ -53,4 +53,36 @@ body {
 	a:hover {
 		text-decoration: underline;
 	}
+}
+
+.registrationLabelStyle {
+	.fontMedium;
+	display: none;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 0.6rem;
+	line-height: 0.6rem;
+	color: @baseGray;
+}
+
+.registrationInputStyle {
+	outline: 0;
+	margin-top: 1.8rem;
+	height: 1.5rem;
+	border-width: 0 0 1px;
+	border-color: @ultramarineBlue;
+}
+
+.link-signin {
+	.fontRegular;
+	font-style: normal;
+	color: @ultramarineBlue;
+	font-size: 0.8rem;
+	line-height: 0.8rem;
+	margin: 1rem 0;
+	cursor: pointer;
+}
+
+.link-signin:hover {
+	text-decoration: underline;
 }

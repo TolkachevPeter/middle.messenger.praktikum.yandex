@@ -1,5 +1,6 @@
 import Handlebars from "handlebars";
 import input from "./input.tmpl";
+import './input.less';
 import Block from "../../commonClasses/Block";
 import RenderHelper from "../../commonClasses/RenderHelper";
 

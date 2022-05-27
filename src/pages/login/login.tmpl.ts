@@ -8,7 +8,7 @@ export default `
     </div>
     <div class="formBottom">
       {{> signInButton}}
-      <p class="login__registrationText"><a id="navToRegistration">Registration</a></p>
+      {{> linkToRegistration}}
     </div>
   </form>  
 </div>

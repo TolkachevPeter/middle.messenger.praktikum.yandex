@@ -1,10 +1,11 @@
 import {generateLoginModule} from "../pages/login";
+import { generateRegistrationModule } from "../pages/registration";
 
 
 
 const pageRouter = {
     loginPage: new generateLoginModule(),
-    // registrationPage: new RegistrationPage(),
+    registrationPage: new generateRegistrationModule(),
     // chatsPage: new ChatsPage(),
     // profilePage: new ProfilePage(),
     // page404: new ErrorPage({
@@ -25,6 +26,7 @@ export function navTo(pageToNavigate: string) {
         newDiv.id = "chat";
 		root = newDiv;
 	}
+		console.log(pageToNavigate);
 
 
     if (root && pageToNavigate) {

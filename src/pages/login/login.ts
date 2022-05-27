@@ -47,7 +47,7 @@ export default class Login extends Block {
         this.linkToRegistration = new Link({
             linkText: "Registration",
             linkStyle: "link-registration",
-            event: {
+            events: {
                 click: this.onClickLinkToRegistration.bind(this),
             },
         });
@@ -60,6 +60,7 @@ export default class Login extends Block {
     }
 
     onClickLinkToRegistration() {
+		console.log('click');
         navTo("registrationPage");
     }
 

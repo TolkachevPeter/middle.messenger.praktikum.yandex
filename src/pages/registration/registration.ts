@@ -1,5 +1,5 @@
 import registration from "./registration.tmpl";
-import "./login.less";
+import "./registration.less";
 import Button from "../../components/button";
 import Block from "../../commonClasses/Block";
 import { Form } from "../../types/types";
@@ -41,7 +41,7 @@ export default class Login extends Block {
             inputText: "Login",
             inputPlaceholder: "Login",
             inputStyle: "registrationInputStyle",
-            labelStyle: "registrationInputStyle",
+            labelStyle: "registrationLabelStyle",
             readOnly: false,
             mediumMarginHorizontally: true,
             validation: loginCheck,
@@ -50,7 +50,7 @@ export default class Login extends Block {
             inputText: "Email",
             inputPlaceholder: "Email",
             inputStyle: "registrationInputStyle",
-            labelStyle: "registrationInputStyle",
+            labelStyle: "registrationLabelStyle",
             readOnly: false,
             mediumMarginHorizontally: true,
             validation: emailCheck,
@@ -59,7 +59,7 @@ export default class Login extends Block {
             inputText: "Name",
             inputPlaceholder: "Name",
             inputStyle: "registrationInputStyle",
-            labelStyle: "registrationInputStyle",
+            labelStyle: "registrationLabelStyle",
             readOnly: false,
             mediumMarginHorizontally: true,
             validation: nameOrSurnameCheck,
@@ -68,7 +68,7 @@ export default class Login extends Block {
             inputText: "Surname",
             inputPlaceholder: "Surname",
             inputStyle: "registrationInputStyle",
-            labelStyle: "registrationInputStyle",
+            labelStyle: "registrationLabelStyle",
             readOnly: false,
             mediumMarginHorizontally: true,
             validation: nameOrSurnameCheck,
@@ -77,7 +77,7 @@ export default class Login extends Block {
             inputText: "Phone",
             inputPlaceholder: "Phone",
             inputStyle: "registrationInputStyle",
-            labelStyle: "registrationInputStyle",
+            labelStyle: "registrationLabelStyle",
             readOnly: false,
             mediumMarginHorizontally: true,
             validation: phoneCheck,
@@ -164,7 +164,7 @@ export default class Login extends Block {
             this.nameInput.renderAsHTMLString()
         );
         renderHelper.registerPartial(
-            "Surname",
+            "surnameInput",
             this.surnameInput.renderAsHTMLString()
         );
         renderHelper.registerPartial(

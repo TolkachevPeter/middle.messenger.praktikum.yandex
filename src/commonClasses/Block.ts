@@ -98,13 +98,11 @@ export default class Block {
     private _render() {
         const block = this.render();
         this._element.innerHTML = "";
-        //  todo this.removeListneres()
         this._element.appendChild(block);
         this._addEvents();
     }
 
     renderAsHTMLString() {
-        // this method is needed when we work with html templates in handlebars partials
         return this._element.outerHTML;
     }
 
