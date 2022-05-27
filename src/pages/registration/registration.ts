@@ -24,6 +24,7 @@ export default class Login extends Block {
     nameInput: Input;
     surnameInput: Input;
     phoneInput: Input;
+	passwordSecondInput: Input;
     constructor() {
         super("div");
     }
@@ -90,6 +91,15 @@ export default class Login extends Block {
             mediumMarginHorizontally: true,
             validation: passwordCheck,
         });
+        this.passwordSecondInput = new Input({
+            inputText: "Password",
+            inputPlaceholder: "Password",
+            inputStyle: "loginInputStyle",
+            inputType: "password",
+            labelStyle: "loginLabelStyle",
+            mediumMarginHorizontally: true,
+            validation: passwordCheck,
+        });
         this.linkToRegistration = new Link({
             linkText: "Sign In",
             linkStyle: "link-signin",
@@ -109,10 +119,36 @@ export default class Login extends Block {
         navTo("loginPage");
     }
 
+    onClickRegistration() {
+        const { registrationForm } = document.forms as Form;
+        getFormData(registrationForm);
+        this.getAllInputs().forEach((input) => {
+            input.validateInput();
+        });
+        const isValidationPassed = this.getAllInputs()
+            .map((inpField) => inpField.getIsInputValid())
+            .every((isValidField) => isValidField);
+        if (isValidationPassed) {
+            navTo("chatsPage");
+        }
+    }
+
+    getAllInputs() {
+        return [
+            this.loginInput,
+            this.emailInput,
+            this.nameInput,
+            this.surnameInput,
+            this.phoneInput,
+            this.passwordInput,
+            this.passwordSecondInput,
+        ];
+    }
+
     render() {
         const renderHelper = new RenderHelper();
         renderHelper.registerPartial(
-            "signInButton",
+            "completeRegistration",
             this.button.renderAsHTMLString()
         );
         renderHelper.registerPartial(
@@ -120,19 +156,38 @@ export default class Login extends Block {
             this.loginInput.renderAsHTMLString()
         );
         renderHelper.registerPartial(
+            "emailInput",
+            this.emailInput.renderAsHTMLString()
+        );
+        renderHelper.registerPartial(
+            "nameInput",
+            this.nameInput.renderAsHTMLString()
+        );
+        renderHelper.registerPartial(
+            "Surname",
+            this.surnameInput.renderAsHTMLString()
+        );
+        renderHelper.registerPartial(
+            "phoneInput",
+            this.phoneInput.renderAsHTMLString()
+        );
+        renderHelper.registerPartial(
             "passwordInput",
             this.passwordInput.renderAsHTMLString()
+        );
+        renderHelper.registerPartial(
+            "passwordSecondInput",
+            this.passwordSecondInput.renderAsHTMLString()
         );
         renderHelper.registerPartial(
             "linkToRegistration",
             this.linkToRegistration.renderAsHTMLString()
         );
-        const templateHTML = renderHelper.generate(login);
+        const templateHTML = renderHelper.generate(registration);
         return renderHelper.replaceElements(templateHTML, [
             this.button,
-            this.loginInput,
-            this.passwordInput,
-            this.linkToRegistration,
+            this.linkToRegistration, 
+			...this.getAllInputs()
         ]);
     }
 }
