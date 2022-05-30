@@ -1,13 +1,22 @@
 import Request from "./request";
 
-export default class ChatService {
+export type UserInfo = {
+	id: number;
+	first_name: string;
+	second_name: string;
+	display_name: string;
+	login: string;
+	email: string;
+	phone: string;
+	avatar: string;
+}
+export default class UserService {
     request: Request;
-
     constructor() {
         this.request = new Request();
     }
 
-    getUserInfo() {
+    public getUserInfo(): UserInfo {
         return {
             id: 123,
             first_name: "Peter",

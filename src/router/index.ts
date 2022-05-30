@@ -1,3 +1,5 @@
+import { generateChatPage } from "../pages/chats";
+import { generateErrorPage } from "../pages/errors";
 import {generateLoginModule} from "../pages/login";
 import { generateRegistrationModule } from "../pages/registration";
 
@@ -6,16 +8,10 @@ import { generateRegistrationModule } from "../pages/registration";
 const pageRouter = {
     loginPage: new generateLoginModule(),
     registrationPage: new generateRegistrationModule(),
-    // chatsPage: new ChatsPage(),
-    // profilePage: new ProfilePage(),
-    // page404: new ErrorPage({
-    //     errorCode: 404,
-    //     desc: "Sorry, but this page does not exist",
-    // }),
-    // page500: new ErrorPage({
-    //     errorCode: 500,
-    //     desc: "We are working to fix the problem!",
-    // }),
+    chatPage: new generateChatPage(),
+    profilePage: new generateChatPage(),
+    page404: generateErrorPage(404, "Sorry, but this page does not exist"),
+    page500: generateErrorPage(500, "We are working to fix the problem!"),
 };
 
 export function navTo(pageToNavigate: string) {

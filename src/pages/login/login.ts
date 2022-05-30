@@ -20,7 +20,7 @@ export default class Login extends Block {
 
     componentDidMount() {
         this.button = new Button({
-            buttonStyle: "button_style_default",
+            buttonStyle: "defaultButton",
             buttonText: "Sign in",
             events: {
                 click: this.onClickSignIn.bind(this),
@@ -54,13 +54,16 @@ export default class Login extends Block {
     }
 
     onClickSignIn() {
+		console.log("clickSignIn");
         const { loginForm } = document.forms as Form;
         getFormData(loginForm);
         this.loginInput.validateInput();
+		
+		navTo("chatPage");
     }
 
     onClickLinkToRegistration() {
-		console.log('click');
+		console.log('click Registration');
         navTo("registrationPage");
     }
 

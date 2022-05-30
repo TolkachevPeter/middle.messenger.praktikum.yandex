@@ -22,7 +22,7 @@ export default `
 		<form name="messageForm" id="messageForm" class="form-message" onsubmit="return false">
 			<div class="form-message__attachment"></div>
 			<div class="form-message__inputfield">
-				{{> messageInputField}}
+				{{> messageInput}}
 			</div>
 			<div class="form-message__submit-msg">
 				{{> submitMessageButton }}

@@ -31,7 +31,7 @@ export default class Login extends Block {
 
     componentDidMount() {
         this.button = new Button({
-            buttonStyle: "button_style_default",
+            buttonStyle: "defaultButton",
             buttonText: "Complete registration",
             events: {
                 click: this.onClickRegistration.bind(this),

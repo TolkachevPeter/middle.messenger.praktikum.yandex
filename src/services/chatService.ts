@@ -8,7 +8,7 @@ export default class ChatService {
 		this.request = new Request();
 	}
 
-	getChats() {
+	static getChats() {
 		return [
             {
                 name: "Peter",
