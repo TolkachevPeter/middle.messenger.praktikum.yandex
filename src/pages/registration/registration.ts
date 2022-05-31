@@ -19,12 +19,12 @@ export default class Login extends Block {
     button: Button;
     loginInput: Input;
     passwordInput: Input;
-    linkToRegistration: Link;
     emailInput: Input;
     nameInput: Input;
     surnameInput: Input;
     phoneInput: Input;
 	passwordSecondInput: Input;
+	linkToLogin: Link;
     constructor() {
         super("div");
     }
@@ -100,19 +100,13 @@ export default class Login extends Block {
             mediumMarginHorizontally: true,
             validation: passwordCheck,
         });
-        this.linkToRegistration = new Link({
+        this.linkToLogin = new Link({
             linkText: "Sign In",
             linkStyle: "link-signin",
-            event: {
+            events: {
                 click: this.onClickLinkToSignIn.bind(this),
             },
         });
-    }
-
-    onClickSignIn() {
-        const { loginForm } = document.forms as Form;
-        getFormData(loginForm);
-        this.loginInput.validateInput();
     }
 
     onClickLinkToSignIn() {
@@ -120,6 +114,7 @@ export default class Login extends Block {
     }
 
     onClickRegistration() {
+		event!.preventDefault();
         const { registrationForm } = document.forms as Form;
         getFormData(registrationForm);
         this.getAllInputs().forEach((input) => {
@@ -129,7 +124,7 @@ export default class Login extends Block {
             .map((inpField) => inpField.getIsInputValid())
             .every((isValidField) => isValidField);
         if (isValidationPassed) {
-            navigateTo("chatsPage");
+            navigateTo("chatPage");
         }
     }
 
@@ -180,14 +175,14 @@ export default class Login extends Block {
             this.passwordSecondInput.renderAsHTMLString()
         );
         renderHelper.registerPartial(
-            "linkToRegistration",
-            this.linkToRegistration.renderAsHTMLString()
+            "linkToLogin",
+            this.linkToLogin.renderAsHTMLString()
         );
         const templateHTML = renderHelper.generate(registration);
         return renderHelper.replaceElements(templateHTML, [
             this.button,
-            this.linkToRegistration, 
-			...this.getAllInputs()
+            this.linkToLogin,
+            ...this.getAllInputs(),
         ]);
     }
 }

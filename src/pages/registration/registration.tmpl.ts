@@ -13,7 +13,7 @@ export default `
     </div>
     <div class="formBottom">
       {{> completeRegistration}}
-      <p class="login__registrationText"><a id="navigateToSignIn">Sign in</a></p>
+      {{> linkToLogin}}
     </div>
   </form>  
 </div>
