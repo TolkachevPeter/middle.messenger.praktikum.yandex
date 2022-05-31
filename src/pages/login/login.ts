@@ -55,6 +55,7 @@ export default class Login extends Block {
 
     onClickSignIn() {
         console.log("clickSignIn");
+		event!.preventDefault();
         const { loginForm } = document.forms as Form;
         getFormData(loginForm);
         this.loginInput.validateInput();
