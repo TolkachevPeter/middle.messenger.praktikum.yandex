@@ -13,7 +13,7 @@ import {
     phoneCheck,
 } from "../../global/regex";
 import Link from "../../components/link";
-import { navTo } from "../../router";
+import { navigateTo } from "../../router";
 import RenderHelper from "../../commonClasses/RenderHelper";
 import UserService, { UserInfo } from '../../services/userService';
 
@@ -124,7 +124,7 @@ export default class User extends Block {
 
     onClickChat() {
 		console.log("click to Chat")
-		navTo("chatPage")
+		navigateTo("chatPage")
 	}
 
     onClickUser() {
@@ -137,7 +137,7 @@ export default class User extends Block {
             .map((inpField) => inpField.getIsInputValid())
             .every((isValidField) => isValidField);
         if (isValidationPassed) {
-            navTo("chatPage");
+            navigateTo("chatPage");
         }
     }
 

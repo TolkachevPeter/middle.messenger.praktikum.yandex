@@ -6,7 +6,7 @@ import { Form } from "../../types/types";
 import Input from "../../components/input/input";
 import { loginCheck, passwordCheck } from "../../global/regex";
 import Link from "../../components/link";
-import { navTo } from "../../router";
+import { navigateTo } from "../../router";
 import RenderHelper from "../../commonClasses/RenderHelper";
 
 export default class Login extends Block {
@@ -58,13 +58,13 @@ export default class Login extends Block {
         const { loginForm } = document.forms as Form;
         getFormData(loginForm);
         this.loginInput.validateInput();
-		
-		navTo("chatPage");
+
+		navigateTo("chatPage");
     }
 
     onClickLinkToRegistration() {
 		console.log('click Registration');
-        navTo("registrationPage");
+        navigateTo("registrationPage");
     }
 
     render() {

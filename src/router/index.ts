@@ -15,7 +15,7 @@ const pageRouter = {
     page500: generateErrorPage(500, "We are working to fix the problem!"),
 };
 
-export function navTo(pageToNavigate: string) {
+export function navigateTo(pageToNavigate: string) {
     let root = document.querySelector("#chat");
 
 	if(!root){

@@ -15,6 +15,6 @@ export default `
         {{#if readOnly}}readonly{{/if}}>
     </div>
     {{#unless isValid}}
-      <span class="input__error-msg mediumMarginLeft mediumMarginRight">{{validationFailedMessage}}</span>
+      <span class="input__error-msg mediumMarginLeft mediumMarginRight">{{validationMessage}}</span>
     {{/unless}}
 `;

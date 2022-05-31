@@ -12,7 +12,7 @@ import {
     phoneCheck,
 } from "../../global/regex";
 import Link from "../../components/link";
-import { navTo } from "../../router";
+import { navigateTo } from "../../router";
 import RenderHelper from "../../commonClasses/RenderHelper";
 
 export default class Login extends Block {
@@ -116,7 +116,7 @@ export default class Login extends Block {
     }
 
     onClickLinkToSignIn() {
-        navTo("loginPage");
+        navigateTo("loginPage");
     }
 
     onClickRegistration() {
@@ -129,7 +129,7 @@ export default class Login extends Block {
             .map((inpField) => inpField.getIsInputValid())
             .every((isValidField) => isValidField);
         if (isValidationPassed) {
-            navTo("chatsPage");
+            navigateTo("chatsPage");
         }
     }
 

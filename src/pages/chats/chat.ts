@@ -1,4 +1,3 @@
-import Handlebars from 'handlebars';
 import chat from './chat.tmpl';
 import './chat.less';
 import "./chat.less";
