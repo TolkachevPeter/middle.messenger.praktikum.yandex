@@ -1,4 +1,4 @@
-import ChatContact from "./chatContact";
+import ChatContact from './chatContact';
 
 
 export default ChatContact;

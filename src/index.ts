@@ -1,3 +1,3 @@
-import { navTo } from "./router";
+import { navTo } from './router';
 
-navTo("loginPage");
+navTo('loginPage');
