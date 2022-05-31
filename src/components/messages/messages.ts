@@ -22,7 +22,7 @@ export default class Messages extends Block {
             inputPlaceholder: "Message",
             inputType: "text",
             inputText: "Message",
-            inputStyle: "form-conversation__inputfield_style_default",
+            inputStyle: "form-message__inputfield_style_default",
             mediumMarginHorizontally: true,
             validation: noEmptyStringCheck,
             isLabelEnabled: false,

@@ -9,6 +9,7 @@ type Props = {
     firstName?: string;
     content?: string;
 	time?: Date;
+	index?: number;
 	events?: {[key: string]: any}
 };
 export default class ChatContact extends Block {

@@ -48,15 +48,17 @@ export default class ChatList extends Block {
     }
 
     onClickChatContact() {
+		console.log('click contact')
         this.isChatSelected = true;
         this.localEventBus.emit("chatIsSelected");
     }
 
     buildChatContacts() {
         const chatContacts: ChatContact[] = [];
-        this.props.chatContacts.forEach((chat: Chat) => {
+        this.props.chatContacts.forEach((chat: Chat, index: number) => {
             const chatContact = new ChatContact({
                 ...chat,
+				index,
                 events: {
                     click: this.onClickChatContact.bind(this),
                 },

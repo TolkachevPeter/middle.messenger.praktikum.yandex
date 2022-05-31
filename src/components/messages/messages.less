@@ -50,7 +50,7 @@
 	text-align: center;
 }
 
-.conversation {
+.message {
 	display: flex;
 	flex-direction: column;
 	margin: 1rem 0;
@@ -58,7 +58,7 @@
 	height: calc(100% - @chatwindowBottomHeight);
 }
 
-.conversation__reader-msg-container {
+.message__reader-msg-container {
 	max-width: 40%;
 	background: #F8F8F8;
 	padding: 1rem;
@@ -66,8 +66,8 @@
 	border-radius: 0 15px 15px 0;
 }
 
-.conversation__reader-msg,
-.conversation__author-msg {
+.message__reader-msg,
+.message__author-msg {
 	.fontRegular;
 	font-weight: 500;
 	font-size: 0.9rem;
@@ -77,7 +77,7 @@
 }
 
 
-p.conversation__time {
+p.message__time {
 	.fontRegular;
 	font-weight: 500;
 	font-size: 0.7rem;
@@ -87,11 +87,11 @@ p.conversation__time {
 	text-align: right;
 }
 
-.conversation__author-msg-container {
+.message__author-msg-container {
 	display: flex;
 }
 
-.conversation__author-msg-container-content {
+.message__author-msg-container-content {
 	max-width: 40%;
 	background: #E4EDFD;
 	padding: 1rem;
@@ -99,18 +99,18 @@ p.conversation__time {
 	border-radius: 15px 0 0 15px;
 }
 
-.conversation__spacer {
+.message__spacer {
 	flex-grow: 1;
 }
 
-.form-conversation {
+.form-message {
 	border-top: 1px solid #EAEAEA;
 	margin: 0 1.5rem;
 	padding: 1rem 0 0 0;
 	display: flex;
 }
 
-.form-conversation__attachment {
+.form-message__attachment {
 	background: url('../../../static/attachment.png') no-repeat;
 	background-position: center;
 	width: 2.5rem;
@@ -118,11 +118,11 @@ p.conversation__time {
 	cursor: pointer;
 }
 
-.form-conversation__inputfield {
+.form-message__inputfield {
 	flex-grow: 1;
 }
 
-.form-conversation__inputfield_style_default {
+.form-message__inputfield_style_default {
 
 	height: 2.5rem;
 	background: #EFEFEF;
@@ -131,6 +131,6 @@ p.conversation__time {
 	border-radius: 10px;
 }
 
-.form-conversation__submit-msg {
+.form-message__submit-msg {
 	margin: 0.4rem;
 }

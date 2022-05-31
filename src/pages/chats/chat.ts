@@ -10,32 +10,30 @@ import Messages from '../../components/messages';
 import ChatList from '../../components/chatList/chatList';
 
 export default class Chat extends Block {
-	chatContacts: any;
-	localEventBus: any;
-	renderAfterChatSelection: any;
-	chatList: ChatList;
-	messages: Messages;
-	loginInput: Input;
+    chatContacts: any;
+    localEventBus: any;
+    renderAfterChatSelection: any;
+    chatList: ChatList;
+    messages: Messages;
+    loginInput: Input;
 
     constructor() {
         super("div", {}, true);
     }
-
-    componentDidMount() {
-    this.chatContacts = ChatService.getChats();
-    this.localEventBus = new EventBus();
-    this.localEventBus.on("chatIsSelected", this.chatSelect.bind(this));
-    this.chatList = new ChatList({
-        chatContacts: this.chatContacts,
-        localEventBus: this.localEventBus,
-    });
-    this.messages = new Messages();
+    chatSelect() {
+        this.eventBus().emit("flow:render");
     }
 
-	chatSelect(){
-		this.eventBus().emit('flow:render')
-	}
-
+    componentDidMount() {
+        this.chatContacts = ChatService.getChats();
+        this.localEventBus = new EventBus();
+        this.localEventBus.on("chatIsSelected", this.chatSelect.bind(this));
+        this.chatList = new ChatList({
+            chatContacts: this.chatContacts,
+            localEventBus: this.localEventBus,
+        });
+        this.messages = new Messages();
+    }
 
     render() {
         const renderHelper = new RenderHelper();
