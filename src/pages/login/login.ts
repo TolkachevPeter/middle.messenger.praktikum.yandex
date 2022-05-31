@@ -54,16 +54,21 @@ export default class Login extends Block {
     }
 
     onClickSignIn() {
-		console.log("clickSignIn");
+        console.log("clickSignIn");
         const { loginForm } = document.forms as Form;
         getFormData(loginForm);
         this.loginInput.validateInput();
-
-		navigateTo("chatPage");
+        this.passwordInput.validateInput();
+        if (
+            (this.loginInput.getIsInputValid(),
+            this.passwordInput.getIsInputValid())
+        ) {
+            navigateTo("chatPage");
+        }
     }
 
     onClickLinkToRegistration() {
-		console.log('click Registration');
+        console.log("click Registration");
         navigateTo("registrationPage");
     }
 

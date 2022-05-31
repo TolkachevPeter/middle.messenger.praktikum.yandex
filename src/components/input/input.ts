@@ -93,6 +93,7 @@ export default class Input extends Block {
     }
 
 	validateInput(){
+		console.log(this.getElement().querySelector(".input"));
 		this.getElement().querySelector(".input")?.dispatchEvent(new Event('blur'))
 	}
 

@@ -45,7 +45,9 @@ export default class Chat extends Block {
             "messages",
             this.messages.renderAsHTMLString()
         );
-        const templateHTML = renderHelper.generate(chat);
+        const templateHTML = renderHelper.generate(chat, {
+            isChatSelected: this.chatList.isChatSelected,
+        });
         return renderHelper.replaceElements(templateHTML, [
             this.chatList,
             this.messages,

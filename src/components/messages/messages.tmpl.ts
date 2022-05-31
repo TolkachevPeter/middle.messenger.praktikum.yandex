@@ -5,7 +5,7 @@ export default `
 			<div class="chatwindow__header_settings"></div>
 		</div>
 		<div class="message">
-			<span class="message__date">${new Date().getDate()}</span>
+			<span class="message__date">${new Date().getFullYear()}</span>
 			<div class="message__reader-msg-container">
 				<p class="message__reader-msg">Message
 				</p>
@@ -14,14 +14,14 @@ export default `
 			<div class="message__author-msg-container">
 				<div class="message__spacer"></div>
 				<div class="message__author-msg-container-content">
-					<p class="message__author-msg">Cool!</p>
-					<p class="message__time">12:00</span>
+					<p class="message__author-msg">super!</p>
+					<p class="message__time">${new Date(new Date().getTime())}</span>
 				</div>
 			</div>
 		</div>
 		<form name="messageForm" id="messageForm" class="form-message" onsubmit="return false">
 			<div class="form-message__attachment"></div>
-			<div class="form-message__inputfield">
+			<div class="form-message__input">
 				{{> messageInput}}
 			</div>
 			<div class="form-message__submit-msg">

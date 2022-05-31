@@ -5,6 +5,7 @@
 
 .chatwindow {
 	height: 100%;
+	width: 100%;
 }
 
 .chatwindow_no-selected-chat {
@@ -47,7 +48,6 @@
 	font-size: 0.9rem;
 	line-height: 0.9rem;
 	color: @baseGray;
-	text-align: center;
 }
 
 .message {
@@ -111,19 +111,16 @@ p.message__time {
 }
 
 .form-message__attachment {
-	background: url('../../../static/attachment.png') no-repeat;
-	background-position: center;
 	width: 2.5rem;
 	height: 2.5rem;
 	cursor: pointer;
 }
 
-.form-message__inputfield {
+.form-message__input {
 	flex-grow: 1;
 }
 
 .form-message__inputfield_style_default {
-
 	height: 2.5rem;
 	background: #EFEFEF;
 	border: none;
