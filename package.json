@@ -1,0 +1,24 @@
+{
+  "name": "middle-messenger-praktikum",
+  "version": "0.1.0",
+  "source": "./src/index.html",
+  "scripts": {
+    "start": "npm run build && node server.js",
+    "build": "parcel build src/index.html",
+    "dev": "parcel src/index.html",
+    "lint": "eslint --fix --ext .js ./"
+  },
+  "devDependencies": {
+    "@parcel/transformer-css": "2.5.0",
+    "@parcel/transformer-less": "2.5.0",
+    "eslint": "^8.13.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "less": "^4.1.2",
+    "parcel": "2.5.0"
+  },
+  "dependencies": {
+    "express": "^4.17.3",
+    "handlebars": "^4.7.7"
+  }
+}

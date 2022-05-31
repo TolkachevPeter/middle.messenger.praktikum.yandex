@@ -1,0 +1,48 @@
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+*.swp
+*.rest
+
+pids
+logs
+results
+tmp
+
+_old
+.cache
+*/static/*.css
+*/static/*.js
+*/static/*.gif
+
+docker-compose.override.yml
+
+# Coverage reports
+.nyc_output
+coverage
+
+# API keys and secrets
+.env
+.env.dev
+
+# Dependency directory
+node_modules
+
+# Editors
+.vscode
+.idea
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Ignore built ts files
+.nuxt
+dist
+
+.parcel-cache
