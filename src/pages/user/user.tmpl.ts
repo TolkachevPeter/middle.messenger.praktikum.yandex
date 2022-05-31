@@ -1,18 +1,18 @@
 export default `
 <div class="profileContainer">
   <div class="profileContainer__navBack">
-    <button id="navToChats" class="roundButton">{{buttonText}}</button>
+    {{> toChat}}
   </div>
   <div class="profileContainer__main">
     <div class="profileImage"></div>
     <div class="profileName">Ivan</div>
     <div class="profileInputFields">
-      {{> emailInputFieldProfile}}
-      {{> loginInputFieldProfile}}
-      {{> nameInputFieldProfile}}
-      {{> surnameInputFieldProfile}}
-      {{> visibleNameInputFieldProfile}}
-      {{> phoneInputFieldProfile}}
+      {{> emailInput}}
+      {{> loginInput}}
+      {{> nameInput}}
+      {{> surnameInput}}
+      {{> displayName}}
+      {{> phoneInput}}
     </div>
     <div class="profileConfigs">
       <div>

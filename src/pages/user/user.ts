@@ -1,33 +1,5 @@
-import Handlebars from 'handlebars';
-import profile from './user.tmpl';
-import './user.less';
 
-// Handlebars.registerPartial(
-// 	'emailInputFieldProfile',
-// 	generateInput('email', 'Email', '', 'text', randomEmail())
-// );
-// Handlebars.registerPartial(
-// 	'loginInputFieldProfile',
-// 	generateInput('login', 'Login', '', 'text', 'ivanivanov')
-// );
-// Handlebars.registerPartial(
-// 	'nameInputFieldProfile',
-// 	generateInput('name', 'Name', '', 'text', 'Ivan')
-// );
-// Handlebars.registerPartial(
-// 	'surnameInputFieldProfile',
-// 	generateInput('surname', 'Surname', '', 'text', 'Ivanov')
-// );
-// Handlebars.registerPartial(
-// 	'visibleNameInputFieldProfile',
-// 	generateInput('visibleName', 'Visible Name', '', 'text', 'Ivan')
-// );
-// Handlebars.registerPartial(
-// 	'phoneInputFieldProfile',
-// 	generateInput('phone', 'Phone', '', 'text', `+7 ${Math.floor(Math.random() * 1000000000)}`)
-// );
-
-import registration from "./user.tmpl";
+import user from "./user.tmpl";
 import "./user.less";
 import Button from "../../components/button";
 import Block from "../../commonClasses/Block";
@@ -45,7 +17,7 @@ import { navTo } from "../../router";
 import RenderHelper from "../../commonClasses/RenderHelper";
 import UserService, { UserInfo } from '../../services/userService';
 
-export default class Login extends Block {
+export default class User extends Block {
     button: Button;
     loginInput: Input;
     passwordInput: Input;
@@ -57,7 +29,8 @@ export default class Login extends Block {
     passwordSecondInput: Input;
     service: UserService;
     user: UserInfo;
-	displayName: Input;
+    displayNameInput: Input;
+    toChat: Button;
     constructor() {
         super("div");
     }
@@ -105,7 +78,7 @@ export default class Login extends Block {
             validation: nameOrSurnameCheck,
             inputValue: this.user.second_name,
         });
-        this.displayName = new Input({
+        this.displayNameInput = new Input({
             inputText: "DisplayName",
             inputPlaceholder: "DisplayName",
             inputStyle: "userInputStyle",
@@ -130,19 +103,29 @@ export default class Login extends Block {
             inputPlaceholder: "Password",
             inputStyle: "userInputStyle",
             inputType: "password",
-            labelStyle: "loginLabelStyle",
+            labelStyle: "userLabelStyle",
             mediumMarginHorizontally: true,
             validation: passwordCheck,
         });
-		this.button = new Button({
+        this.button = new Button({
             buttonStyle: "defaultButton",
             buttonText: "Change user info",
             events: {
                 click: this.onClickUser.bind(this),
             },
         });
+        this.toChat = new Button({
+            buttonStyle: "roundButton",
+            events: {
+                click: this.onClickChat.bind(this),
+            },
+        });
     }
 
+    onClickChat() {
+		console.log("click to Chat")
+		navTo("chatPage")
+	}
 
     onClickUser() {
         const { userForm } = document.forms as Form;
@@ -154,7 +137,7 @@ export default class Login extends Block {
             .map((inpField) => inpField.getIsInputValid())
             .every((isValidField) => isValidField);
         if (isValidationPassed) {
-            navTo("chatsPage");
+            navTo("chatPage");
         }
     }
 
@@ -166,15 +149,19 @@ export default class Login extends Block {
             this.surnameInput,
             this.phoneInput,
             this.passwordInput,
-            this.displayName,
+            this.displayNameInput,
         ];
     }
 
     render() {
         const renderHelper = new RenderHelper();
-		renderHelper.registerPartial(
+        renderHelper.registerPartial(
             "changeUserInfo",
             this.button.renderAsHTMLString()
+        );
+        renderHelper.registerPartial(
+            "toChat",
+            this.toChat.renderAsHTMLString()
         );
         renderHelper.registerPartial(
             "loginInput",
@@ -194,7 +181,7 @@ export default class Login extends Block {
         );
         renderHelper.registerPartial(
             "displayName",
-            this.displayName.renderAsHTMLString()
+            this.displayNameInput.renderAsHTMLString()
         );
         renderHelper.registerPartial(
             "phoneInput",
@@ -204,9 +191,10 @@ export default class Login extends Block {
             "passwordInput",
             this.passwordInput.renderAsHTMLString()
         );
-        const templateHTML = renderHelper.generate(registration);
+        const templateHTML = renderHelper.generate(user);
         return renderHelper.replaceElements(templateHTML, [
-			this.button,
+            this.button,
+			this.toChat,
             ...this.getAllInputs(),
         ]);
     }

@@ -6,9 +6,10 @@ import Handlebars from 'handlebars';
 
 
 type Props = {
-    firstName: string;
-    content: string;
-	time: Date;
+    firstName?: string;
+    content?: string;
+	time?: Date;
+	events?: {[key: string]: any}
 };
 export default class ChatContact extends Block {
     constructor(props: Props) {
