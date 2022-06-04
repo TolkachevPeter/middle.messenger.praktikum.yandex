@@ -1,8 +1,8 @@
-import Handlebars from "handlebars";
-import link from "./link.tmpl";
+import Handlebars from 'handlebars';
+import link from './link.tmpl';
 import './link.less';
-import Block from "../../commonClasses/Block";
-import RenderHelper from "../../commonClasses/RenderHelper";
+import Block from '../../commonClasses/Block';
+import RenderHelper from '../../commonClasses/RenderHelper';
 
 export default class Link extends Block{
 	constructor(props: object | undefined) {
@@ -15,7 +15,7 @@ export default class Link extends Block{
 		const templateHTML = template({
 			linkStyle: this.props.linkStyle,
 			linkText: this.props.linkText
-		})
+		});
 		return renderHelper.convertHtmlToDom(templateHTML);
 	}
 }

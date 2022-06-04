@@ -1,36 +1,36 @@
 type CallBackFunction = (...args: any[]) => {};
 
 export default class EventBus {
-    listeners: Record<string, CallBackFunction[]>;
-    constructor() {
-        this.listeners = {};
-    }
+	listeners: Record<string, CallBackFunction[]>;
+	constructor() {
+		this.listeners = {};
+	}
 
-    on(event: string, callback: CallBackFunction): void {
-        if (!this.listeners[event]) {
-            this.listeners[event] = [];
-        }
+	on(event: string, callback: CallBackFunction): void {
+		if (!this.listeners[event]) {
+			this.listeners[event] = [];
+		}
 
-        this.listeners[event].push(callback);
-    }
+		this.listeners[event].push(callback);
+	}
 
-    off(event: string, callback: CallBackFunction): void {
-        if (!this.listeners[event]) {
-            throw new Error(`Нет события: ${event}`);
-        }
+	off(event: string, callback: CallBackFunction): void {
+		if (!this.listeners[event]) {
+			throw new Error(`Нет события: ${event}`);
+		}
 
-        this.listeners[event] = this.listeners[event].filter(
-            (listener) => listener !== callback
-        );
-    }
+		this.listeners[event] = this.listeners[event].filter(
+			(listener) => listener !== callback
+		);
+	}
 
-    emit(event: string, ...args: any[]): void {
-        if (!this.listeners[event]) {
-            throw new Error(`Нет события: ${event}`);
-        }
+	emit(event: string, ...args: any[]): void {
+		if (!this.listeners[event]) {
+			throw new Error(`Нет события: ${event}`);
+		}
 
-        this.listeners[event].forEach(function (listener) {
-            listener(...args);
-        });
-    }
+		this.listeners[event].forEach(function (listener) {
+			listener(...args);
+		});
+	}
 }

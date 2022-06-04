@@ -17,77 +17,77 @@ type ChatListProps = {
 };
 
 export default class ChatList extends Block {
-    linkToProfile: Link;
-    chatContacts: ChatContact[];
-    renderHelper: RenderHelper;
-    isChatSelected: boolean;
-    selectedChat: number | null;
-    localEventBus: EventBus;
+	linkToProfile: Link;
+	chatContacts: ChatContact[];
+	renderHelper: RenderHelper;
+	isChatSelected: boolean;
+	selectedChat: number | null;
+	localEventBus: EventBus;
 
-    constructor(props: ChatListProps) {
-        super("div", props);
-        this.isChatSelected = false;
-        this.selectedChat = null;
-        this.localEventBus = this.props.localEventBus;
-    }
+	constructor(props: ChatListProps) {
+		super('div', props);
+		this.isChatSelected = false;
+		this.selectedChat = null;
+		this.localEventBus = this.props.localEventBus;
+	}
 
-    componentDidMount() {
-        this.linkToProfile = new Link({
-            linkText: "Profile",
-            linkStyle: "chatlist__link_profile",
-            events: {
-                click: this.onClickLinkToProfile.bind(this),
-            },
-        });
-        this.renderHelper = new RenderHelper();
-        this.chatContacts = this.buildChatContacts();
-    }
+	componentDidMount() {
+		this.linkToProfile = new Link({
+			linkText: 'Profile',
+			linkStyle: 'chatlist__link_profile',
+			events: {
+				click: this.onClickLinkToProfile.bind(this),
+			},
+		});
+		this.renderHelper = new RenderHelper();
+		this.chatContacts = this.buildChatContacts();
+	}
 
-    onClickLinkToProfile() {
-        navigateTo("profilePage");
-    }
+	onClickLinkToProfile() {
+		navigateTo('profilePage');
+	}
 
-    onClickChatContact() {
-		console.log('click contact')
-        this.isChatSelected = true;
-        this.localEventBus.emit("chatIsSelected");
-    }
+	onClickChatContact() {
+		console.log('click contact');
+		this.isChatSelected = true;
+		this.localEventBus.emit('chatIsSelected');
+	}
 
-    buildChatContacts() {
-        const chatContacts: ChatContact[] = [];
-        this.props.chatContacts.forEach((chat: Chat, index: number) => {
-            const chatContact = new ChatContact({
-                ...chat,
+	buildChatContacts() {
+		const chatContacts: ChatContact[] = [];
+		this.props.chatContacts.forEach((chat: Chat, index: number) => {
+			const chatContact = new ChatContact({
+				...chat,
 				index,
-                events: {
-                    click: this.onClickChatContact.bind(this),
-                },
-            });
-            chatContacts.push(chatContact);
-        });
-        return chatContacts;
-    }
+				events: {
+					click: this.onClickChatContact.bind(this),
+				},
+			});
+			chatContacts.push(chatContact);
+		});
+		return chatContacts;
+	}
 
-    render() {
-        Handlebars.registerPartial(
-            "linkToProfile",
-            this.linkToProfile.renderAsHTMLString()
-        );
-        Handlebars.registerPartial(
-            "chatContacts",
-            this.chatContacts
-                .map((chatContact: ChatContact) =>
-                    chatContact.renderAsHTMLString()
-                )
-                .join()
-        );
-        const template = Handlebars.compile(chatList);
-        const templateHTML = template({
-            chatContacts: this.props.chatContacts,
-        });
-        return this.renderHelper.replaceElements(templateHTML, [
-            this.linkToProfile,
-            ...this.chatContacts,
-        ]);
-    }
+	render() {
+		Handlebars.registerPartial(
+			'linkToProfile',
+			this.linkToProfile.renderAsHTMLString()
+		);
+		Handlebars.registerPartial(
+			'chatContacts',
+			this.chatContacts
+				.map((chatContact: ChatContact) =>
+					chatContact.renderAsHTMLString()
+				)
+				.join()
+		);
+		const template = Handlebars.compile(chatList);
+		const templateHTML = template({
+			chatContacts: this.props.chatContacts,
+		});
+		return this.renderHelper.replaceElements(templateHTML, [
+			this.linkToProfile,
+			...this.chatContacts,
+		]);
+	}
 }

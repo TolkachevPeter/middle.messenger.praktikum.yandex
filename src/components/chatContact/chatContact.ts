@@ -13,18 +13,18 @@ type Props = {
 	events?: {[key: string]: any}
 };
 export default class ChatContact extends Block {
-    constructor(props: Props) {
-        super("div", props);
-    }
+	constructor(props: Props) {
+		super('div', props);
+	}
 
-    render() {
-        const renderHelper = new RenderHelper();
-        const template = Handlebars.compile(chatContact);
-        const templateHTML = template({
-            firstName: this.props.firstName,
-            content: this.props.content,
-            time: this.props.time,
-        });
-        return renderHelper.convertHtmlToDom(templateHTML);
-    }
+	render() {
+		const renderHelper = new RenderHelper();
+		const template = Handlebars.compile(chatContact);
+		const templateHTML = template({
+			firstName: this.props.firstName,
+			content: this.props.content,
+			time: this.props.time,
+		});
+		return renderHelper.convertHtmlToDom(templateHTML);
+	}
 }
