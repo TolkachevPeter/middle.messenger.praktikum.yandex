@@ -12,8 +12,9 @@ import {
 	phoneCheck,
 } from '../../global/regex';
 import Link from '../../components/link';
-import { navigateTo } from '../../router';
+// import { navigateTo } from '../../router';
 import RenderHelper from '../../commonClasses/RenderHelper';
+import Router from '../../services/router';
 
 export default class Login extends Block {
 	button: Button;
@@ -25,8 +26,10 @@ export default class Login extends Block {
 	phoneInput: Input;
 	passwordSecondInput: Input;
 	linkToLogin: Link;
+	router: Router;
 	constructor() {
 		super('div');
+		this.router = new Router();
 	}
 
 	componentDidMount() {
@@ -110,7 +113,8 @@ export default class Login extends Block {
 	}
 
 	onClickLinkToSignIn() {
-		navigateTo('loginPage');
+		this.router.go('/');
+		// navigateTo('loginPage');
 	}
 
 	onClickRegistration() {
@@ -124,7 +128,7 @@ export default class Login extends Block {
 			.map((inpField) => inpField.getIsInputValid())
 			.every((isValidField) => isValidField);
 		if (isValidationPassed) {
-			navigateTo('chatPage');
+			this.router.go('/messenger');
 		}
 	}
 

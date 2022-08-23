@@ -13,9 +13,10 @@ import {
 	phoneCheck,
 } from '../../global/regex';
 import Link from '../../components/link';
-import { navigateTo } from '../../router';
+// import { navigateTo } from '../../router';
 import RenderHelper from '../../commonClasses/RenderHelper';
 import UserService, { UserInfo } from '../../services/userService';
+import Router from '../../services/router';
 
 export default class User extends Block {
 	button: Button;
@@ -31,8 +32,10 @@ export default class User extends Block {
 	user: UserInfo;
 	displayNameInput: Input;
 	toChat: Button;
+	router: Router;
 	constructor() {
 		super('div');
+		this.router = new Router();
 	}
 
 	componentDidMount() {
@@ -124,7 +127,7 @@ export default class User extends Block {
 
 	onClickChat() {
 		console.log('click to Chat');
-		navigateTo('chatPage');
+		this.router.go('/messenger');
 	}
 
 	onClickUser() {
@@ -137,7 +140,7 @@ export default class User extends Block {
 			.map((inpField) => inpField.getIsInputValid())
 			.every((isValidField) => isValidField);
 		if (isValidationPassed) {
-			navigateTo('chatPage');
+			this.router.go('/messenger');
 		}
 	}
 

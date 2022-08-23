@@ -6,16 +6,19 @@ import { Form } from '../../types/types';
 import Input from '../../components/input/input';
 import { loginCheck, passwordCheck } from '../../global/regex';
 import Link from '../../components/link';
-import { navigateTo } from '../../router';
+// import { navigateTo } from '../../router';
 import RenderHelper from '../../commonClasses/RenderHelper';
+import Router from '../../services/router';
 
 export default class Login extends Block {
 	button: Button;
 	loginInput: Input;
 	passwordInput: Input;
 	linkToRegistration: Link;
+	router: Router;
 	constructor() {
 		super('div');
+		this.router = new Router();
 	}
 
 	componentDidMount() {
@@ -64,13 +67,15 @@ export default class Login extends Block {
 			(this.loginInput.getIsInputValid(),
 			this.passwordInput.getIsInputValid())
 		) {
-			navigateTo('chatPage');
+			this.router.go('/messenger');
+			// navigateTo('chatPage');
 		}
 	}
 
 	onClickLinkToRegistration() {
 		console.log('click Registration');
-		navigateTo('registrationPage');
+		this.router.go('/sign-up');
+		// navigateTo('registrationPage');
 	}
 
 	render() {
