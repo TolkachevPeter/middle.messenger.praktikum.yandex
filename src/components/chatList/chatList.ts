@@ -5,11 +5,12 @@ import Block from '../../commonClasses/Block';
 import './chatList.less';
 
 import Link from '../link';
-import { navigateTo } from '../../router';
+// import { navigateTo } from '../../router';
 import RenderHelper from '../../commonClasses/RenderHelper';
 import Chat from '../../pages/chats/chat';
 import EventBus from '../../commonClasses/EventBus';
 import ChatContact from '../chatContact';
+import Router from '../../services/router';
 
 type ChatListProps = {
     chatContacts: Chat[];
@@ -23,12 +24,15 @@ export default class ChatList extends Block {
 	isChatSelected: boolean;
 	selectedChat: number | null;
 	localEventBus: EventBus;
+	router: Router;
+
 
 	constructor(props: ChatListProps) {
 		super('div', props);
 		this.isChatSelected = false;
 		this.selectedChat = null;
 		this.localEventBus = this.props.localEventBus;
+		this.router = new Router();
 	}
 
 	componentDidMount() {
@@ -44,7 +48,7 @@ export default class ChatList extends Block {
 	}
 
 	onClickLinkToProfile() {
-		navigateTo('profilePage');
+		this.router.go('/settings');
 	}
 
 	onClickChatContact() {

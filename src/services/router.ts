@@ -48,9 +48,9 @@ export default class Router {
 	routes: Route[];
 	history: History;
 	private _currentRoute: null | Route;
-	private _rootQuery: string;
+	private _rootQuery?: string;
 
-	constructor(rootQuery: string) {
+	constructor(rootQuery?: string) {
 		if (Router.__instance) {
 			return Router.__instance;
 		}
