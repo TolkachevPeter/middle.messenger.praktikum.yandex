@@ -31,7 +31,7 @@ export default class Request {
 		);
 	}
 
-	request = (url: string, options: Record<string, any>, timeout = 5000) => {
+	request = (url: string, options: Record<string, any>, timeout = 5000): Promise<XMLHttpRequest> => {
 		const { headers = {}, data, method } = options;
 		return new Promise((resolve, reject) => {
 			if (!method) {
