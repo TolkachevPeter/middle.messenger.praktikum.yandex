@@ -15,8 +15,9 @@ import {
 import Link from '../../components/link';
 // import { navigateTo } from '../../router';
 import RenderHelper from '../../commonClasses/RenderHelper';
-import UserService, { UserInfo } from '../../services/userService';
+import { UserInfo } from '../../services/userService';
 import Router from '../../services/router';
+import UserController from './user.controller';
 
 export default class User extends Block {
 	button: Button;
@@ -28,19 +29,22 @@ export default class User extends Block {
 	surnameInput: Input;
 	phoneInput: Input;
 	passwordSecondInput: Input;
-	service: UserService;
+	// service: UserService;
 	user: UserInfo;
 	displayNameInput: Input;
 	toChat: Button;
 	router: Router;
+	controller: UserController;
 	constructor() {
 		super('div');
 		this.router = new Router();
 	}
 
-	componentDidMount() {
-		this.service = new UserService();
-		this.user = this.service.getUserInfo();
+	async componentDidMount() {
+		// this.service = new UserService();
+		this.controller = new UserController();
+		console.log('user', await this.controller.getUserInfo());
+		this.user = await this.controller.getUserInfo();
 		this.loginInput = new Input({
 			inputText: 'Login',
 			inputPlaceholder: 'Login',

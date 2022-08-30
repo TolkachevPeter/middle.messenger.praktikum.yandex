@@ -4,10 +4,11 @@ import './chat.less';
 import Block from '../../commonClasses/Block';
 import Input from '../../components/input/input';
 import RenderHelper from '../../commonClasses/RenderHelper';
-import ChatService from '../../services/chatService';
+// import ChatService from '../../services/chatService';
 import EventBus from '../../commonClasses/EventBus';
 import Messages from '../../components/messages';
 import ChatList from '../../components/chatList/chatList';
+import ChatController from './chat.controller';
 
 export default class Chat extends Block {
 	chatContacts: any;
@@ -16,6 +17,7 @@ export default class Chat extends Block {
 	chatList: ChatList;
 	messages: Messages;
 	loginInput: Input;
+	controller: ChatController;
 
 	constructor() {
 		super('div', {}, true);
@@ -24,8 +26,9 @@ export default class Chat extends Block {
 		this.eventBus().emit('flow:render');
 	}
 
-	componentDidMount() {
-		this.chatContacts = ChatService.getChats();
+	async componentDidMount() {
+		this.controller = new ChatController();
+		this.chatContacts = await this.controller.getChats();
 		this.localEventBus = new EventBus();
 		this.localEventBus.on('chatIsSelected', this.chatSelect.bind(this));
 		this.chatList = new ChatList({

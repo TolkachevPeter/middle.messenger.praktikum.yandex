@@ -11,6 +11,7 @@ import Chat from '../../pages/chats/chat';
 import EventBus from '../../commonClasses/EventBus';
 import ChatContact from '../chatContact';
 import Router from '../../services/router';
+import ChatListController from './chatList.controller';
 
 type ChatListProps = {
     chatContacts: Chat[];
@@ -25,6 +26,7 @@ export default class ChatList extends Block {
 	selectedChat: number | null;
 	localEventBus: EventBus;
 	router: Router;
+	controller: ChatListController;
 
 
 	constructor(props: ChatListProps) {
@@ -33,6 +35,7 @@ export default class ChatList extends Block {
 		this.selectedChat = null;
 		this.localEventBus = this.props.localEventBus;
 		this.router = new Router();
+		this.controller = new ChatListController();
 	}
 
 	componentDidMount() {
@@ -45,6 +48,17 @@ export default class ChatList extends Block {
 		});
 		this.renderHelper = new RenderHelper();
 		this.chatContacts = this.buildChatContacts();
+	}
+
+	async onClickLinkToCreateChat(title: string){
+		await this.controller.createChat(title || 'title');
+		const update = await this.controller.getChats();
+		this.setProps({chatContacts: update});
+	}
+	async onClickLinkToRemoveChat(){
+		// await this.controller.createChat(title || 'title');
+		// const update = await this.controller.getChats();
+		// this.setProps({chatContacts: update});
 	}
 
 	onClickLinkToProfile() {

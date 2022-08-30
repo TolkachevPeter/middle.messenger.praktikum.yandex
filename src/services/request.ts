@@ -1,13 +1,13 @@
-enum METHODS {
-	'GET',
-	'POST',
-	'PUT',
-	'DELETE',
+const METHODS = {
+	GET: 'GET',
+	POST: 'POST',
+	PUT: 'PUT',
+	DELETE: 'DELETE',
 };
 
 function queryStringify(data: Record<string, any>): string {
 	let queryString = '?';
-	data.forEach((key: string) => {
+	data && data.forEach((key: string) => {
 		queryString += `${String(key)}=${String(data[key])}&`;
 	});
 	return queryString;
@@ -34,6 +34,7 @@ export default class Request {
 	request = (url: string, options: Record<string, any>, timeout = 5000): Promise<XMLHttpRequest> => {
 		const { headers = {}, data, method } = options;
 		return new Promise((resolve, reject) => {
+			console.log(`request ${url} ${options.method} ${options.headers} ${options.data}`);
 			if (!method) {
 				reject(new Error('No method provided for XHR'));
 			}
