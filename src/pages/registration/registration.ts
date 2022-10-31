@@ -15,6 +15,7 @@ import Link from '../../components/link';
 // import { navigateTo } from '../../router';
 import RenderHelper from '../../commonClasses/RenderHelper';
 import Router from '../../services/router';
+import getFormData from '../../utils/getFormData';
 
 export default class Login extends Block {
 	button: Button;
@@ -191,14 +192,14 @@ export default class Login extends Block {
 	}
 }
 
-export function getFormData(form: HTMLFormElement) {
-	const formData: FormData = new FormData(form);
-	const consoleData = [...formData.entries()].reduce(
-		(prev: Record<string, any>, [k, v]) => {
-			prev[k] = v;
-			return prev;
-		},
-		{}
-	);
-	console.log(consoleData);
-}
+// export function getFormData(form: HTMLFormElement) {
+// 	const formData: FormData = new FormData(form);
+// 	const consoleData = [...formData.entries()].reduce(
+// 		(prev: Record<string, any>, [k, v]) => {
+// 			prev[k] = v;
+// 			return prev;
+// 		},
+// 		{}
+// 	);
+// 	console.log(consoleData);
+// }

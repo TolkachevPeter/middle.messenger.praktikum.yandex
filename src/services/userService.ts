@@ -1,3 +1,4 @@
+import { GenericObject, signInRequest } from '../types/types';
 import Request from './request';
 
 export type UserInfo = {
@@ -20,10 +21,7 @@ type singUpUserData = {
 		phone: string
 	}
 
-type signInRequest = {
-	login: string,
-	password: string,
-}
+
 
 export default class UserService {
 	request: Request;
@@ -63,7 +61,7 @@ export default class UserService {
 		}
 	}
 
-	async singIn(data: signInRequest): Promise<XMLHttpRequest> {
+	async singIn(data: GenericObject): Promise<XMLHttpRequest> {
 		let request: XMLHttpRequest;
 
 		try {

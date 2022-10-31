@@ -9,6 +9,8 @@ import Link from '../../components/link';
 // import { navigateTo } from '../../router';
 import RenderHelper from '../../commonClasses/RenderHelper';
 import Router from '../../services/router';
+import { LoginController } from './login.controller';
+import getFormData from '../../utils/getFormData';
 
 export default class Login extends Block {
 	button: Button;
@@ -16,9 +18,17 @@ export default class Login extends Block {
 	passwordInput: Input;
 	linkToRegistration: Link;
 	router: Router;
+	controller: LoginController;
+	login: string;
+	pswd: string;
+	isLoggedIn: boolean;
 	constructor() {
 		super('div');
 		this.router = new Router();
+		this.controller = new LoginController();
+		this.login = '';
+		this.pswd = '';
+		this.isLoggedIn = false;
 	}
 
 	componentDidMount() {
@@ -56,26 +66,26 @@ export default class Login extends Block {
 		});
 	}
 
-	onClickSignIn() {
+	async onClickSignIn() {
 		console.log('clickSignIn');
 		event!.preventDefault();
 		const { loginForm } = document.forms as Form;
-		getFormData(loginForm);
 		this.loginInput.validateInput();
 		this.passwordInput.validateInput();
-		if (
-			(this.loginInput.getIsInputValid(),
-			this.passwordInput.getIsInputValid())
+		const formData = getFormData(loginForm);
+		this.isLoggedIn = await this.controller.isUserLoggedIn(formData);
+		console.log('isLoggedIn', this.isLoggedIn);
+		if (this.loginInput.getIsInputValid() 
+		&& this.passwordInput.getIsInputValid() 
+		&& this.isLoggedIn
 		) {
 			this.router.go('/messenger');
-			// navigateTo('chatPage');
 		}
 	}
 
 	onClickLinkToRegistration() {
 		console.log('click Registration');
 		this.router.go('/sign-up');
-		// navigateTo('registrationPage');
 	}
 
 	render() {
@@ -106,14 +116,14 @@ export default class Login extends Block {
 	}
 }
 
-export function getFormData(form: HTMLFormElement) {
-	const formData: FormData = new FormData(form);
-	const consoleData = [...formData.entries()].reduce(
-		(prev: Record<string, any>, [k, v]) => {
-			prev[k] = v;
-			return prev;
-		},
-		{}
-	);
-	console.log(consoleData);
-}
+// export function getFormData(form: HTMLFormElement): signInRequest {
+// 	const formData: FormData = new FormData(form);
+// 	const consoleData = [...formData.entries()].reduce(
+// 		(prev: Record<string, any>, [k, v]) => {
+// 			prev[k] = v;
+// 			return prev;
+// 		},
+// 		{}
+// 	);
+// 	console.log(consoleData);
+// }
