@@ -162,10 +162,10 @@ export default class User extends Block {
 
 	render() {
 		const renderHelper = new RenderHelper();
-		renderHelper.registerPartial(
-			'changeUserInfo',
-			this.button.renderAsHTMLString()
-		);
+		// renderHelper.registerPartial(
+		// 	'changeUserInfo',
+		// 	this.button.renderAsHTMLString()
+		// );
 		renderHelper.registerPartial(
 			'toChat',
 			this.toChat.renderAsHTMLString()

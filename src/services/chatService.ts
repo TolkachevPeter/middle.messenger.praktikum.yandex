@@ -23,13 +23,13 @@ interface Chat {
 export default class ChatService {
 	request: Request;
 	baseUrl: string;
-	// wssBaseUrl: string;
+	wssBaseUrl: string;
 
 
 	constructor() {
 		this.request = new Request();
 		this.baseUrl = 'https://ya-praktikum.tech/api/v2';
-		// this.baseUrl = 'wss://ya-praktikum.tech/ws/chats';
+		this.wssBaseUrl = 'wss://ya-praktikum.tech/ws/chats';
 	}
 
 	async getChats(): Promise<Chat[]> {
@@ -71,44 +71,44 @@ export default class ChatService {
 		}
 	}
 
-	// async getChatWsToken(chatId: number): Promise<string> {
-	// 	let wsToken: string;
-	// 	try{
-	// 		const res = await this.request.post(`${this.baseUrl}/chats/token/${chatId}`,
-	// 			{
-	// 				headers: {
-	// 					'Content-Type': 'application/x-www-form-urlencoded',
-	// 				}
-	// 			});
-	// 		wsToken = JSON.parse(res.responseText).token;
+	async getChatWsToken(chatId: number): Promise<string> {
+		let wsToken: string;
+		try{
+			const res = await this.request.post(`${this.baseUrl}/chats/token/${chatId}`,
+				{
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+					}
+				});
+			wsToken = JSON.parse(res.responseText).token;
 
-	// 		if(!wsToken){
-	// 			throw new Error('No ws token found');
-	// 		} 
-	// 	} catch(error) {
-	// 		throw new Error(error);
-	// 	}
-	// 	return wsToken;
-	// }
+			if(!wsToken){
+				throw new Error('No ws token found');
+			} 
+		} catch(error) {
+			throw new Error(error);
+		}
+		return wsToken;
+	}
 
-	// createWsConnection(chatId: number, userId: number, wsToken: string): Promise<WebSocket> {
-	// 	return new Promise((resolve, reject) => {
-	// 		const ws = new WebSocket(`${this.wssBaseUrl}/${userId}/${chatId}/${wsToken}}`);
-	// 		ws.onopen = () => {
-	// 			resolve(ws);
-	// 		};
+	createWsConnection(chatId: number, userId: number, wsToken: string): Promise<WebSocket> {
+		return new Promise((resolve, reject) => {
+			const ws = new WebSocket(`${this.wssBaseUrl}/${userId}/${chatId}/${wsToken}}`);
+			ws.onopen = () => {
+				resolve(ws);
+			};
 
-	// 		ws.onmessage = (event) => {
-	// 			console.log(event);
-	// 		};
+			ws.onmessage = (event) => {
+				console.log(event);
+			};
 
-	// 		ws.onerror = (error) => {
-	// 			reject(error);
-	// 		};
+			ws.onerror = (error) => {
+				reject(error);
+			};
 
-	// 		ws.onclose = (event) => {
-	// 			console.log(event);
-	// 		};
-	// 	});
-	// }
+			ws.onclose = (event) => {
+				console.log(event);
+			};
+		});
+	}
 }
