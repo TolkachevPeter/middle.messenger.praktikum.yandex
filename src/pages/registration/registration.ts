@@ -49,6 +49,7 @@ export default class Login extends Block {
 			readOnly: false,
 			mediumMarginHorizontally: true,
 			validation: loginCheck,
+			isValid: true
 		});
 		this.emailInput = new Input({
 			inputText: 'Email',
@@ -58,6 +59,7 @@ export default class Login extends Block {
 			readOnly: false,
 			mediumMarginHorizontally: true,
 			validation: emailCheck,
+			isValid: true
 		});
 		this.nameInput = new Input({
 			inputText: 'Name',
@@ -67,6 +69,7 @@ export default class Login extends Block {
 			readOnly: false,
 			mediumMarginHorizontally: true,
 			validation: nameOrSurnameCheck,
+			isValid: true
 		});
 		this.surnameInput = new Input({
 			inputText: 'Surname',
@@ -76,6 +79,7 @@ export default class Login extends Block {
 			readOnly: false,
 			mediumMarginHorizontally: true,
 			validation: nameOrSurnameCheck,
+			isValid: true
 		});
 		this.phoneInput = new Input({
 			inputText: 'Phone',
@@ -85,6 +89,7 @@ export default class Login extends Block {
 			readOnly: false,
 			mediumMarginHorizontally: true,
 			validation: phoneCheck,
+			isValid: true
 		});
 		this.passwordInput = new Input({
 			inputText: 'Password',
@@ -94,6 +99,7 @@ export default class Login extends Block {
 			labelStyle: 'loginLabelStyle',
 			mediumMarginHorizontally: true,
 			validation: passwordCheck,
+			isValid: true
 		});
 		this.passwordSecondInput = new Input({
 			inputText: 'Password',
@@ -103,6 +109,7 @@ export default class Login extends Block {
 			labelStyle: 'loginLabelStyle',
 			mediumMarginHorizontally: true,
 			validation: passwordCheck,
+			isValid: true
 		});
 		this.linkToLogin = new Link({
 			linkText: 'Sign In',
@@ -115,7 +122,6 @@ export default class Login extends Block {
 
 	onClickLinkToSignIn() {
 		this.router.go('/');
-		// navigateTo('loginPage');
 	}
 
 	onClickRegistration() {
@@ -191,15 +197,3 @@ export default class Login extends Block {
 		]);
 	}
 }
-
-// export function getFormData(form: HTMLFormElement) {
-// 	const formData: FormData = new FormData(form);
-// 	const consoleData = [...formData.entries()].reduce(
-// 		(prev: Record<string, any>, [k, v]) => {
-// 			prev[k] = v;
-// 			return prev;
-// 		},
-// 		{}
-// 	);
-// 	console.log(consoleData);
-// }

@@ -6,7 +6,7 @@ import RenderHelper from '../../commonClasses/RenderHelper';
 import { noEmptyStringCheck } from '../../global/regex';
 import Input from '../input';
 import { Form } from '../../types/types';
-import { getFormData } from '../../pages/registration/registration';
+import getFormData from '../../utils/getFormData';
 
 
 export default class Messages extends Block {
@@ -27,6 +27,7 @@ export default class Messages extends Block {
 			mediumMarginHorizontally: true,
 			validation: noEmptyStringCheck,
 			isLabelEnabled: false,
+			isValid: true,
 		});
 		this.submitMessageButton = new Button({
 			buttonStyle: 'button_style_round-arrow-right',

@@ -86,7 +86,7 @@ export default class Input extends Block {
 	}
 
 	validateInput(){
-		console.log(this.getElement().querySelector('.input'));
+		console.log('validateInput',this.getElement().querySelector('.input'));
 		this.getElement().querySelector('.input')?.dispatchEvent(new Event('blur'));
 	}
 
@@ -106,10 +106,11 @@ export default class Input extends Block {
 			vbox: this.props.vbox || false,
 			style_justifyContentSpaceBetween:
                 this.props.style_justifyContentSpaceBetween || false,
-			isValid: this.props.isValid || false,
-			validationMessage: this.props.validationMessage || '',
+			isValid: this.isValid || false,
+			validationMessage: this.valid.validationMessage || '',
 			isLabelEnabled: this.props.isLabelEnabled || true,
 		});
+		console.log('this.props.isValid', this.props.isValid);
 		return renderHelper.convertHtmlToDom(templateHTML);
 	}
 }

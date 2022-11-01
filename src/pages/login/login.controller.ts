@@ -1,5 +1,5 @@
+import { GenericObject } from './../../types/types';
 import UserService from '../../services/userService';
-import { signInRequest } from '../../types/types';
 
 export class LoginController {
 	userService: UserService;
@@ -7,8 +7,9 @@ export class LoginController {
 		this.userService = new UserService;
 	}
 
-	async isUserLoggedIn(userCredentials: signInRequest): Promise<boolean> {
+	async isUserLoggedIn(userCredentials: GenericObject): Promise<boolean> {
 		const res = await this.userService.singIn(userCredentials);
+		console.log('res', res);
 		return res.responseText === 'OK';
 	}
 }

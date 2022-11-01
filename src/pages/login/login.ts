@@ -47,6 +47,7 @@ export default class Login extends Block {
 			readOnly: false,
 			mediumMarginHorizontally: true,
 			validation: loginCheck,
+			isValid: true
 		});
 		this.passwordInput = new Input({
 			inputText: 'Password',
@@ -56,6 +57,7 @@ export default class Login extends Block {
 			labelStyle: 'loginLabelStyle',
 			mediumMarginHorizontally: true,
 			validation: passwordCheck,
+			isValid: true
 		});
 		this.linkToRegistration = new Link({
 			linkText: 'Registration',
@@ -70,7 +72,10 @@ export default class Login extends Block {
 		console.log('clickSignIn');
 		event!.preventDefault();
 		const { loginForm } = document.forms as Form;
-		this.loginInput.validateInput();
+		const loginValid = this.loginInput.validateInput();
+		const isValidation = this.loginInput.getIsInputValid()
+		&& this.passwordInput.getIsInputValid();
+		console.log('loginValid', isValidation);
 		this.passwordInput.validateInput();
 		const formData = getFormData(loginForm);
 		this.isLoggedIn = await this.controller.isUserLoggedIn(formData);

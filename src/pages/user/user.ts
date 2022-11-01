@@ -18,6 +18,7 @@ import RenderHelper from '../../commonClasses/RenderHelper';
 import { UserInfo } from '../../services/userService';
 import Router from '../../services/router';
 import UserController from './user.controller';
+import getFormData from '../../utils/getFormData';
 
 export default class User extends Block {
 	button: Button;
@@ -54,6 +55,7 @@ export default class User extends Block {
 			readOnly: false,
 			mediumMarginHorizontally: true,
 			validation: loginCheck,
+			isValid: true,
 		});
 		this.emailInput = new Input({
 			inputText: 'Email',
@@ -64,6 +66,7 @@ export default class User extends Block {
 			mediumMarginHorizontally: true,
 			validation: emailCheck,
 			inputValue: this.user.email,
+			isValid: true,
 		});
 		this.nameInput = new Input({
 			inputText: 'Name',
@@ -74,6 +77,7 @@ export default class User extends Block {
 			mediumMarginHorizontally: true,
 			validation: nameOrSurnameCheck,
 			inputValue: this.user.first_name,
+			isValid: true,
 		});
 		this.surnameInput = new Input({
 			inputText: 'Surname',
@@ -84,6 +88,7 @@ export default class User extends Block {
 			mediumMarginHorizontally: true,
 			validation: nameOrSurnameCheck,
 			inputValue: this.user.second_name,
+			isValid: true,
 		});
 		this.displayNameInput = new Input({
 			inputText: 'DisplayName',
@@ -94,6 +99,7 @@ export default class User extends Block {
 			mediumMarginHorizontally: true,
 			validation: nameOrSurnameCheck,
 			inputValue: this.user.display_name,
+			isValid: true,
 		});
 		this.phoneInput = new Input({
 			inputText: 'Phone',
@@ -104,6 +110,7 @@ export default class User extends Block {
 			mediumMarginHorizontally: true,
 			validation: phoneCheck,
 			inputValue: this.user.phone,
+			isValid: true,
 		});
 		this.passwordInput = new Input({
 			inputText: 'Password',
@@ -113,6 +120,7 @@ export default class User extends Block {
 			labelStyle: 'userLabelStyle',
 			mediumMarginHorizontally: true,
 			validation: passwordCheck,
+			isValid: true,
 		});
 		this.button = new Button({
 			buttonStyle: 'defaultButton',
@@ -162,10 +170,10 @@ export default class User extends Block {
 
 	render() {
 		const renderHelper = new RenderHelper();
-		// renderHelper.registerPartial(
-		// 	'changeUserInfo',
-		// 	this.button.renderAsHTMLString()
-		// );
+		renderHelper.registerPartial(
+			'changeUserInfo',
+			this.button.renderAsHTMLString()
+		);
 		renderHelper.registerPartial(
 			'toChat',
 			this.toChat.renderAsHTMLString()
@@ -207,26 +215,3 @@ export default class User extends Block {
 	}
 }
 
-export function getFormData(form: HTMLFormElement) {
-	const formData: FormData = new FormData(form);
-	const consoleData = [...formData.entries()].reduce(
-		(prev: Record<string, any>, [k, v]) => {
-			prev[k] = v;
-			return prev;
-		},
-		{}
-	);
-	console.log(consoleData);
-}
-
-
-
-// function randomEmail() {
-// 	const chars = 'abcdefghijklmnopqrstuvwxyz1234567890';
-// 	let string = '';
-// 	for (var ii = 0; ii < 15; ii++) {
-// 		string += chars[Math.floor(Math.random() * chars.length)];
-// 	}
-// 	return `${string}"@gmail.com"`;
-
-// }
