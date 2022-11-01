@@ -13,6 +13,7 @@ import {
 	phoneCheck,
 } from '../../global/regex';
 import Link from '../../components/link';
+import Text from '../../components/text';
 // import { navigateTo } from '../../router';
 import RenderHelper from '../../commonClasses/RenderHelper';
 import { UserInfo } from '../../services/userService';
@@ -36,6 +37,7 @@ export default class User extends Block {
 	toChat: Button;
 	router: Router;
 	controller: UserController;
+	logout: Text;
 	constructor() {
 		super('div');
 		this.router = new Router();
@@ -135,6 +137,13 @@ export default class User extends Block {
 				click: this.onClickChat.bind(this),
 			},
 		});
+		this.logout = new Text({
+			textStyle: 'profileConfigs__logout',
+			text: 'Logout',
+			events: {
+				click: this.onClickLogout.bind(this),
+			},
+		});
 	}
 
 	onClickChat() {
@@ -168,6 +177,12 @@ export default class User extends Block {
 		];
 	}
 
+	async onClickLogout() {
+		console.log('onClickLogout');
+		await this.controller.logOut();
+		this.router.go('/');
+	}
+
 	render() {
 		const renderHelper = new RenderHelper();
 		renderHelper.registerPartial(
@@ -177,6 +192,10 @@ export default class User extends Block {
 		renderHelper.registerPartial(
 			'toChat',
 			this.toChat.renderAsHTMLString()
+		);
+		renderHelper.registerPartial(
+			'logout',
+			this.logout.renderAsHTMLString()
 		);
 		renderHelper.registerPartial(
 			'loginInput',
@@ -210,6 +229,7 @@ export default class User extends Block {
 		return renderHelper.replaceElements(templateHTML, [
 			this.button,
 			this.toChat,
+			this.logout,
 			...this.getAllInputs(),
 		]);
 	}

@@ -1,10 +1,10 @@
 import Handlebars from 'handlebars';
 import text from './text.tmpl';
-import './link.less';
+import './text.less';
 import Block from '../../commonClasses/Block';
 import RenderHelper from '../../commonClasses/RenderHelper';
 
-export default class Link extends Block {
+export default class Text extends Block {
 	constructor(props: object | undefined) {
 		super('div', props);
 	}

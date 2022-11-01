@@ -72,7 +72,7 @@ export default class Login extends Block {
 		console.log('clickSignIn');
 		event!.preventDefault();
 		const { loginForm } = document.forms as Form;
-		const loginValid = this.loginInput.validateInput();
+		// const loginValid = this.loginInput.validateInput();
 		const isValidation = this.loginInput.getIsInputValid()
 		&& this.passwordInput.getIsInputValid();
 		console.log('loginValid', isValidation);
@@ -121,14 +121,3 @@ export default class Login extends Block {
 	}
 }
 
-// export function getFormData(form: HTMLFormElement): signInRequest {
-// 	const formData: FormData = new FormData(form);
-// 	const consoleData = [...formData.entries()].reduce(
-// 		(prev: Record<string, any>, [k, v]) => {
-// 			prev[k] = v;
-// 			return prev;
-// 		},
-// 		{}
-// 	);
-// 	console.log(consoleData);
-// }

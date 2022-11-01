@@ -15,15 +15,8 @@ export default `
       {{> phoneInput}}
     </div>
     <div class="profileConfigs">
-      <div>
-        <span class="profileConfigs__changeUserSettings">Change user settings</span>
-      </div>
-      <div>
-        <span class="profileConfigs__changePassword">Change password</span>
-      </div>
-      <div>
-        <span class="profileConfigs__logout">Logout</span>
-      </div>
+
+      {{> logout}}
     </div>
   </div>
 </div>
