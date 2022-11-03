@@ -2,7 +2,7 @@ import registration from './registration.tmpl';
 import './registration.less';
 import Button from '../../components/button';
 import Block from '../../commonClasses/Block';
-import { Form } from '../../types/types';
+import { Form, singUpUserData } from '../../types/types';
 import Input from '../../components/input/input';
 import {
 	emailCheck,
@@ -16,6 +16,7 @@ import Link from '../../components/link';
 import RenderHelper from '../../commonClasses/RenderHelper';
 import Router from '../../services/router';
 import getFormData from '../../utils/getFormData';
+import RegistrationController from './registration.controller';
 
 export default class Login extends Block {
 	button: Button;
@@ -28,9 +29,13 @@ export default class Login extends Block {
 	passwordSecondInput: Input;
 	linkToLogin: Link;
 	router: Router;
+	controller: RegistrationController;
+	isLoggedIn: boolean;
 	constructor() {
 		super('div');
 		this.router = new Router();
+		this.controller = new RegistrationController();
+		this.isLoggedIn = false;
 	}
 
 	componentDidMount() {
@@ -127,14 +132,16 @@ export default class Login extends Block {
 	onClickRegistration() {
 		event!.preventDefault();
 		const { registrationForm } = document.forms as Form;
-		getFormData(registrationForm);
+		const formData = getFormData(registrationForm) as singUpUserData;
 		this.getAllInputs().forEach((input) => {
 			input.validateInput();
 		});
 		const isValidationPassed = this.getAllInputs()
 			.map((inpField) => inpField.getIsInputValid())
 			.every((isValidField) => isValidField);
+		
 		if (isValidationPassed) {
+			this.controller.signUp(formData);
 			this.router.go('/messenger');
 		}
 	}

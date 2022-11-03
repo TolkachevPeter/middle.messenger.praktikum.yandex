@@ -113,13 +113,13 @@ function stringifyObjectDeep(obj: GenericObject): string {
 	let res = '';
 	// eslint-disable-next-line no-restricted-syntax
 	for (const [key, val] of Object.entries(obj)) {
-	  if (isObject(val)) {
+		if (isObject(val)) {
 			res += `[${key}]${stringifyObjectDeep(val)}&`;
-	  } else if (isArray(val)) {
+		} else if (isArray(val)) {
 			res += `${stringifyArray(key, val)}&`;
-	  } else {
+		} else {
 			res += `[${key}]=${encodeURIComponent(String(val))}&`;
-	  }
+		}
 	}
 	return removeLastChar(res);
 }

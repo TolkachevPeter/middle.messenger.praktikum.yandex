@@ -1,4 +1,5 @@
-import UserService, { UserInfo } from '../../services/userService';
+import UserService from '../../services/userService';
+import { UserInfo } from '../../types/types';
 
 export default class UserController {
 	userService: UserService;

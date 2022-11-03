@@ -3,7 +3,7 @@ import user from './user.tmpl';
 import './user.less';
 import Button from '../../components/button';
 import Block from '../../commonClasses/Block';
-import { Form } from '../../types/types';
+import { Form, UserInfo } from '../../types/types';
 import Input from '../../components/input/input';
 import {
 	emailCheck,
@@ -16,7 +16,6 @@ import Link from '../../components/link';
 import Text from '../../components/text';
 // import { navigateTo } from '../../router';
 import RenderHelper from '../../commonClasses/RenderHelper';
-import { UserInfo } from '../../services/userService';
 import Router from '../../services/router';
 import UserController from './user.controller';
 import getFormData from '../../utils/getFormData';

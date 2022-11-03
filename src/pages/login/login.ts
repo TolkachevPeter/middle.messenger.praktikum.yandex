@@ -43,6 +43,7 @@ export default class Login extends Block {
 			inputText: 'Login',
 			inputPlaceholder: 'Login',
 			inputStyle: 'loginInputStyle',
+			inputType: 'login',
 			labelStyle: 'loginLabelStyle',
 			readOnly: false,
 			mediumMarginHorizontally: true,
@@ -75,13 +76,12 @@ export default class Login extends Block {
 		// const loginValid = this.loginInput.validateInput();
 		const isValidation = this.loginInput.getIsInputValid()
 		&& this.passwordInput.getIsInputValid();
-		console.log('loginValid', isValidation);
 		this.passwordInput.validateInput();
+		this.loginInput.validateInput();
 		const formData = getFormData(loginForm);
 		this.isLoggedIn = await this.controller.isUserLoggedIn(formData);
 		console.log('isLoggedIn', this.isLoggedIn);
-		if (this.loginInput.getIsInputValid() 
-		&& this.passwordInput.getIsInputValid() 
+		if (isValidation
 		&& this.isLoggedIn
 		) {
 			this.router.go('/messenger');
