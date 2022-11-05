@@ -72,7 +72,7 @@ export default class Login extends Block {
 	async onClickSignIn() {
 		console.log('clickSignIn');
 		event!.preventDefault();
-		const { loginForm } = document.forms as Form;
+		const loginForm = (document.forms as Form).loginForm;
 		// const loginValid = this.loginInput.validateInput();
 		const isValidation = this.loginInput.getIsInputValid()
 		&& this.passwordInput.getIsInputValid();

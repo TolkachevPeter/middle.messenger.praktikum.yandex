@@ -129,9 +129,11 @@ export default class Login extends Block {
 		this.router.go('/');
 	}
 
-	onClickRegistration() {
+	async onClickRegistration() {
 		event!.preventDefault();
 		const { registrationForm } = document.forms as Form;
+		console.log('registrationForm', registrationForm);
+		console.log('document.forms', document.forms);
 		const formData = getFormData(registrationForm) as singUpUserData;
 		this.getAllInputs().forEach((input) => {
 			input.validateInput();
@@ -141,7 +143,9 @@ export default class Login extends Block {
 			.every((isValidField) => isValidField);
 		
 		if (isValidationPassed) {
-			this.controller.signUp(formData);
+			const res = await this.controller.signUp(formData);
+			console.log('res!!!',res);
+
 			this.router.go('/messenger');
 		}
 	}
