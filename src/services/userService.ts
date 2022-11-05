@@ -26,17 +26,15 @@ export default class UserService {
 		return user;
 	}
 
-	async singUp(data: singUpUserData): Promise<XMLHttpRequest> {
+	async singUp(data: singUpUserData) {
 		try {
-			const res = await this.request.post(`${this.baseUrl}/auth/signUp`,
+			await this.request.post(`${this.baseUrl}/auth/signUp`,
 				{
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded',
 					},
 					data
 				});
-			console.log('response', res);
-			return res;
 		} catch(error){
 			throw new Error(`Error sing up: ${error.message}`);
 		}

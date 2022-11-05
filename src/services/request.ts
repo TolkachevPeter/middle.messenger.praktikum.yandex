@@ -1,9 +1,5 @@
-// import { queryStringify } from './queryString';
-// import { GenericObject } from '../global/types';
+import { GenericObject } from '../types/types';
 
-type GenericObject<T = unknown> = {
-	[key in string]: T
-  }
 
 const METHODS = {
 	GET: 'GET',

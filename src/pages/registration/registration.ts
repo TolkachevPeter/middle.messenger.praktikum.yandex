@@ -47,7 +47,7 @@ export default class Login extends Block {
 			},
 		});
 		this.loginInput = new Input({
-			inputText: 'Login',
+			inputText: 'login',
 			inputPlaceholder: 'Login',
 			inputStyle: 'registrationInputStyle',
 			labelStyle: 'registrationLabelStyle',
@@ -57,7 +57,7 @@ export default class Login extends Block {
 			isValid: true
 		});
 		this.emailInput = new Input({
-			inputText: 'Email',
+			inputText: 'email',
 			inputPlaceholder: 'Email',
 			inputStyle: 'registrationInputStyle',
 			labelStyle: 'registrationLabelStyle',
@@ -67,7 +67,7 @@ export default class Login extends Block {
 			isValid: true
 		});
 		this.nameInput = new Input({
-			inputText: 'Name',
+			inputText: 'first_name',
 			inputPlaceholder: 'Name',
 			inputStyle: 'registrationInputStyle',
 			labelStyle: 'registrationLabelStyle',
@@ -77,7 +77,7 @@ export default class Login extends Block {
 			isValid: true
 		});
 		this.surnameInput = new Input({
-			inputText: 'Surname',
+			inputText: 'second_name',
 			inputPlaceholder: 'Surname',
 			inputStyle: 'registrationInputStyle',
 			labelStyle: 'registrationLabelStyle',
@@ -87,7 +87,7 @@ export default class Login extends Block {
 			isValid: true
 		});
 		this.phoneInput = new Input({
-			inputText: 'Phone',
+			inputText: 'phone',
 			inputPlaceholder: 'Phone',
 			inputStyle: 'registrationInputStyle',
 			labelStyle: 'registrationLabelStyle',
@@ -97,7 +97,7 @@ export default class Login extends Block {
 			isValid: true
 		});
 		this.passwordInput = new Input({
-			inputText: 'Password',
+			inputText: 'password',
 			inputPlaceholder: 'Password',
 			inputStyle: 'loginInputStyle',
 			inputType: 'password',
@@ -107,7 +107,7 @@ export default class Login extends Block {
 			isValid: true
 		});
 		this.passwordSecondInput = new Input({
-			inputText: 'Password',
+			inputText: 'password',
 			inputPlaceholder: 'Password',
 			inputStyle: 'loginInputStyle',
 			inputType: 'password',
@@ -133,7 +133,6 @@ export default class Login extends Block {
 		event!.preventDefault();
 		const { registrationForm } = document.forms as Form;
 		console.log('registrationForm', registrationForm);
-		console.log('document.forms', document.forms);
 		const formData = getFormData(registrationForm) as singUpUserData;
 		this.getAllInputs().forEach((input) => {
 			input.validateInput();

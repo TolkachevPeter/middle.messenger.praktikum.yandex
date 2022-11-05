@@ -224,7 +224,10 @@ export default class User extends Block {
 			'passwordInput',
 			this.passwordInput.renderAsHTMLString()
 		);
-		const templateHTML = renderHelper.generate(user);
+		const templateHTML = renderHelper.generate(user, 
+			{displayName: this.user.display_name 
+			|| this.user.first_name + ' ' + this.user.second_name});
+		console.log('props', this.user);
 		return renderHelper.replaceElements(templateHTML, [
 			this.button,
 			this.toChat,
