@@ -9,7 +9,7 @@ import {
 	emailCheck,
 	loginCheck,
 	nameOrSurnameCheck,
-	passwordCheck,
+	// passwordCheck,
 	phoneCheck,
 } from '../../global/regex';
 import Link from '../../components/link';
@@ -23,7 +23,7 @@ import getFormData from '../../utils/getFormData';
 export default class User extends Block {
 	button: Button;
 	loginInput: Input;
-	passwordInput: Input;
+	// passwordInput: Input;
 	linkToRegistration: Link;
 	emailInput: Input;
 	nameInput: Input;
@@ -37,6 +37,8 @@ export default class User extends Block {
 	router: Router;
 	controller: UserController;
 	logout: Text;
+	updateUser: Text;
+	updatePassword: Text;
 	constructor() {
 		super('div');
 		this.router = new Router();
@@ -48,7 +50,7 @@ export default class User extends Block {
 		console.log('user', await this.controller.getUserInfo());
 		this.user = await this.controller.getUserInfo();
 		this.loginInput = new Input({
-			inputText: 'Login',
+			inputText: 'login',
 			inputPlaceholder: 'Login',
 			inputStyle: 'userInputStyle',
 			labelStyle: 'userLabelStyle',
@@ -59,7 +61,7 @@ export default class User extends Block {
 			isValid: true,
 		});
 		this.emailInput = new Input({
-			inputText: 'Email',
+			inputText: 'email',
 			inputPlaceholder: 'Email',
 			inputStyle: 'userInputStyle',
 			labelStyle: 'userLabelStyle',
@@ -70,7 +72,7 @@ export default class User extends Block {
 			isValid: true,
 		});
 		this.nameInput = new Input({
-			inputText: 'Name',
+			inputText: 'first_name',
 			inputPlaceholder: 'Name',
 			inputStyle: 'userInputStyle',
 			labelStyle: 'userLabelStyle',
@@ -81,7 +83,7 @@ export default class User extends Block {
 			isValid: true,
 		});
 		this.surnameInput = new Input({
-			inputText: 'Surname',
+			inputText: 'second_name',
 			inputPlaceholder: 'Surname',
 			inputStyle: 'userInputStyle',
 			labelStyle: 'userLabelStyle',
@@ -92,7 +94,7 @@ export default class User extends Block {
 			isValid: true,
 		});
 		this.displayNameInput = new Input({
-			inputText: 'DisplayName',
+			inputText: 'display_name',
 			inputPlaceholder: 'DisplayName',
 			inputStyle: 'userInputStyle',
 			labelStyle: 'userLabelStyle',
@@ -103,7 +105,7 @@ export default class User extends Block {
 			isValid: true,
 		});
 		this.phoneInput = new Input({
-			inputText: 'Phone',
+			inputText: 'phone',
 			inputPlaceholder: 'Phone',
 			inputStyle: 'userInputStyle',
 			labelStyle: 'userLabelStyle',
@@ -113,23 +115,23 @@ export default class User extends Block {
 			inputValue: this.user.phone,
 			isValid: true,
 		});
-		this.passwordInput = new Input({
-			inputText: 'Password',
-			inputPlaceholder: 'Password',
-			inputStyle: 'userInputStyle',
-			inputType: 'password',
-			labelStyle: 'userLabelStyle',
-			mediumMarginHorizontally: true,
-			validation: passwordCheck,
-			isValid: true,
-		});
-		this.button = new Button({
-			buttonStyle: 'defaultButton',
-			buttonText: 'Change user info',
-			events: {
-				click: this.onClickUser.bind(this),
-			},
-		});
+		// this.passwordInput = new Input({
+		// 	inputText: 'Password',
+		// 	inputPlaceholder: 'Password',
+		// 	inputStyle: 'userInputStyle',
+		// 	inputType: 'password',
+		// 	labelStyle: 'userLabelStyle',
+		// 	mediumMarginHorizontally: true,
+		// 	validation: passwordCheck,
+		// 	isValid: true,
+		// });
+		// this.button = new Button({
+		// 	buttonStyle: 'defaultButton',
+		// 	buttonText: 'Change user info',
+		// 	events: {
+		// 		click: this.onClickUser.bind(this),
+		// 	},
+		// });
 		this.toChat = new Button({
 			buttonStyle: 'roundButton',
 			events: {
@@ -143,16 +145,31 @@ export default class User extends Block {
 				click: this.onClickLogout.bind(this),
 			},
 		});
+		this.updateUser = new Text({
+			text: 'Change user info',
+			events: {
+				click: this.onClickUser.bind(this),
+			},
+		});
+		this.updatePassword = new Text({
+			text: 'Change password',
+			events: {
+				click: this.onClickPassword.bind(this),
+			},
+		});
 	}
 
 	onClickChat() {
 		console.log('click to Chat');
 		this.router.go('/messenger');
 	}
+	onClickPassword() {
+		console.log('click to Password');
+		this.router.go('/404');
+	}
 
-	onClickUser() {
+	async onClickUser() {
 		const { userForm } = document.forms as Form;
-		getFormData(userForm);
 		this.getAllInputs().forEach((input) => {
 			input.validateInput();
 		});
@@ -160,7 +177,11 @@ export default class User extends Block {
 			.map((inpField) => inpField.getIsInputValid())
 			.every((isValidField) => isValidField);
 		if (isValidationPassed) {
-			this.router.go('/messenger');
+			const userData = getFormData(userForm) as UserInfo;
+			console.log('userData', userData);
+			const updatedUserData = await this.controller.updateUserInfo(userData);
+			this.setProps(updatedUserData);
+			// this.router.go('/messenger');
 		}
 	}
 
@@ -171,7 +192,7 @@ export default class User extends Block {
 			this.nameInput,
 			this.surnameInput,
 			this.phoneInput,
-			this.passwordInput,
+			// this.passwordInput,
 			this.displayNameInput,
 		];
 	}
@@ -184,10 +205,10 @@ export default class User extends Block {
 
 	render() {
 		const renderHelper = new RenderHelper();
-		renderHelper.registerPartial(
-			'changeUserInfo',
-			this.button.renderAsHTMLString()
-		);
+		// renderHelper.registerPartial(
+		// 	'changeUserInfo',
+		// 	this.button.renderAsHTMLString()
+		// );
 		renderHelper.registerPartial(
 			'toChat',
 			this.toChat.renderAsHTMLString()
@@ -195,6 +216,14 @@ export default class User extends Block {
 		renderHelper.registerPartial(
 			'logout',
 			this.logout.renderAsHTMLString()
+		);
+		renderHelper.registerPartial(
+			'changeUserInfo',
+			this.updateUser.renderAsHTMLString()
+		);
+		renderHelper.registerPartial(
+			'changePassword',
+			this.updatePassword.renderAsHTMLString()
 		);
 		renderHelper.registerPartial(
 			'loginInput',
@@ -220,16 +249,17 @@ export default class User extends Block {
 			'phoneInput',
 			this.phoneInput.renderAsHTMLString()
 		);
-		renderHelper.registerPartial(
-			'passwordInput',
-			this.passwordInput.renderAsHTMLString()
-		);
+		// renderHelper.registerPartial(
+		// 	'passwordInput',
+		// 	this.passwordInput.renderAsHTMLString()
+		// );
 		const templateHTML = renderHelper.generate(user, 
 			{displayName: this.user.display_name 
 			|| this.user.first_name + ' ' + this.user.second_name});
 		console.log('props', this.user);
 		return renderHelper.replaceElements(templateHTML, [
-			this.button,
+			this.updateUser,
+			this.updatePassword,
 			this.toChat,
 			this.logout,
 			...this.getAllInputs(),

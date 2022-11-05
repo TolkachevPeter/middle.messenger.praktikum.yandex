@@ -7,7 +7,7 @@ export default `
     <div class="profileImage"></div>
     <div class="profileName">{{displayName}}</div>
     <div class="profileInputFields">
-    <form name="profileForm" class="profileForm" onsubmit="return false">
+    <form name="userForm" class="profileForm" onsubmit="return false">
       {{> emailInput}}
       {{> loginInput}}
       {{> nameInput}}
@@ -17,7 +17,8 @@ export default `
       </form>
     </div>
     <div class="profileConfigs">
-
+      {{> changeUserInfo}}
+      {{> changePassword}}
       {{> logout}}
     </div>
   </div>

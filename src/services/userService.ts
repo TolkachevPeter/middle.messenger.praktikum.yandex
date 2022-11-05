@@ -64,7 +64,7 @@ export default class UserService {
 	async updateUserInfo(data: UserInfo): Promise<UserInfo> {
 		let newUserData: UserInfo;
 		try {
-			const res = await this.request.put(`${this.baseUrl}/auth/profile`,
+			const res = await this.request.put(`${this.baseUrl}/user/profile`,
 				{
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded',
