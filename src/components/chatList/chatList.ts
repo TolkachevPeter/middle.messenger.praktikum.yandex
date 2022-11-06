@@ -27,6 +27,8 @@ export default class ChatList extends Block {
 	localEventBus: EventBus;
 	router: Router;
 	controller: ChatListController;
+	linkToNewChat: Link;
+	linkToRemoveChat: Link;
 
 
 	constructor(props: ChatListProps) {
@@ -46,12 +48,30 @@ export default class ChatList extends Block {
 				click: this.onClickLinkToProfile.bind(this),
 			},
 		});
+		this.linkToNewChat = new Link({
+			linkText: 'New chat',
+			linkStyle: 'chatlist__link_profile chatlist__new-chat',
+			events: {
+				click: this.onClickLinkToCreateChat.bind(this),
+			},
+		});
+		this.linkToRemoveChat = new Link({
+			linkText: 'Remove chat',
+			linkStyle: 'chatlist__link_profile chatlist__new-chat',
+			events: {
+				click: this.onClickLinkToCreateChat.bind(this),
+			},
+		});
 		this.renderHelper = new RenderHelper();
 		this.chatContacts = this.buildChatContacts();
 	}
 
-	async onClickLinkToCreateChat(title: string){
-		await this.controller.createChat(title || 'title');
+	componentDidUpdate(): void {
+		this.chatContacts = this.buildChatContacts();
+	}
+
+	async onClickLinkToCreateChat(){
+		await this.controller.createChat('title');
 		const update = await this.controller.getChats();
 		this.setProps({chatContacts: update});
 	}
@@ -92,6 +112,14 @@ export default class ChatList extends Block {
 			this.linkToProfile.renderAsHTMLString()
 		);
 		Handlebars.registerPartial(
+			'linkToCreateNewChat',
+			this.linkToNewChat.renderAsHTMLString()
+		);
+		Handlebars.registerPartial(
+			'linkToRemoveChat',
+			this.linkToRemoveChat.renderAsHTMLString()
+		);
+		Handlebars.registerPartial(
 			'chatContacts',
 			this.chatContacts
 				.map((chatContact: ChatContact) =>
@@ -105,6 +133,8 @@ export default class ChatList extends Block {
 		});
 		return this.renderHelper.replaceElements(templateHTML, [
 			this.linkToProfile,
+			this.linkToNewChat,
+			this.linkToRemoveChat,
 			...this.chatContacts,
 		]);
 	}

@@ -28,8 +28,8 @@ export default class Chat extends Block {
 
 	async componentDidMount() {
 		this.controller = new ChatController();
-		this.chatContacts = await this.controller.getChats();
 		this.localEventBus = new EventBus();
+		this.chatContacts = await this.controller.getChats();
 		this.localEventBus.on('chatIsSelected', this.chatSelect.bind(this));
 		this.chatList = new ChatList({
 			chatContacts: this.chatContacts,

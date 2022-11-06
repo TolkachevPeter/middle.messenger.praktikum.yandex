@@ -7,5 +7,9 @@ export default `
     <div class="chatlist__chats">
       {{> chatContacts }}
     </div>
+    <div class="chatlist__controller">
+      {{> linkToCreateNewChat }}
+      {{> linkToRemoveChat }}
+    </div>
   </div>
 `;
