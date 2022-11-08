@@ -38,6 +38,12 @@ export default class Chat extends Block {
 		this.messages = new Messages();
 	}
 
+	chatIsSelected(){
+		this.setProps({
+			isChatSelected: true,
+		});
+	}
+
 	render() {
 		const renderHelper = new RenderHelper();
 		renderHelper.registerPartial(

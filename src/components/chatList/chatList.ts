@@ -59,7 +59,7 @@ export default class ChatList extends Block {
 			linkText: 'Remove chat',
 			linkStyle: 'chatlist__link_profile chatlist__new-chat',
 			events: {
-				click: this.onClickLinkToCreateChat.bind(this),
+				click: this.onClickLinkToRemoveChat.bind(this),
 			},
 		});
 		this.renderHelper = new RenderHelper();
@@ -76,6 +76,18 @@ export default class ChatList extends Block {
 		this.setProps({chatContacts: update});
 	}
 	async onClickLinkToRemoveChat(){
+		const { selectedChat } = this.props;
+		if(selectedChat && selectedChat.props) {
+			await this.controller.removeChat(selectedChat.props.id);
+			const update = await this.controller.getChats();
+			this.setProps({
+				chatContacts: update,
+				selectedChat: null
+			});
+		} else {
+			console.log('Choose a chat');
+		}
+
 		// await this.controller.createChat(title || 'title');
 		// const update = await this.controller.getChats();
 		// this.setProps({chatContacts: update});
@@ -87,8 +99,14 @@ export default class ChatList extends Block {
 
 	onClickChatContact() {
 		console.log('click contact');
+		const { currentTarget } = event as Event;
+		const select = currentTarget ? this.chatContacts.find(el => el.getId() === (currentTarget as HTMLElement).getAttribute('data-id')) : null;
+		console.log('select', select);
+		select && this.setProps({
+			selectedChat: select
+		});
 		this.isChatSelected = true;
-		this.localEventBus.emit('chatIsSelected');
+		this.localEventBus.emit('chatIsSelected', select);
 	}
 
 	buildChatContacts() {
