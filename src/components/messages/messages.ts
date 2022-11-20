@@ -1,4 +1,4 @@
-import messages from './messages.tmpl';
+import messages from './messages.right.tmpl';
 import './messages.less';
 import Button from '../button';
 import Block from '../../commonClasses/Block';
@@ -9,7 +9,7 @@ import { Form } from '../../types/types';
 import getFormData from '../../utils/getFormData';
 
 
-export default class Messages extends Block {
+export default class Message extends Block {
 	rh: RenderHelper;
 	submitMessageButton: Button;
 	renderHelper: RenderHelper;
