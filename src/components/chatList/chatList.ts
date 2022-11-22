@@ -100,7 +100,9 @@ export default class ChatList extends Block {
 	onClickChatContact() {
 		console.log('click contact');
 		const { currentTarget } = event as Event;
-		const select = currentTarget ? this.chatContacts.find(el => el.getId() === (currentTarget as HTMLElement).getAttribute('data-id')) : null;
+		const select = currentTarget ? 
+		this.chatContacts.find(el => el.getId() === (currentTarget as HTMLElement).getAttribute('data-id')) 
+		: null;
 		console.log('select', select);
 		select && this.setProps({
 			selectedChat: select

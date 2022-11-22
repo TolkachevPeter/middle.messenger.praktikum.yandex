@@ -28,6 +28,8 @@ export default class Conversation extends Block {
 	messageInput: Input;
 	submitMessageButton: Button;
 	messages: Message[];
+	wss: WebSocket;
+
 	constructor(props: ConversationProps) {
 		super('div', props, false, true);
 	}
@@ -53,17 +55,26 @@ export default class Conversation extends Block {
 		});
 	}
 
+	async initSocket(chatId: number){
+		const wss = await this.controller.createWs(chatId, this.user.id);
+		if(wss instanceof WebSocket) this.wss = wss;
+	}
+
 	async onSubmitMessage(){
 		const { messageForm } = document.forms as Form;
 		console.log('messageForm', messageForm);
 		const dataForm = getFormData(messageForm);
 		console.log(dataForm);
+
 		const isValid = this.messageInput.getIsInputValid();
 		console.log('isValid', isValid);
-		// if(isValid){
+		if(isValid && this.props.chatId){
+			this.initSocket(this.props.chatId)
 			this.messageInput.setProps({inputValue: ''});
 			this.props.localEventBus.emit('onNewMessage');
-		// }
+		} else {
+			console.log('We dont have chatId', this.props)
+		}
 
 
 	}

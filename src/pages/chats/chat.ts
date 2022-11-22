@@ -15,7 +15,7 @@ export default class Chat extends Block {
 	localEventBus: any;
 	renderAfterChatSelection: any;
 	chatList: ChatList;
-	Conversation: Conversation;
+	conversation: Conversation;
 	// messages: Messages;
 	loginInput: Input;
 	controller: ChatController;
@@ -31,14 +31,14 @@ export default class Chat extends Block {
 		this.controller = new ChatController();
 		this.localEventBus = new EventBus();
 		this.chatContacts = await this.controller.getChats();
-		this.localEventBus.on('chatIsSelected', this.chatSelect.bind(this));
+		this.localEventBus.on('chatIsSelected', this.chatIsSelected.bind(this));
 
 		this.localEventBus.on('onNewMessage', this.onNewMessage.bind(this));
 		this.chatList = new ChatList({
 			chatContacts: this.chatContacts,
 			localEventBus: this.localEventBus,
 		});
-		this.Conversation = new Conversation({
+		this.conversation = new Conversation({
 			localEventBus: this.localEventBus,
 		});
 	}
@@ -53,7 +53,10 @@ export default class Chat extends Block {
 		this.setProps({
 			isChatSelected: true,
 		});
-	}
+		this.conversation.setProps({
+			chatId: this.chatList.props.selectedChat.getId()
+		});
+		}
 
 	render() {
 		const renderHelper = new RenderHelper();
@@ -63,14 +66,14 @@ export default class Chat extends Block {
 		);
 		renderHelper.registerPartial(
 			'messages',
-			this.Conversation.renderAsHTMLString()
+			this.conversation.renderAsHTMLString()
 		);
 		const templateHTML = renderHelper.generate(chat, {
 			isChatSelected: this.chatList.isChatSelected,
 		});
 		return renderHelper.replaceElements(templateHTML, [
 			this.chatList,
-			this.Conversation,
+			this.conversation,
 		]);
 	}
 }

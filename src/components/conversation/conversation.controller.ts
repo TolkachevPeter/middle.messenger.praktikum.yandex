@@ -15,4 +15,13 @@ export default class ConversationController {
 		return await this.userService.getUserInfo();
 	}
 
+	async createWs(chatId: number, userId: number) {
+		try {
+			const token = await this.chatService.getChatWsToken(chatId);
+			return await this.chatService.createWsConnection(chatId, userId, token);
+		} catch (e) {
+			console.error(e);
+		}
+	}
+
 }
