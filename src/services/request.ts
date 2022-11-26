@@ -93,7 +93,7 @@ function queryStringify(data: any): string | never {
 	return removeLastChar(res);
 }
 
-function isObject(val: unknown): val is GenericObject {
+export function isObject(val: unknown): val is GenericObject {
 	return (
 		typeof val === 'object'
 		&& val != null

@@ -91,24 +91,24 @@ export default class ChatService {
 		return wsToken;
 	}
 
-	createWsConnection(chatId: number, userId: number, wsToken: string): Promise<WebSocket> {
-		return new Promise((resolve, reject) => {
-			const ws = new WebSocket(`${this.wssBaseUrl}/${userId}/${chatId}/${wsToken}}`);
-			ws.onopen = () => {
-				resolve(ws);
-			};
-
-			ws.onmessage = (event) => {
-				console.log(event);
-			};
-
-			ws.onerror = (error) => {
-				reject(error);
-			};
-
-			ws.onclose = (event) => {
-				console.log(event);
-			};
-		});
-	}
+	createWsConnection(chatId: number, userId: number, wsToken: string, callback: (...args: any) => void):
+    Promise<WebSocket> {
+    return new Promise((resolve, reject) => {
+      const server = new WebSocket(`${this.wssBaseUrl}/${userId}/${chatId}/${wsToken}`);
+      server.onopen = () => {
+        console.log('Соединение установлено');
+        resolve(server);
+      };
+      server.onmessage = callback;
+      server.onerror = (error) => reject(error);
+      server.onclose = (event) => {
+        if (event.wasClean) {
+          console.log('Соединение закрыто чисто');
+        } else {
+          console.log('Обрыв соединения');
+        }
+        console.log(`Код: ${event.code} | Причина: ${event.reason}`);
+      };
+    });
+  }
 }

@@ -15,10 +15,10 @@ export default class ConversationController {
 		return await this.userService.getUserInfo();
 	}
 
-	async createWs(chatId: number, userId: number) {
+	async createWs(chatId: number, userId: number, callback: (...args: any) => void) {
 		try {
 			const token = await this.chatService.getChatWsToken(chatId);
-			return await this.chatService.createWsConnection(chatId, userId, token);
+			return await this.chatService.createWsConnection(chatId, userId, token, callback);
 		} catch (e) {
 			console.error(e);
 		}
