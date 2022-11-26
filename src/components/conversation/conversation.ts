@@ -84,6 +84,8 @@ export default class Conversation extends Block {
 	}
 
 	async initSocket(){
+		console.log('this.props.chatId', this.props.chatId);
+		console.log('this.user.id', this.user.id);
 		const wss = await this.controller.createWs(this.props.chatId!, this.user.id, this.onMessageWebSocket.bind(this));
 		if(wss instanceof WebSocket) this.wss = wss;
 	}
@@ -98,6 +100,10 @@ export default class Conversation extends Block {
 		console.log('this.props.chatId', this.props.chatId);
 		if(isValid && this.props.chatId){
 			this.initSocket();
+			this.wss.send(JSON.stringify({
+				content: this.messageInput.getInputValue(),
+				type: 'message',
+			  }));
 			this.messageInput.setProps({inputValue: ''});
 			this.props.localEventBus.emit('onNewMessage');
 		} else {

@@ -23,9 +23,6 @@ export default class Chat extends Block {
 	constructor() {
 		super('div', {}, true);
 	}
-	chatSelect() {
-		this.eventBus().emit('flow:render');
-	}
 
 	async componentDidMount() {
 		this.controller = new ChatController();
@@ -54,7 +51,7 @@ export default class Chat extends Block {
 			isChatSelected: true,
 		});
 		this.conversation.setProps({
-			chatId: this.chatList.props.selectedChat.getId()
+			chatId: this.chatList.props.selectedChat.props.id
 		});
 		}
 

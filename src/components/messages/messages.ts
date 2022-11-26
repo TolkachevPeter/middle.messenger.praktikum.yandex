@@ -26,10 +26,11 @@ export default class Message extends Block {
 	messageInput: Input;
 	templateToRender: string;;
 	constructor(props: MessageProps) {
-		super('div');
+		super('div', props);
 	}
 
 	componentDidMount() {
+		console.log('message!!!! here!!!')
 		this.templateToRender = this.props.isMessageAuthor
 		  ? notRenderedTemplateRight : notRenderedTemplateLeft;
 	}

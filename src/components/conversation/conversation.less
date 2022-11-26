@@ -132,3 +132,56 @@ p.message__time {
 .form-message__submit-msg {
 	margin: 0.4rem;
 }
+
+.conversation__author-msg-container {
+	display: flex;
+  }
+  
+  .conversation__author-msg-container-content {
+	max-width: 40%;
+	background: #E4EDFD;
+	padding: 1rem;
+	margin: 1rem;
+	border-radius: 15px 0 0 15px;
+  }
+
+  .conversation__reader-msg-container {
+	max-width: 40%;
+	background: #F8F8F8;
+	padding: 1rem;
+	margin: 1rem;
+	border-radius: 0 15px 15px 0;
+  }
+  
+  .conversation__reader-msg,
+  .conversation__author-msg {
+	.fontRegular;
+	font-weight: 500;
+	font-size: 0.9rem;
+	line-height: 1.2rem;
+	color: @eerieBlack;
+	margin: 0;
+  }
+
+  .conversation__date {
+	.fontRegular;
+	font-weight: 500;
+	font-size: 0.9rem;
+	line-height: 0.9rem;
+	color: @baseGray;
+	text-align: center;
+  }
+
+  p.conversation__time {
+	.fontRegular;
+	font-weight: 500;
+	font-size: 0.7rem;
+	line-height: 0.7rem;
+	color: @baseGray;
+	margin: 1rem 0 0 0;
+	text-align: right;
+  }
+
+  .conversation__spacer {
+	flex-grow: 1;
+  }
