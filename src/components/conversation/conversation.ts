@@ -42,7 +42,7 @@ export default class Conversation extends Block {
 		this.messageInput = new Input({
 			inputPlaceholder: 'Message',
 			inputType: 'text',
-			inputStyle: 'form-conversation__inputfield_style_default',
+			inputStyle: 'form-message__inputfield_style_default',
 			mediumMarginHorizontally: true,
 			validation: noEmptyStringCheck,
 			isLabelEnabled: false,
@@ -50,6 +50,7 @@ export default class Conversation extends Block {
 		this.submitMessageButton = new Button({
 			buttonStyle: 'button_style_round-arrow-right',
 			events: {
+				submit: this.onSubmitMessage.bind(this),
 				click: this.onSubmitMessage.bind(this),
 			},
 		});
@@ -65,18 +66,16 @@ export default class Conversation extends Block {
 		console.log('messageForm', messageForm);
 		const dataForm = getFormData(messageForm);
 		console.log(dataForm);
-
 		const isValid = this.messageInput.getIsInputValid();
 		console.log('isValid', isValid);
+		console.log('this.props.chatId', this.props.chatId);
 		if(isValid && this.props.chatId){
 			this.initSocket(this.props.chatId)
 			this.messageInput.setProps({inputValue: ''});
 			this.props.localEventBus.emit('onNewMessage');
 		} else {
-			console.log('We dont have chatId', this.props)
+			console.log('We dont have chatId', this.props, 'or isValid', isValid);
 		}
-
-
 	}
 
 

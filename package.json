@@ -12,14 +12,18 @@
     "@parcel/transformer-css": "2.5.0",
     "@parcel/transformer-less": "2.5.0",
     "@types/uuid": "^8.3.4",
-    "@typescript-eslint/eslint-plugin": "^5.23.0",
-    "eslint": "^8.13.0",
+    "@typescript-eslint/eslint-plugin": "^5.44.0",
+    "eslint": "^8.28.0",
     "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-standard-with-typescript": "^23.0.0",
     "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.5.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-vue": "^9.8.0",
     "less": "^4.1.2",
     "parcel": "2.5.0",
     "stylelint": "^14.8.5",
-    "typescript": "^4.6.4"
+    "typescript": "^4.9.3"
   },
   "dependencies": {
     "express": "^4.17.3",

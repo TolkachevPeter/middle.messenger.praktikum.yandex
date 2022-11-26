@@ -7,7 +7,9 @@ import RenderHelper from '../../commonClasses/RenderHelper';
 type ButtonProps = {
     buttonStyle: string;
     buttonText?: string;
-    events?: { click: () => void };
+    events?: { 
+	click?: () => void
+	submit?: () => void };
 };
 
 export default class Button extends Block {
