@@ -9,7 +9,6 @@ export default class ChatController {
 	}
 
 	async getChats() {
-		console.log('data', await this.chatService.getChats());
 		return await this.chatService.getChats();
 	}
 }

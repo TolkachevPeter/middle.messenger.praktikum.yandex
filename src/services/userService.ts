@@ -14,7 +14,6 @@ export default class UserService {
 		let user: UserInfo;
 		try {
 			const res = await this.request.get(`${this.baseUrl}/auth/user`);
-			console.log('RES!!!', res);
 			user = JSON.parse(res.response);
 
 			if(!user){

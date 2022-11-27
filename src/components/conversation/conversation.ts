@@ -6,7 +6,6 @@ import { Form, UserInfo } from '../../types/types';
 import Input from '../../components/input/input';
 import Link from '../../components/link';
 import Text from '../../components/text';
-// import { navigateTo } from '../../router';
 import RenderHelper from '../../commonClasses/RenderHelper';
 import Router from '../../services/router';
 import getFormData from '../../utils/getFormData';
@@ -60,6 +59,7 @@ export default class Conversation extends Block {
 			mediumMarginHorizontally: true,
 			validation: noEmptyStringCheck,
 			isLabelEnabled: false,
+			isValid: true
 		});
 		this.submitMessageButton = new Button({
 			buttonStyle: 'button_style_round-arrow-right',
@@ -84,27 +84,21 @@ export default class Conversation extends Block {
 	}
 
 	async initSocket(){
-		console.log('this.props.chatId', this.props.chatId);
-		console.log('this.user.id', this.user.id);
 		const wss = await this.controller.createWs(this.props.chatId!, this.user.id, this.onMessageWebSocket.bind(this));
 		if(wss instanceof WebSocket) this.wss = wss;
 	}
 
 	async onSubmitMessage(){
 		const { messageForm } = document.forms as Form;
-		console.log('messageForm', messageForm);
 		const dataForm = getFormData(messageForm);
-		console.log(dataForm);
 		const isValid = this.messageInput.getIsInputValid();
-		console.log('isValid', isValid);
-		console.log('this.props.chatId', this.props.chatId);
 		if(isValid && this.props.chatId){
 			this.initSocket();
 			this.wss.send(JSON.stringify({
 				content: this.messageInput.getInputValue(),
 				type: 'message',
 			  }));
-			this.messageInput.setProps({inputValue: ''});
+			this.messageInput.setInputValue('');
 			this.props.localEventBus.emit('onNewMessage');
 		} else {
 			console.log('We dont have chatId', this.props, 'or isValid', isValid);
@@ -118,7 +112,6 @@ export default class Conversation extends Block {
 	private onMessageWebSocket(event: MessageEvent) {
 		const { data } = event;
 		const parsedData = JSON.parse(data);
-		console.log('messages!!!!! webSocket', parsedData)
 		if (isArray(parsedData)) {
 		  parsedData.forEach((el: RwMessage) => this.rwMessages.push(el));
 		} else if (isObject(parsedData)) {
@@ -133,7 +126,6 @@ export default class Conversation extends Block {
 		  }),
 		  isMessageAuthor: msg.user_id === this.user.id,
 		}));
-		console.log('messages', messages)
 		this.messages = messages;
 		this.forceRender();
 	  }
@@ -155,7 +147,6 @@ export default class Conversation extends Block {
 			this.messages.map(message => message.renderAsHTMLString()).join('')
 		);
 		const templateHTML = renderHelper.generate(conversationTmpl);
-		console.log('props', this.user);
 		return renderHelper.replaceElements(templateHTML, [
 			this.messageInput,
 			this.submitMessageButton,

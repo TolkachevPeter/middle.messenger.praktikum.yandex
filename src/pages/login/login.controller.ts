@@ -9,7 +9,6 @@ export class LoginController {
 
 	async isUserLoggedIn(userCredentials: GenericObject): Promise<boolean> {
 		const res = await this.userService.singIn(userCredentials);
-		console.log('res', res);
 		return res.responseText === 'OK';
 	}
 }

@@ -8,7 +8,6 @@ import { noEmptyStringCheck } from '../../global/regex';
 import Input from '../input';
 import { Form } from '../../types/types';
 import getFormData from '../../utils/getFormData';
-
 import Handlebars from 'handlebars';
 
 
@@ -30,7 +29,6 @@ export default class Message extends Block {
 	}
 
 	componentDidMount() {
-		console.log('message!!!! here!!!')
 		this.templateToRender = this.props.isMessageAuthor
 		  ? notRenderedTemplateRight : notRenderedTemplateLeft;
 	}

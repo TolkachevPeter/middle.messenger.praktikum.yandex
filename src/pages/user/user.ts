@@ -47,7 +47,6 @@ export default class User extends Block {
 	async componentDidMount() {
 		// this.service = new UserService();
 		this.controller = new UserController();
-		console.log('user', await this.controller.getUserInfo());
 		this.user = await this.controller.getUserInfo();
 		this.loginInput = new Input({
 			inputText: 'login',
@@ -160,11 +159,9 @@ export default class User extends Block {
 	}
 
 	onClickChat() {
-		console.log('click to Chat');
 		this.router.go('/messenger');
 	}
 	onClickPassword() {
-		console.log('click to Password');
 		this.router.go('/404');
 	}
 
@@ -178,7 +175,6 @@ export default class User extends Block {
 			.every((isValidField) => isValidField);
 		if (isValidationPassed) {
 			const userData = getFormData(userForm) as UserInfo;
-			console.log('userData', userData);
 			const updatedUserData = await this.controller.updateUserInfo(userData);
 			this.setProps(updatedUserData);
 			// this.router.go('/messenger');
@@ -198,7 +194,6 @@ export default class User extends Block {
 	}
 
 	async onClickLogout() {
-		console.log('onClickLogout');
 		await this.controller.logOut();
 		this.router.go('/');
 	}
@@ -256,7 +251,6 @@ export default class User extends Block {
 		const templateHTML = renderHelper.generate(user, 
 			{displayName: this.user.display_name 
 			|| this.user.first_name + ' ' + this.user.second_name});
-		console.log('props', this.user);
 		return renderHelper.replaceElements(templateHTML, [
 			this.updateUser,
 			this.updatePassword,

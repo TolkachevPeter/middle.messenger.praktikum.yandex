@@ -13,7 +13,6 @@ export default class ChatListController {
 	}
 
 	async createChat(title: string) {
-		console.log('title', title);
 		await this.chatService.createChat(title);
 	}
 

@@ -19,6 +19,7 @@ export default class Chat extends Block {
 	// messages: Messages;
 	loginInput: Input;
 	controller: ChatController;
+	id?: number;
 
 	constructor() {
 		super('div', {}, true);

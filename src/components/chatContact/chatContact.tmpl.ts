@@ -1,5 +1,5 @@
 export default `
-  <div class="chatContact">
+  <div class="chatContact {{#if isSelected}} chatContact-selected{{/if}}">
     <div class="chatContact__photo"></div>
     <div class="chatContact__middleSection">
       <p class="chatContact__name">{{firstName}}</p>

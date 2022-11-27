@@ -85,8 +85,13 @@ export default class Input extends Block {
 			.value;
 	}
 
+	setInputValue(inputValue: string) {
+		this.setProps({
+			inputValue,
+		})
+	}
+
 	validateInput(){
-		console.log('validateInput',this.getElement().querySelector('.input'));
 		this.getElement().querySelector('.input')?.dispatchEvent(new Event('blur'));
 	}
 

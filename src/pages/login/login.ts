@@ -70,7 +70,6 @@ export default class Login extends Block {
 	}
 
 	async onClickSignIn() {
-		console.log('clickSignIn');
 		event!.preventDefault();
 		const loginForm = (document.forms as Form).loginForm;
 		// const loginValid = this.loginInput.validateInput();
@@ -80,7 +79,6 @@ export default class Login extends Block {
 		this.loginInput.validateInput();
 		const formData = getFormData(loginForm);
 		this.isLoggedIn = await this.controller.isUserLoggedIn(formData);
-		console.log('isLoggedIn', this.isLoggedIn);
 		if (isValidation
 		&& this.isLoggedIn
 		) {

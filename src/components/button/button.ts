@@ -9,7 +9,8 @@ type ButtonProps = {
     buttonText?: string;
     events?: { 
 	click?: () => void
-	submit?: () => void };
+	submit?: () => void 
+}
 };
 
 export default class Button extends Block {
