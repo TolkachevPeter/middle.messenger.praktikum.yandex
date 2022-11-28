@@ -4,10 +4,7 @@ import './messages.less';
 import Button from '../button';
 import Block from '../../commonClasses/Block';
 import RenderHelper from '../../commonClasses/RenderHelper';
-import { noEmptyStringCheck } from '../../global/regex';
 import Input from '../input';
-import { Form } from '../../types/types';
-import getFormData from '../../utils/getFormData';
 import Handlebars from 'handlebars';
 
 
@@ -23,7 +20,7 @@ export default class Message extends Block {
 	submitMessageButton: Button;
 	renderHelper: RenderHelper;
 	messageInput: Input;
-	templateToRender: string;;
+	templateToRender: string;
 	constructor(props: MessageProps) {
 		super('div', props);
 	}
@@ -32,13 +29,7 @@ export default class Message extends Block {
 		this.templateToRender = this.props.isMessageAuthor
 		  ? notRenderedTemplateRight : notRenderedTemplateLeft;
 	}
-	
 
-	// onClickSubmitMessage() {
-	// 	const { messageForm } = document.forms as Form;
-	// 	getFormData(messageForm);
-	// 	this.messageInput.validateInput();
-	// }
 
 	render() {
 		const renderHelper = new RenderHelper();
@@ -48,18 +39,5 @@ export default class Message extends Block {
 		  messageTime: this.props.messageTime,
 		});
 		return renderHelper.convertHtmlToDom(templateHTML);
-		// renderHelper.registerPartial(
-		// 	'messageInput',
-		// 	this.messageInput.renderAsHTMLString()
-		// );
-		// renderHelper.registerPartial(
-		// 	'submitMessageButton',
-		// 	this.submitMessageButton.renderAsHTMLString()
-		// );
-		// const templateHTML = renderHelper.generate(this.templateToRender);
-		// return renderHelper.replaceElements(templateHTML, [
-		// 	this.messageInput,
-		// 	this.submitMessageButton,
-		// ]);
 	}
 }

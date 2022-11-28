@@ -1,6 +1,5 @@
 import Block from '../commonClasses/Block';
 
-
 class Route {
 	private _pathname: string;
 	private _blockClass: Block;
@@ -88,7 +87,6 @@ export default class Router {
 		if(route){
 			this._currentRoute = route;
 			route.render();
-			// route.render(route, pathname);
 		}
 
 	}

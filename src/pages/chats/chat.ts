@@ -4,7 +4,6 @@ import './chat.less';
 import Block from '../../commonClasses/Block';
 import Input from '../../components/input/input';
 import RenderHelper from '../../commonClasses/RenderHelper';
-// import ChatService from '../../services/chatService';
 import EventBus from '../../commonClasses/EventBus';
 import Conversation from '../../components/conversation';
 import ChatList from '../../components/chatList/chatList';
@@ -16,7 +15,6 @@ export default class Chat extends Block {
 	renderAfterChatSelection: any;
 	chatList: ChatList;
 	conversation: Conversation;
-	// messages: Messages;
 	loginInput: Input;
 	controller: ChatController;
 	id?: number;
@@ -44,7 +42,7 @@ export default class Chat extends Block {
 	async onNewMessage(){
 		this.chatList.setProps({
 			chatContacts: await this.controller.getChats()
-		})
+		});
 	}
 
 	chatIsSelected(){
@@ -54,7 +52,7 @@ export default class Chat extends Block {
 		this.conversation.setProps({
 			chatId: this.chatList.props.selectedChat.props.id
 		});
-		}
+	}
 
 	render() {
 		const renderHelper = new RenderHelper();

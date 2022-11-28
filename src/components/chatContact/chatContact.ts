@@ -22,11 +22,11 @@ export default class ChatContact extends Block {
 		const renderHelper = new RenderHelper();
 		const template = Handlebars.compile(chatContact);
 		const templateHTML = template({
-			firstName: this.props.last_message?.user?.first_name ?  this.props.last_message.user.first_name : '',
+			firstName: this.props.last_message?.user?.first_name ? this.props.last_message.user.first_name : '',
 			content: this.props.last_message ? this.props.last_message.content : '',
 			time: this.props.last_message ? 
-			new Date(this.props.last_message.time).toLocaleTimeString([], {
-				year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit',
+				new Date(this.props.last_message.time).toLocaleTimeString([], {
+					year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit',
 			  })
 			  : '',
 			isSelected: this.props.isSelected,

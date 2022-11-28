@@ -9,12 +9,10 @@ import {
 	emailCheck,
 	loginCheck,
 	nameOrSurnameCheck,
-	// passwordCheck,
 	phoneCheck,
 } from '../../global/regex';
 import Link from '../../components/link';
 import Text from '../../components/text';
-// import { navigateTo } from '../../router';
 import RenderHelper from '../../commonClasses/RenderHelper';
 import Router from '../../services/router';
 import UserController from './user.controller';
@@ -114,23 +112,6 @@ export default class User extends Block {
 			inputValue: this.user.phone,
 			isValid: true,
 		});
-		// this.passwordInput = new Input({
-		// 	inputText: 'Password',
-		// 	inputPlaceholder: 'Password',
-		// 	inputStyle: 'userInputStyle',
-		// 	inputType: 'password',
-		// 	labelStyle: 'userLabelStyle',
-		// 	mediumMarginHorizontally: true,
-		// 	validation: passwordCheck,
-		// 	isValid: true,
-		// });
-		// this.button = new Button({
-		// 	buttonStyle: 'defaultButton',
-		// 	buttonText: 'Change user info',
-		// 	events: {
-		// 		click: this.onClickUser.bind(this),
-		// 	},
-		// });
 		this.toChat = new Button({
 			buttonStyle: 'roundButton',
 			events: {
@@ -177,7 +158,6 @@ export default class User extends Block {
 			const userData = getFormData(userForm) as UserInfo;
 			const updatedUserData = await this.controller.updateUserInfo(userData);
 			this.setProps(updatedUserData);
-			// this.router.go('/messenger');
 		}
 	}
 
@@ -188,7 +168,6 @@ export default class User extends Block {
 			this.nameInput,
 			this.surnameInput,
 			this.phoneInput,
-			// this.passwordInput,
 			this.displayNameInput,
 		];
 	}
@@ -200,10 +179,6 @@ export default class User extends Block {
 
 	render() {
 		const renderHelper = new RenderHelper();
-		// renderHelper.registerPartial(
-		// 	'changeUserInfo',
-		// 	this.button.renderAsHTMLString()
-		// );
 		renderHelper.registerPartial(
 			'toChat',
 			this.toChat.renderAsHTMLString()
@@ -244,10 +219,6 @@ export default class User extends Block {
 			'phoneInput',
 			this.phoneInput.renderAsHTMLString()
 		);
-		// renderHelper.registerPartial(
-		// 	'passwordInput',
-		// 	this.passwordInput.renderAsHTMLString()
-		// );
 		const templateHTML = renderHelper.generate(user, 
 			{displayName: this.user.display_name 
 			|| this.user.first_name + ' ' + this.user.second_name});

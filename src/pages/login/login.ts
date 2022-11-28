@@ -6,7 +6,6 @@ import { Form } from '../../types/types';
 import Input from '../../components/input/input';
 import { loginCheck, passwordCheck } from '../../global/regex';
 import Link from '../../components/link';
-// import { navigateTo } from '../../router';
 import RenderHelper from '../../commonClasses/RenderHelper';
 import Router from '../../services/router';
 import { LoginController } from './login.controller';
@@ -72,7 +71,6 @@ export default class Login extends Block {
 	async onClickSignIn() {
 		event!.preventDefault();
 		const loginForm = (document.forms as Form).loginForm;
-		// const loginValid = this.loginInput.validateInput();
 		const isValidation = this.loginInput.getIsInputValid()
 		&& this.passwordInput.getIsInputValid();
 		this.passwordInput.validateInput();

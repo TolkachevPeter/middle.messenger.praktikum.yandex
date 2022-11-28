@@ -1,6 +1,5 @@
 import ChatService from '../../services/chatService';
 import UserService from '../../services/userService';
-import { UserInfo } from '../../types/types';
 
 export default class ConversationController {
 	userService: UserService;

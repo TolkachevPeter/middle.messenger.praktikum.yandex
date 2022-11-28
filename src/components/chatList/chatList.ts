@@ -1,11 +1,8 @@
 import Handlebars from 'handlebars';
 import chatList from './chatList.tmpl';
 import Block from '../../commonClasses/Block';
-
 import './chatList.less';
-
 import Link from '../link';
-// import { navigateTo } from '../../router';
 import RenderHelper from '../../commonClasses/RenderHelper';
 import Chat from '../../pages/chats/chat';
 import EventBus from '../../commonClasses/EventBus';
@@ -87,10 +84,6 @@ export default class ChatList extends Block {
 		} else {
 			console.log('Choose a chat');
 		}
-
-		// await this.controller.createChat(title || 'title');
-		// const update = await this.controller.getChats();
-		// this.setProps({chatContacts: update});
 	}
 
 	onClickLinkToProfile() {
@@ -100,8 +93,8 @@ export default class ChatList extends Block {
 	onClickChatContact() {
 		const { currentTarget } = event as Event;
 		const select = currentTarget ? 
-		this.chatContacts.find(el => el.getId() === (currentTarget as HTMLElement).getAttribute('data-id')) 
-		: null;
+			this.chatContacts.find(el => el.getId() === (currentTarget as HTMLElement).getAttribute('data-id')) 
+			: null;
  		select && this.setProps({
 			selectedChat: select
 		});

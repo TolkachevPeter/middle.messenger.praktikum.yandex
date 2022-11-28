@@ -4,13 +4,10 @@ import Button from '../../components/button';
 import Block from '../../commonClasses/Block';
 import { Form, UserInfo } from '../../types/types';
 import Input from '../../components/input/input';
-import Link from '../../components/link';
-import Text from '../../components/text';
 import RenderHelper from '../../commonClasses/RenderHelper';
-import Router from '../../services/router';
 import getFormData from '../../utils/getFormData';
 import ConversationController from './conversation.controller';
-import { emailCheck, noEmptyStringCheck } from '../../global/regex';
+import { noEmptyStringCheck } from '../../global/regex';
 import Message from '../messages';
 import EventBus from '../../commonClasses/EventBus';
 import { isArray, isObject } from '../../services/request';
@@ -74,18 +71,18 @@ export default class Conversation extends Block {
 		this.wss.send(JSON.stringify({
 			content: '0',
 			type: 'get old'
-		}))
+		}));
 	}
 
 	async componentDidUpdate() {
 		this.rwMessages = [];
 		await this.initSocket();
-		this.getMessagesBefore()
+		this.getMessagesBefore();
 	}
 
 	async initSocket(){
 		const wss = await this.controller.createWs(this.props.chatId!, this.user.id, this.onMessageWebSocket.bind(this));
-		if(wss instanceof WebSocket) this.wss = wss;
+		if(wss instanceof WebSocket) {this.wss = wss;}
 	}
 
 	async onSubmitMessage(){
@@ -122,7 +119,7 @@ export default class Conversation extends Block {
 		const messages = this.rwMessages.sort(this.sortByDate).map((msg) => new Message({
 		  messageText: msg.content,
 		  messageTime: new Date(msg.time).toLocaleTimeString([], {
-			year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit',
+				year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit',
 		  }),
 		  isMessageAuthor: msg.user_id === this.user.id,
 		}));

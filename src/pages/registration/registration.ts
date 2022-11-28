@@ -12,7 +12,6 @@ import {
 	phoneCheck,
 } from '../../global/regex';
 import Link from '../../components/link';
-// import { navigateTo } from '../../router';
 import RenderHelper from '../../commonClasses/RenderHelper';
 import Router from '../../services/router';
 import getFormData from '../../utils/getFormData';

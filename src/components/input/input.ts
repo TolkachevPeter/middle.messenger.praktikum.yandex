@@ -88,7 +88,7 @@ export default class Input extends Block {
 	setInputValue(inputValue: string) {
 		this.setProps({
 			inputValue,
-		})
+		});
 	}
 
 	validateInput(){

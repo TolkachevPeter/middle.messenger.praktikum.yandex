@@ -18,5 +18,4 @@ export default class UserController {
 	async updateUserInfo(data: UserInfo){
 		return await this.userService.updateUserInfo(data);
 	}
-
 }

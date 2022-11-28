@@ -1,7 +1,6 @@
 import { GenericObject, singUpUserData, UserInfo } from '../types/types';
 import Request from './request';
 
-
 export default class UserService {
 	request: Request;
 	baseUrl: string;
