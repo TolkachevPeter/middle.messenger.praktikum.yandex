@@ -1,6 +1,12 @@
 https://github.com/TolkachevPeter/middle.messenger.praktikum.yandex/pull/3
 
 # Чатик
+
+![](https://img.shields.io/github/languages/top/TolkachevPeter/middle.messenger.praktikum.yandex)
+![](https://img.shields.io/github/languages/count/TolkachevPeter/middle.messenger.praktikum.yandex)
+
+
+
 Находится в процессе разработки, в конце 4 спринта будет финальная версия.
 
 Онлайн-веб-чат, построенный на простом Typescript без каких-либо фреймворков, проект в рамках курса «мидл фронтенд разработчик» в Яндекс практикум.
@@ -64,3 +70,4 @@ npm run start
 ```
 
 
+![](https://frabjous-paletas-38af62.netlify.app)
