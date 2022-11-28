@@ -14,7 +14,7 @@ export default class ConversationController {
 		return await this.userService.getUserInfo();
 	}
 
-	async createWs(chatId: number, userId: number, callback: (...args: any) => void): Promise<WebSocket | undefined> {
+	async createWs(chatId: number, userId: number, callback: () => void): Promise<WebSocket | undefined> {
 		try {
 			const token = await this.chatService.getChatWsToken(chatId);
 			return await this.chatService.createWsConnection(chatId, userId, token, callback);

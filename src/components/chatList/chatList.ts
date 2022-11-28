@@ -95,7 +95,7 @@ export default class ChatList extends Block {
 		const select = currentTarget ? 
 			this.chatContacts.find(el => el.getId() === (currentTarget as HTMLElement).getAttribute('data-id')) 
 			: null;
- 		select && this.setProps({
+		select && this.setProps({
 			selectedChat: select
 		});
 		this.isChatSelected = true;

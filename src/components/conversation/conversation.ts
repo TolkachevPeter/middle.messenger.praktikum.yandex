@@ -87,14 +87,14 @@ export default class Conversation extends Block {
 
 	async onSubmitMessage(){
 		const { messageForm } = document.forms as Form;
-		const dataForm = getFormData(messageForm);
+		getFormData(messageForm);
 		const isValid = this.messageInput.getIsInputValid();
 		if(isValid && this.props.chatId){
 			this.initSocket();
 			this.wss.send(JSON.stringify({
 				content: this.messageInput.getInputValue(),
 				type: 'message',
-			  }));
+			}));
 			this.messageInput.setInputValue('');
 			this.props.localEventBus.emit('onNewMessage');
 		} else {
@@ -110,22 +110,22 @@ export default class Conversation extends Block {
 		const { data } = event;
 		const parsedData = JSON.parse(data);
 		if (isArray(parsedData)) {
-		  parsedData.forEach((el: RwMessage) => this.rwMessages.push(el));
+			parsedData.forEach((el: RwMessage) => this.rwMessages.push(el));
 		} else if (isObject(parsedData)) {
-		  this.rwMessages.push(parsedData as RwMessage);
+			this.rwMessages.push(parsedData as RwMessage);
 		} else {
-		  throw new Error('Not supported type of parsed WS response!');
+			throw new Error('Not supported type of parsed WS response!');
 		}
 		const messages = this.rwMessages.sort(this.sortByDate).map((msg) => new Message({
-		  messageText: msg.content,
-		  messageTime: new Date(msg.time).toLocaleTimeString([], {
+			messageText: msg.content,
+			messageTime: new Date(msg.time).toLocaleTimeString([], {
 				year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit',
-		  }),
-		  isMessageAuthor: msg.user_id === this.user.id,
+			}),
+			isMessageAuthor: msg.user_id === this.user.id,
 		}));
 		this.messages = messages;
 		this.forceRender();
-	  }
+	}
 
 
 

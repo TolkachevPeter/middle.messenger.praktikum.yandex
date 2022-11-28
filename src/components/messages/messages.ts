@@ -27,7 +27,7 @@ export default class Message extends Block {
 
 	componentDidMount() {
 		this.templateToRender = this.props.isMessageAuthor
-		  ? notRenderedTemplateRight : notRenderedTemplateLeft;
+			? notRenderedTemplateRight : notRenderedTemplateLeft;
 	}
 
 
@@ -35,8 +35,8 @@ export default class Message extends Block {
 		const renderHelper = new RenderHelper();
 		const template = Handlebars.compile(this.templateToRender);
 		const templateHTML = template({
-		  messageText: this.props.messageText,
-		  messageTime: this.props.messageTime,
+			messageText: this.props.messageText,
+			messageTime: this.props.messageTime,
 		});
 		return renderHelper.convertHtmlToDom(templateHTML);
 	}

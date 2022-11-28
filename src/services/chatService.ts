@@ -91,7 +91,7 @@ export default class ChatService {
 		return wsToken;
 	}
 
-	createWsConnection(chatId: number, userId: number, wsToken: string, callback: (...args: any) => void):
+	createWsConnection(chatId: number, userId: number, wsToken: string, callback: () => void):
     Promise<WebSocket> {
 		return new Promise((resolve, reject) => {
 			const server = new WebSocket(`${this.wssBaseUrl}/${userId}/${chatId}/${wsToken}`);

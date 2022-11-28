@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 type CallBackFunction = (...args: any[]) => {};
 
 export default class EventBus {

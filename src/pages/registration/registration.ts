@@ -140,7 +140,7 @@ export default class Login extends Block {
 			.every((isValidField) => isValidField);
 		
 		if (isValidationPassed) {
-			const res = await this.controller.signUp(formData);
+			await this.controller.signUp(formData);
 
 			this.router.go('/messenger');
 		}

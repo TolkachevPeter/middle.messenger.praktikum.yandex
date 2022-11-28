@@ -27,8 +27,8 @@ export default class ChatContact extends Block {
 			time: this.props.last_message ? 
 				new Date(this.props.last_message.time).toLocaleTimeString([], {
 					year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit',
-			  })
-			  : '',
+				})
+				: '',
 			isSelected: this.props.isSelected,
 		});
 		return renderHelper.convertHtmlToDom(templateHTML);

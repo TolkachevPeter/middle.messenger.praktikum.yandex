@@ -96,7 +96,7 @@ function queryStringify(data: any): string | never {
 export function isObject(val: unknown): val is GenericObject {
 	return (
 		typeof val === 'object'
-		&& val != null
+		&& val !== null
 		&& val.constructor === Object
 		&& Object.prototype.toString.call(val) === '[object Object]');
 }
