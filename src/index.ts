@@ -1,7 +1,3 @@
-// import router from './router';
-
-// router;
-
 import { generateChatPage } from './pages/chats';
 import { generateErrorPage } from './pages/errors';
 import {generateLoginModule} from './pages/login';

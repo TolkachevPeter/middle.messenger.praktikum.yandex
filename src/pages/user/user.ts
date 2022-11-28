@@ -21,14 +21,12 @@ import getFormData from '../../utils/getFormData';
 export default class User extends Block {
 	button: Button;
 	loginInput: Input;
-	// passwordInput: Input;
 	linkToRegistration: Link;
 	emailInput: Input;
 	nameInput: Input;
 	surnameInput: Input;
 	phoneInput: Input;
 	passwordSecondInput: Input;
-	// service: UserService;
 	user: UserInfo;
 	displayNameInput: Input;
 	toChat: Button;
@@ -43,7 +41,6 @@ export default class User extends Block {
 	}
 
 	async componentDidMount() {
-		// this.service = new UserService();
 		this.controller = new UserController();
 		this.user = await this.controller.getUserInfo();
 		this.loginInput = new Input({

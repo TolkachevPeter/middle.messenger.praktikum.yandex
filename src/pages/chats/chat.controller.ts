@@ -1,6 +1,5 @@
 import ChatService from '../../services/chatService';
 
-
 export default class ChatController {
 	chatService: ChatService;
 
