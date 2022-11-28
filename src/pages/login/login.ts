@@ -30,7 +30,7 @@ export default class Login extends Block {
 		this.isLoggedIn = false;
 	}
 
-	componentDidMount() {
+	async componentDidMount() {
 		this.button = new Button({
 			buttonStyle: 'defaultButton',
 			buttonText: 'Sign in',
@@ -70,18 +70,22 @@ export default class Login extends Block {
 
 	async onClickSignIn() {
 		event!.preventDefault();
-		const loginForm = (document.forms as Form).loginForm;
-		const isValidation = this.loginInput.getIsInputValid()
-		&& this.passwordInput.getIsInputValid();
-		this.passwordInput.validateInput();
-		this.loginInput.validateInput();
-		const formData = getFormData(loginForm);
-		this.isLoggedIn = await this.controller.isUserLoggedIn(formData);
-		if (isValidation
-		&& this.isLoggedIn
-		) {
+		this.isLoggedIn = await this.controller.getUserInfo();
+		if(this.isLoggedIn) {
 			this.router.go('/messenger');
-		}
+		} else {
+			const loginForm = (document.forms as Form).loginForm;
+			const isValidation = this.loginInput.getIsInputValid()
+		&& this.passwordInput.getIsInputValid();
+			this.passwordInput.validateInput();
+			this.loginInput.validateInput();
+			const formData = getFormData(loginForm);
+			this.isLoggedIn = await this.controller.isUserLoggedIn(formData);
+			if (isValidation
+		&& this.isLoggedIn
+			) {
+				this.router.go('/messenger');
+			}}
 	}
 
 	onClickLinkToRegistration() {

@@ -11,4 +11,9 @@ export class LoginController {
 		const res = await this.userService.singIn(userCredentials);
 		return res.responseText === 'OK';
 	}
+
+	async getUserInfo(): Promise<boolean>{
+		const res = await this.userService.getUserInfo();
+		return typeof res.id === 'number' && res.email ? true : false ;
+	}
 }
