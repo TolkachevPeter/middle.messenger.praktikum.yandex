@@ -137,7 +137,7 @@ export default class ChatList extends Block {
 				.map((chatContact: ChatContact) =>
 					chatContact.renderAsHTMLString()
 				)
-				.join()
+				.join('')
 		);
 		const template = Handlebars.compile(chatList);
 		const templateHTML = template({

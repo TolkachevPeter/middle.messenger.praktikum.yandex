@@ -1,3 +1,4 @@
+import { baseUrl } from '../config/config';
 import { GenericObject, singUpUserData, UserInfo } from '../types/types';
 import Request from './request';
 
@@ -6,7 +7,7 @@ export default class UserService {
 	baseUrl: string;
 	constructor() {
 		this.request = new Request();
-		this.baseUrl = 'https://ya-praktikum.tech/api/v2';
+		this.baseUrl = baseUrl;
 	}
 
 	async getUserInfo(): Promise<UserInfo> {

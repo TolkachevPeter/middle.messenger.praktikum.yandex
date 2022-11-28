@@ -1,3 +1,4 @@
+import { baseUrl, wssBaseUrl } from '../config/config';
 import Request from './request';
 
 interface Chat {
@@ -28,8 +29,8 @@ export default class ChatService {
 
 	constructor() {
 		this.request = new Request();
-		this.baseUrl = 'https://ya-praktikum.tech/api/v2';
-		this.wssBaseUrl = 'wss://ya-praktikum.tech/ws/chats';
+		this.baseUrl = baseUrl;
+		this.wssBaseUrl = wssBaseUrl;
 	}
 
 	async getChats(): Promise<Chat[]> {
