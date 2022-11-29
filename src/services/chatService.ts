@@ -54,7 +54,7 @@ export default class ChatService {
 					data: { title }
 				});
 		} catch (error) {
-			throw new Error(error);
+			console.log(error);
 		}
 	}
 
@@ -68,7 +68,7 @@ export default class ChatService {
 					data: { chatId }
 				});
 		} catch (error) {
-			throw new Error(error);
+			console.log(error);
 		}
 	}
 

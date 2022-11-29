@@ -4,7 +4,7 @@ export default `
     {{> toChat}}
   </div>
   <div class="profileContainer__main">
-    <div class="profileImage"></div>
+    <div class="profileImage" style="background-image: url('{{avatarUrl}}')"></div>
     <div class="profileName">{{displayName}}</div>
     <div class="profileInputFields">
     <form name="userForm" class="profileForm" onsubmit="return false">

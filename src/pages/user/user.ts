@@ -17,6 +17,7 @@ import RenderHelper from '../../commonClasses/RenderHelper';
 import Router from '../../services/router';
 import UserController from './user.controller';
 import getFormData from '../../utils/getFormData';
+import { baseUrl } from '../../config/config';
 
 export default class User extends Block {
 	button: Button;
@@ -35,6 +36,7 @@ export default class User extends Block {
 	logout: Text;
 	updateUser: Text;
 	updatePassword: Text;
+	avatar: Button;
 	constructor() {
 		super('div');
 		this.router = new Router();
@@ -115,6 +117,12 @@ export default class User extends Block {
 				click: this.onClickChat.bind(this),
 			},
 		});
+		this.avatar = new Button({
+			buttonStyle: '',
+			// events: {
+			// 	click: this.onClickAvatar.bind(this),
+			// },
+		});
 		this.logout = new Text({
 			textStyle: 'profileConfigs__logout',
 			text: 'Logout',
@@ -181,6 +189,10 @@ export default class User extends Block {
 			this.toChat.renderAsHTMLString()
 		);
 		renderHelper.registerPartial(
+			'avatarUrl',
+			this.avatar.renderAsHTMLString()
+		);
+		renderHelper.registerPartial(
 			'logout',
 			this.logout.renderAsHTMLString()
 		);
@@ -218,11 +230,13 @@ export default class User extends Block {
 		);
 		const templateHTML = renderHelper.generate(user, 
 			{displayName: this.user.display_name 
-			|| this.user.first_name + ' ' + this.user.second_name});
+			|| this.user.first_name + ' ' + this.user.second_name,
+			avatarUrl: baseUrl + '/resources/' + this.user.avatar});
 		return renderHelper.replaceElements(templateHTML, [
 			this.updateUser,
 			this.updatePassword,
 			this.toChat,
+			this.avatar,
 			this.logout,
 			...this.getAllInputs(),
 		]);

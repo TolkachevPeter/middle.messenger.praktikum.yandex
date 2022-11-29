@@ -22,6 +22,7 @@ export default class UserService {
 		} catch (e) {
 			throw new Error(`Error getting user info: ${e.message}`);
 		}
+		console.log('user', user);
 		return user;
 	}
 
@@ -35,7 +36,7 @@ export default class UserService {
 					data
 				});
 		} catch(error){
-			throw new Error(`Error sing up: ${error.message}`);
+			console.error(`Error sing up: ${error.message}`);
 		}
 	}
 
@@ -86,7 +87,7 @@ export default class UserService {
 		try{
 			await this.request.post(`${this.baseUrl}/auth/logout`);
 		} catch (e) {
-			throw new Error(`Error logging out: ${e.message}`);
+			console.error(`Error logging out: ${e.message}`);
 		}
 	}
 }

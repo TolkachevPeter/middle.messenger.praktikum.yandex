@@ -1,13 +1,15 @@
-import { GenericObject } from './../types/types';
 import { v4 as makeUUID } from 'uuid';
 import EventBus from './EventBus';
 import RenderHelpers from './RenderHelper';
 
 type AllowedTags = 'div' | 'button';
-export default class Block {
+export default abstract class Block {
 	private _element: HTMLElement;
 	private _meta: { props: any, tagName: AllowedTags };
-	props: GenericObject;
+	// пусть будет так.
+	// с этим не совсем понял как наследовать классы тогда
+	// abstract class Block<Props extends Record<string, any> = unknown> {
+	props: Record<string, any>;
 	eventBus: () => EventBus;
 	static eventBus: () => EventBus;
 	private _id: string;
@@ -113,10 +115,22 @@ export default class Block {
 			);
 		});
 	}
+	private _removeEvents() {
+		const { events = {} } = this.props;
+		Object.keys(events).forEach((eventName) => {
+			this._element.removeEventListener(
+				eventName,
+				events[eventName],
+			);
+		});
+	}
 
 	private _render() {
 		const block = this.render();
 		this._element.innerHTML = '';
+		// посмотрел вот эту работу, https://github.com/Filimonsha/middle.messenger.praktikum.yandex/blob/sprint_3/src/utils/framework/block/index.ts
+		// вродку куда-то сюда пихнули.
+		this._removeEvents();
 		this._element.appendChild(block);
 		this._addEvents();
 	}
