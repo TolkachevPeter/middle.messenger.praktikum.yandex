@@ -1,12 +1,13 @@
+import { GenericObject } from './../types/types';
 import { v4 as makeUUID } from 'uuid';
 import EventBus from './EventBus';
 import RenderHelpers from './RenderHelper';
 
-type allowedTags = 'div' | 'button';
+type AllowedTags = 'div' | 'button';
 export default class Block {
 	private _element: HTMLElement;
-	private _meta: { props: any, tagName: allowedTags };
-	props: any;
+	private _meta: { props: any, tagName: AllowedTags };
+	props: GenericObject;
 	eventBus: () => EventBus;
 	static eventBus: () => EventBus;
 	private _id: string;
@@ -20,7 +21,7 @@ export default class Block {
 	};
 	rh: RenderHelpers;
 
-	constructor(tagName: allowedTags = 'div', props = {}, isFullPageHeight = false, isFullPageWidth = false) {
+	constructor(tagName: AllowedTags = 'div', props = {}, isFullPageHeight = false, isFullPageWidth = false) {
 		const eventBus = new EventBus();
 		this._meta = {
 			tagName,
@@ -64,7 +65,6 @@ export default class Block {
 	_createDocumentElement(tagName: string) {
 		const element = document.createElement(tagName);
 		element.setAttribute('data-id', this._id);
-		// todo: refactor and remove this part, it's not correct to assign styles here
 		if (this.isFullPageHeight) {
 			element.style.height = '100%';
 		}
