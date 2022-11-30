@@ -68,9 +68,12 @@ export default class ChatList extends Block {
 	}
 
 	async onClickLinkToCreateChat(){
-		await this.controller.createChat('title');
-		const update = await this.controller.getChats();
-		this.setProps({chatContacts: update});
+		let chatName = prompt('Please enter chat name', '');
+		if(chatName) {
+			await this.controller.createChat(chatName);
+			const update = await this.controller.getChats();
+			this.setProps({chatContacts: update});
+		}
 	}
 	async onClickLinkToRemoveChat(){
 		const { selectedChat } = this.props;
