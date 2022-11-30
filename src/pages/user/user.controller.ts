@@ -18,4 +18,7 @@ export default class UserController {
 	async updateUserInfo(data: UserInfo){
 		return await this.userService.updateUserInfo(data);
 	}
+	async updateUserAvatar(fileList: FileList){
+		return await this.userService.updateUserAvatar(fileList);
+	}
 }

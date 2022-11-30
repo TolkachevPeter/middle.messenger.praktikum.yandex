@@ -19,8 +19,13 @@ export default `
     <div class="profileConfigs">
       {{> changeUserInfo}}
       {{> changePassword}}
+      {{> changeAvatar}}
       {{> logout}}
     </div>
+    <form id="avatarForm" name="avatarForm" enctype="multipart/form-data" hidden>
+    <input id="avatarInput" type="file" name="avatar" accept="image/*">
+    <input id="avatarFormSubmit" type="submit">
+    </form> 
   </div>
 </div>
 `;

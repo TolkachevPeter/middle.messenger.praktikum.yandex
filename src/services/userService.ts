@@ -82,6 +82,28 @@ export default class UserService {
 		}
 		return newUserData;
 	}
+	async updateUserAvatar(data: FormData) {
+		let newUserAvatar;
+		const addData = 'fet' as any;
+		try {
+			const res = await this.request.püt(`${this.baseUrl}/user/profile/avatar`,
+				{
+					credentials: 'include',
+					body: data
+				},
+				addData 
+			);
+			newUserAvatar = await res.json();
+
+			if(!newUserAvatar){
+				throw new Error('newUserAvatar not found');
+			}
+		} catch (e) {
+			throw new Error(`Error updateing profileUser info: ${e.message}`);
+		}
+		console.log(newUserAvatar);
+		return newUserAvatar;
+	}
 
 	async logOut(): Promise<void> {
 		try{

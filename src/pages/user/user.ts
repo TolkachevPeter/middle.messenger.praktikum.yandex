@@ -37,6 +37,7 @@ export default class User extends Block {
 	updateUser: Text;
 	updatePassword: Text;
 	avatar: Button;
+	updateAvatar: Text;
 	constructor() {
 		super('div');
 		this.router = new Router();
@@ -119,9 +120,6 @@ export default class User extends Block {
 		});
 		this.avatar = new Button({
 			buttonStyle: '',
-			// events: {
-			// 	click: this.onClickAvatar.bind(this),
-			// },
 		});
 		this.logout = new Text({
 			textStyle: 'profileConfigs__logout',
@@ -140,6 +138,13 @@ export default class User extends Block {
 			text: 'Change password',
 			events: {
 				click: this.onClickPassword.bind(this),
+			},
+		});
+		this.updateAvatar = new Text({
+			text: 'Change avatar',
+			textStyle: 'updateAvatar',
+			events: {
+				click: this.onClickAvatar.bind(this),
 			},
 		});
 	}
@@ -164,6 +169,92 @@ export default class User extends Block {
 			const updatedUserData = await this.controller.updateUserInfo(userData);
 			this.setProps(updatedUserData);
 		}
+	}
+
+	async onClickAvatar(event: Event) {
+		event?.preventDefault();
+		console.log('что же ты не работаешь?!!!!');
+		const avatarInput = document.getElementById('avatarInput')as HTMLInputElement;
+		const avatarSubmit = document.getElementById('avatarFormSubmit');
+		const myUserForm = document.getElementById('avatarForm') as HTMLFormElement;
+		// myUserForm!.addEventListener('submit', event => {
+		// 	event.preventDefault();
+		// 	console.log('here');
+		// });
+		// myUserForm.addEventListener('submit', event => {
+
+		// })
+
+		// avatarInput!.onchange(()=> {
+
+		// });
+		// avatarInput!.onsubmit(event => {
+		// 	console.log('gsddfs!!!');
+		// });
+		// }
+
+		// avatarInput.onchange = async () => {
+		// const { avatarForm } = document.forms as Form;
+		// 	const form = new FormData(avatarForm);
+		// 	console.log(form);
+		// 	await this.controller.updateUserAvatar(form);
+		// };
+		// avatarSubmit!.onchange = async () => {
+		// 	event.preventDefault();
+		// };
+		const sendAvatar = async (form: FormData) => await this.controller.updateUserAvatar(form);
+		const updateUser = async (updatedData: UserInfo) => this.setProps(updatedData);
+		myUserForm.onsubmit = async function(event) {
+			event.preventDefault();
+			// const fileList = this.filis as FileList;
+			// const data = new FormData(this.files);
+			// const { avatarForm } = document.forms as Form;
+			// avatarForm.append('avatar', this.files);
+
+			// const userData = getFormData(avatarForm) as UserInfo;
+			const form = new FormData(myUserForm);
+
+
+			// const formData = new FormData();
+			// formData.append('avatar', this.files);
+			// const value = Object.fromEntries(formData.entries());
+			// console.log(formData);
+			// console.log(value);
+
+			const updateUserData: UserInfo = await sendAvatar(form);
+			updateUser(updateUserData);
+
+			// };
+			// const host = 'https://ya-praktikum.tech';
+
+			// fetch(`${host}/api/v2/user/profile/avatar`, {
+			// 	method: 'PUT',
+			// 	credentials: 'include', // Нам нужно подставлять cookies
+			// 	// mode: 'cors', // Работаем с CORS
+			// 	body: form,
+			//   })
+			// 	.then(response => response.json())
+			// 	.then(data => {
+			// 	  console.log(data);
+			// 	  return data;
+			// 	});
+			
+
+
+		};
+		if(avatarInput){
+			avatarInput!.click();
+		}
+
+		avatarInput.onchange = () => {
+			event.preventDefault();
+			avatarSubmit?.click();
+		};
+		// span[0].parentNode!.replaceChild(input, span[0]);
+		// console.log('here', span[0].parentNode!);
+		// const userData = getFormData(userForm) as UserInfo;
+		// const updatedUserData = await this.controller.updateUserInfo(userData);
+		// this.setProps(updatedUserData);
 	}
 
 	getAllInputs() {
@@ -205,6 +296,10 @@ export default class User extends Block {
 			this.updatePassword.renderAsHTMLString()
 		);
 		renderHelper.registerPartial(
+			'changeAvatar',
+			this.updateAvatar.renderAsHTMLString()
+		);
+		renderHelper.registerPartial(
 			'loginInput',
 			this.loginInput.renderAsHTMLString()
 		);
@@ -235,6 +330,7 @@ export default class User extends Block {
 		return renderHelper.replaceElements(templateHTML, [
 			this.updateUser,
 			this.updatePassword,
+			this.updateAvatar,
 			this.toChat,
 			this.avatar,
 			this.logout,
