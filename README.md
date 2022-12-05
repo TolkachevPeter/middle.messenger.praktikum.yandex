@@ -1,8 +1,8 @@
-https://github.com/TolkachevPeter/middle.messenger.praktikum.yandex/pull/2
+https://github.com/TolkachevPeter/middle.messenger.praktikum.yandex/pull/3
 
 # Чатик
 
-Потемкинские деревни в стиле WhatsApp
+смотрите ветку sprint_3
 
 ## Demo
 
