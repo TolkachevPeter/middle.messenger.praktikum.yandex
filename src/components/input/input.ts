@@ -17,7 +17,7 @@ type Props = {
     style_justifyContentSpaceBetween?: boolean;
     isValid?: boolean;
     isLabelEnabled?: boolean;
-    validation?: {
+    validation: {
         regex: RegExp;
         validationMessage: string;
     };

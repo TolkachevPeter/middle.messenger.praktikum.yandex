@@ -25,6 +25,29 @@ export default class UserService {
 		console.log('user', user);
 		return user;
 	}
+	async getPersonByLogin(login: string): Promise<UserInfo> {
+		let user: UserInfo;
+		try {
+			const res = await this.request.post(`${this.baseUrl}/user/search`,
+				{
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+					},
+					data: {
+						login
+					}
+				});
+			user = JSON.parse(res.response);
+
+			if(!user){
+				throw new Error('User not found');
+			}
+		} catch (e) {
+			throw new Error(`Error getting user info: ${e.message}`);
+		}
+		console.log('user', user);
+		return user;
+	}
 
 	async singUp(data: singUpUserData) {
 		try {

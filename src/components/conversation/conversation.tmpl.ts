@@ -2,7 +2,10 @@ export default `
 	<div class="chatwindow">
 		<div class="chatwindow__header">
 			<div class="chatwindow__header_profileimage_small"></div>
-			<div class="chatwindow__header_settings"></div>
+			<div>
+			{{>searchPerson}}
+			{{>removePerson}}
+			</div>
 		</div>
 		<div class="message">
             {{>messages}}

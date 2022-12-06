@@ -227,20 +227,6 @@ export default class User extends Block {
 			// };
 			// const host = 'https://ya-praktikum.tech';
 
-			// fetch(`${host}/api/v2/user/profile/avatar`, {
-			// 	method: 'PUT',
-			// 	credentials: 'include', // Нам нужно подставлять cookies
-			// 	// mode: 'cors', // Работаем с CORS
-			// 	body: form,
-			//   })
-			// 	.then(response => response.json())
-			// 	.then(data => {
-			// 	  console.log(data);
-			// 	  return data;
-			// 	});
-			
-
-
 		};
 		if(avatarInput){
 			avatarInput!.click();

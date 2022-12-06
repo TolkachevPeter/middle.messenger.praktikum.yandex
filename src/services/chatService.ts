@@ -43,6 +43,40 @@ export default class ChatService {
 		}
 		return chats;
 	}
+	async addPersonsToChat(userIds: number[], chatId: number): Promise<void> {
+		try {
+			await this.request.put(`${this.baseUrl}/chats/users`,
+				{
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+					},
+					data: { 
+						users: userIds,
+						chatId
+					}
+				}
+			);
+		} catch (error) {
+			throw new Error(error);
+		}
+	}
+	async deletePersonsToChat(userIds: number[], chatId: number): Promise<void> {
+		try {
+			await this.request.delete(`${this.baseUrl}/chats/users`,
+				{
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+					},
+					data: { 
+						users: userIds,
+						chatId
+					}
+				}
+			);
+		} catch (error) {
+			throw new Error(error);
+		}
+	}
 
 	async createChat(title: string): Promise<void> {
 		try {

@@ -11,6 +11,8 @@ import { noEmptyStringCheck } from '../../global/regex';
 import Message from '../messages';
 import EventBus from '../../commonClasses/EventBus';
 import { isArray, isObject } from '../../services/request';
+import Text from '../../components/text';
+
 
 type ConversationProps = {
 	chatId?: number,
@@ -38,9 +40,12 @@ export default class Conversation extends Block {
 	messages: Message[];
 	wss: WebSocket;
 	rwMessages: RwMessage[];
+	searchPerson: Text;
+	removePerson: Text;
 
 	constructor(props: ConversationProps) {
 		super('div', props, false, true);
+		console.log('props conversation', props);
 	}
 
 	async componentDidMount() {
@@ -65,6 +70,45 @@ export default class Conversation extends Block {
 				click: this.onSubmitMessage.bind(this),
 			},
 		});
+		this.searchPerson = new Text({
+			text: 'add person to chat',
+			events: {
+				click: this.onClickAddPerson.bind(this),
+			},
+		});
+		this.removePerson = new Text({
+			text: 'remove person from chat',
+			events: {
+				click: this.onClickRemovePerson.bind(this),
+			},
+		});
+	}
+
+	async onClickAddPerson(){
+		let personLogin = prompt('Please enter person login', '');
+		if(personLogin) {
+			const userInfo = await this.controller.getPersonByLogin(personLogin);
+			if(userInfo && userInfo[0]?.id && this.props.chatId) {
+				const personId = [userInfo[0].id as number];
+				this.controller.addPersonToChat(personId, this.props.chatId);
+			} else {
+				console.error('person id not found');
+				alert('person id not found');
+			}
+		}
+	}
+	async onClickRemovePerson(){
+		let personLogin = prompt('Please enter person login', '');
+		if(personLogin) {
+			const userInfo = await this.controller.getPersonByLogin(personLogin);
+			if(userInfo && userInfo[0]?.id && this.props.chatId) {
+				const personId = [userInfo[0].id as number];
+				this.controller.deletePersonToChat(personId, this.props.chatId);
+			} else {
+				console.error('person id not found');
+				alert('person id not found');
+			}
+		}
 	}
 
 	getMessagesBefore() {
@@ -111,8 +155,8 @@ export default class Conversation extends Block {
 		const parsedData = JSON.parse(data);
 		if (isArray(parsedData)) {
 			parsedData.forEach((el: RwMessage) => this.rwMessages.push(el));
-		} else if (isObject(parsedData)) {
-			this.rwMessages.push(parsedData as RwMessage);
+		} else if (isObject(parsedData)) {			
+			parsedData.type === 'message' && this.rwMessages.push(parsedData as RwMessage);
 		} else {
 			throw new Error('Not supported type of parsed WS response!');
 		}
@@ -140,6 +184,14 @@ export default class Conversation extends Block {
 			this.submitMessageButton.renderAsHTMLString()
 		);
 		renderHelper.registerPartial(
+			'searchPerson',
+			this.searchPerson.renderAsHTMLString()
+		);
+		renderHelper.registerPartial(
+			'removePerson',
+			this.removePerson.renderAsHTMLString()
+		);
+		renderHelper.registerPartial(
 			'messages',
 			this.messages.map(message => message.renderAsHTMLString()).join('')
 		);
@@ -147,6 +199,8 @@ export default class Conversation extends Block {
 		return renderHelper.replaceElements(templateHTML, [
 			this.messageInput,
 			this.submitMessageButton,
+			this.searchPerson,
+			this.removePerson,
 			...this.messages,
 		]);
 	}
