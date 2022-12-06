@@ -17,7 +17,7 @@ https://github.com/TolkachevPeter/middle.messenger.praktikum.yandex/pull/3
 ## Demo
 
 ```
-https://frabjous-paletas-38af62.netlify.app
+https://deploy-preview-3--frabjous-paletas-38af62.netlify.app/
 ```
 
 
