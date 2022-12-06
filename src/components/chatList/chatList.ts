@@ -9,9 +9,11 @@ import EventBus from '../../commonClasses/EventBus';
 import ChatContact from '../chatContact';
 import Router from '../../services/router';
 import ChatListController from './chatList.controller';
+import {ChatContact as ChatContactType} from '../../types/types';
+
 
 type ChatListProps = {
-    chatContacts: Chat[];
+    chatContacts: ChatContactType[];
     localEventBus: EventBus;
 };
 

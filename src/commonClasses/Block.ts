@@ -5,7 +5,7 @@ import RenderHelpers from './RenderHelper';
 type AllowedTags = 'div' | 'button';
 export default abstract class Block {
 	private _element: HTMLElement;
-	private _meta: { props: any, tagName: AllowedTags };
+	private _meta: { props: Record<string, any>, tagName: AllowedTags };
 	// пусть будет так.
 	// с этим не совсем понял как наследовать классы тогда
 	// abstract class Block<Props extends Record<string, any> = unknown> {
@@ -76,7 +76,7 @@ export default abstract class Block {
 		return element;
 	}
 
-	setProps = (nextProps: any) => {
+	setProps = (nextProps: Record<string, any>) => {
 		if (!nextProps) {
 			return;
 		}

@@ -8,10 +8,11 @@ import EventBus from '../../commonClasses/EventBus';
 import Conversation from '../../components/conversation';
 import ChatList from '../../components/chatList/chatList';
 import ChatController from './chat.controller';
+import { ChatContact } from '../../types/types';
 
 export default class Chat extends Block {
-	chatContacts: any;
-	localEventBus: any;
+	chatContacts: ChatContact[];
+	localEventBus: EventBus;
 	renderAfterChatSelection: any;
 	chatList: ChatList;
 	conversation: Conversation;

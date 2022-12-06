@@ -1,25 +1,6 @@
 import { baseUrl, wssBaseUrl } from '../config/config';
+import { ChatContact } from '../types/types';
 import Request from './request';
-
-interface Chat {
-	id: number,
-	title: string,
-	avatar: string,
-	unread_count: number,
-	last_message: {
-		user: {
-			first_name: string,
-			second_name: string,
-			avatar: string,
-			email: string,
-			login: string,
-			phone: string
-		},
-		time: Date,
-		content: string
-	}
-}
-
 
 export default class ChatService {
 	request: Request;
@@ -33,8 +14,8 @@ export default class ChatService {
 		this.wssBaseUrl = wssBaseUrl;
 	}
 
-	async getChats(): Promise<Chat[]> {
-		let chats: Chat[];
+	async getChats(): Promise<ChatContact[]> {
+		let chats: ChatContact[];
 		try {
 			const res = await this.request.get(`${this.baseUrl}/chats`);
 			chats = JSON.parse(res.response);
