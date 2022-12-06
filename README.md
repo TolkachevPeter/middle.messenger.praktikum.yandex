@@ -4,6 +4,7 @@ https://github.com/TolkachevPeter/middle.messenger.praktikum.yandex/pull/3
 
 ![](https://img.shields.io/github/languages/top/TolkachevPeter/middle.messenger.praktikum.yandex)
 ![](https://img.shields.io/github/languages/count/TolkachevPeter/middle.messenger.praktikum.yandex)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7f9f2f99-dee1-441c-bc02-a3eef9478d28/deploy-status)](https://app.netlify.com/sites/frabjous-paletas-38af62/deploys)
 
 
 
