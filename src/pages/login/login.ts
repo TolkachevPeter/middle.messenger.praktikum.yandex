@@ -89,7 +89,6 @@ export default class Login extends Block {
 	}
 
 	onClickLinkToRegistration() {
-		console.log('click Registration');
 		this.router.go('/sign-up');
 	}
 

@@ -124,7 +124,6 @@ export default class UserService {
 		} catch (e) {
 			throw new Error(`Error updateing profileUser info: ${e.message}`);
 		}
-		console.log(newUserAvatar);
 		return newUserAvatar;
 	}
 

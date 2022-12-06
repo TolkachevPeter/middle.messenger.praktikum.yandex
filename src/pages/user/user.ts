@@ -173,7 +173,6 @@ export default class User extends Block {
 
 	async onClickAvatar(event: Event) {
 		event?.preventDefault();
-		console.log('что же ты не работаешь?!!!!');
 		const avatarInput = document.getElementById('avatarInput')as HTMLInputElement;
 		const avatarSubmit = document.getElementById('avatarFormSubmit');
 		const myUserForm = document.getElementById('avatarForm') as HTMLFormElement;

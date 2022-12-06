@@ -17,7 +17,6 @@ type Props = {
 export default class ChatContact extends Block {
 	constructor(props: Props) {
 		super('div', props);
-		console.log(props);
 	}
 
 	render() {

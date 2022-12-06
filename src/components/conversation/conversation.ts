@@ -45,7 +45,6 @@ export default class Conversation extends Block {
 
 	constructor(props: ConversationProps) {
 		super('div', props, false, true);
-		console.log('props conversation', props);
 	}
 
 	async componentDidMount() {

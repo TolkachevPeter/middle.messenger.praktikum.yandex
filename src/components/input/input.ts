@@ -115,7 +115,6 @@ export default class Input extends Block {
 			validationMessage: this.valid.validationMessage || '',
 			isLabelEnabled: this.props.isLabelEnabled || true,
 		});
-		console.log('this.props.isValid', this.props.isValid);
 		return renderHelper.convertHtmlToDom(templateHTML);
 	}
 }
