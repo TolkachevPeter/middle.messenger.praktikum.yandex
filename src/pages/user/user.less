@@ -54,6 +54,8 @@
 	border: none;
 	position: relative;
 	cursor: pointer;
+	background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .profileName {
@@ -65,7 +67,7 @@
 	color: #1E1E1E;
 }
 
-.profileInputFields {
+.userInputStyle {
 	width: 35vw;
 	margin-top: 2rem;
 
@@ -81,6 +83,7 @@
 	div {
 		padding: 0.6rem 0 0.5rem 0;
 		border-bottom: 1px solid #EAEAEA;
+		margin: 0 25%;
 	}
 
 	:last-child {
@@ -99,4 +102,22 @@
 	.profileConfigs__logout {
 		color: #FF0000;
 	}
+}
+
+.userLabelStyle {
+	.fontMedium;
+	display: none;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 0.6rem;
+	line-height: 0.6rem;
+	color: @baseGray;
+}
+
+.userInputStyle {
+	outline: 0;
+	margin-top: 1.8rem;
+	height: 1.5rem;
+	border-width: 0 0 1px;
+	border-color: @ultramarineBlue;
 }
