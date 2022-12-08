@@ -1,6 +1,6 @@
 export default `
 <div class="container">
-  <form class="registrationForm">
+  <form class="registrationForm" name="registrationForm">
     <div>
       <p class="form__header">Registration</p>
       {{> emailInput }}

@@ -4,27 +4,28 @@ export default `
     {{> toChat}}
   </div>
   <div class="profileContainer__main">
-    <div class="profileImage"></div>
-    <div class="profileName">Ivan</div>
+    <div class="profileImage" style="background-image: url('{{avatarUrl}}')"></div>
+    <div class="profileName">{{displayName}}</div>
     <div class="profileInputFields">
+    <form name="userForm" class="profileForm" onsubmit="return false">
       {{> emailInput}}
       {{> loginInput}}
       {{> nameInput}}
       {{> surnameInput}}
       {{> displayName}}
       {{> phoneInput}}
+      </form>
     </div>
     <div class="profileConfigs">
-      <div>
-        <span class="profileConfigs__changeUserSettings">Change user settings</span>
-      </div>
-      <div>
-        <span class="profileConfigs__changePassword">Change password</span>
-      </div>
-      <div>
-        <span class="profileConfigs__logout">Logout</span>
-      </div>
+      {{> changeUserInfo}}
+      {{> changePassword}}
+      {{> changeAvatar}}
+      {{> logout}}
     </div>
+    <form id="avatarForm" name="avatarForm" enctype="multipart/form-data" hidden>
+    <input id="avatarInput" type="file" name="avatar" accept="image/*">
+    <input id="avatarFormSubmit" type="submit">
+    </form> 
   </div>
 </div>
 `;

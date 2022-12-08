@@ -1,34 +1,41 @@
+import { v4 as makeUUID } from 'uuid';
 import EventBus from './EventBus';
-export default class Block {
+import RenderHelpers from './RenderHelper';
+
+type AllowedTags = 'div' | 'button';
+export default abstract class Block {
 	private _element: HTMLElement;
-	private _meta: { props: any; tagName: 'div' | 'button' };
-	props: any;
+	private _meta: { props: Record<string, any>, tagName: AllowedTags };
+	// пусть будет так.
+	// с этим не совсем понял как наследовать классы тогда
+	// abstract class Block<Props extends Record<string, any> = unknown> {
+	props: Record<string, any>;
 	eventBus: () => EventBus;
 	static eventBus: () => EventBus;
 	private _id: string;
 	isFullPageHeight: boolean;
+	isFullPageWidth: boolean;
 	static EVENTS = {
 		INIT: 'init',
 		FLOW_CDM: 'flow:component-did-mount',
 		FLOW_RENDER: 'flow:render',
 		FLOW_CDU: 'flow:component-did-update',
 	};
+	rh: RenderHelpers;
 
-	constructor(
-		tagName: 'div' | 'button' = 'div',
-		props = {},
-		isFullPageHeight = false
-	) {
+	constructor(tagName: AllowedTags = 'div', props = {}, isFullPageHeight = false, isFullPageWidth = false) {
 		const eventBus = new EventBus();
 		this._meta = {
 			tagName,
 			props,
 		};
-		this._id = Math.random().toString(16).slice(2);
+		this._id = makeUUID();
 		this.props = this._makePropsProxy(props);
 		this.eventBus = () => eventBus;
 		this._registerEvents(eventBus);
 		this.isFullPageHeight = isFullPageHeight;
+		this.isFullPageWidth = isFullPageWidth;
+		this.rh = new RenderHelpers();
 		eventBus.emit(Block.EVENTS.INIT);
 	}
 
@@ -44,6 +51,14 @@ export default class Block {
 		this.eventBus().emit(Block.EVENTS.FLOW_CDM);
 	}
 
+	hide() {
+		this.getElement().style.display = 'none';
+	}
+
+	show() {
+		this.getElement().style.display = 'block';
+	}
+
 	private _createResources() {
 		const { tagName } = this._meta;
 		this._element = this._createDocumentElement(tagName);
@@ -55,10 +70,13 @@ export default class Block {
 		if (this.isFullPageHeight) {
 			element.style.height = '100%';
 		}
+		if (this.isFullPageWidth) {
+			element.style.width = '100%';
+		}
 		return element;
 	}
 
-	setProps = (nextProps: any) => {
+	setProps = (nextProps: Record<string, any>) => {
 		if (!nextProps) {
 			return;
 		}
@@ -66,15 +84,15 @@ export default class Block {
 		Object.assign(this.props, nextProps);
 	};
 
-	private _componentDidMount() {
-		this.componentDidMount();
+	private async _componentDidMount() {
+		await this.componentDidMount();
 		this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
 	}
 
 	componentDidMount() {}
 
-	private _componentDidUpdate() {
-		this.componentDidUpdate();
+	private async _componentDidUpdate() {
+		await this.componentDidUpdate();
 		this._render();
 	}
 
@@ -91,13 +109,28 @@ export default class Block {
 	private _addEvents() {
 		const { events = {} } = this.props;
 		Object.keys(events).forEach((eventName) => {
-			this._element.addEventListener(eventName, events[eventName]);
+			this._element.addEventListener(
+				eventName,
+				events[eventName],
+			);
+		});
+	}
+	private _removeEvents() {
+		const { events = {} } = this.props;
+		Object.keys(events).forEach((eventName) => {
+			this._element.removeEventListener(
+				eventName,
+				events[eventName],
+			);
 		});
 	}
 
 	private _render() {
 		const block = this.render();
 		this._element.innerHTML = '';
+		// посмотрел вот эту работу, https://github.com/Filimonsha/middle.messenger.praktikum.yandex/blob/sprint_3/src/utils/framework/block/index.ts
+		// вродку куда-то сюда пихнули.
+		this._removeEvents();
 		this._element.appendChild(block);
 		this._addEvents();
 	}
@@ -110,12 +143,8 @@ export default class Block {
 		return document.createElement('div');
 	}
 
-	show() {
-		this.getElement().style.display = 'block';
-	}
-
-	hide() {
-		this.getElement().style.display = 'none';
+	forceRender() {
+		this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
 	}
 
 	private _makePropsProxy(props: any) {

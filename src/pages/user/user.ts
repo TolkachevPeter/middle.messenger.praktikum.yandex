@@ -3,43 +3,51 @@ import user from './user.tmpl';
 import './user.less';
 import Button from '../../components/button';
 import Block from '../../commonClasses/Block';
-import { Form } from '../../types/types';
+import { Form, UserInfo } from '../../types/types';
 import Input from '../../components/input/input';
 import {
 	emailCheck,
 	loginCheck,
 	nameOrSurnameCheck,
-	passwordCheck,
 	phoneCheck,
 } from '../../global/regex';
 import Link from '../../components/link';
-import { navigateTo } from '../../router';
+import Text from '../../components/text';
 import RenderHelper from '../../commonClasses/RenderHelper';
-import UserService, { UserInfo } from '../../services/userService';
+import Router from '../../services/router';
+import UserController from './user.controller';
+import getFormData from '../../utils/getFormData';
+import { baseUrl } from '../../config/config';
 
 export default class User extends Block {
 	button: Button;
 	loginInput: Input;
-	passwordInput: Input;
 	linkToRegistration: Link;
 	emailInput: Input;
 	nameInput: Input;
 	surnameInput: Input;
 	phoneInput: Input;
 	passwordSecondInput: Input;
-	service: UserService;
 	user: UserInfo;
 	displayNameInput: Input;
 	toChat: Button;
+	router: Router;
+	controller: UserController;
+	logout: Text;
+	updateUser: Text;
+	updatePassword: Text;
+	avatar: Button;
+	updateAvatar: Text;
 	constructor() {
 		super('div');
+		this.router = new Router();
 	}
 
-	componentDidMount() {
-		this.service = new UserService();
-		this.user = this.service.getUserInfo();
+	async componentDidMount() {
+		this.controller = new UserController();
+		this.user = await this.controller.getUserInfo();
 		this.loginInput = new Input({
-			inputText: 'Login',
+			inputText: 'login',
 			inputPlaceholder: 'Login',
 			inputStyle: 'userInputStyle',
 			labelStyle: 'userLabelStyle',
@@ -47,9 +55,10 @@ export default class User extends Block {
 			readOnly: false,
 			mediumMarginHorizontally: true,
 			validation: loginCheck,
+			isValid: true,
 		});
 		this.emailInput = new Input({
-			inputText: 'Email',
+			inputText: 'email',
 			inputPlaceholder: 'Email',
 			inputStyle: 'userInputStyle',
 			labelStyle: 'userLabelStyle',
@@ -57,9 +66,10 @@ export default class User extends Block {
 			mediumMarginHorizontally: true,
 			validation: emailCheck,
 			inputValue: this.user.email,
+			isValid: true,
 		});
 		this.nameInput = new Input({
-			inputText: 'Name',
+			inputText: 'first_name',
 			inputPlaceholder: 'Name',
 			inputStyle: 'userInputStyle',
 			labelStyle: 'userLabelStyle',
@@ -67,9 +77,10 @@ export default class User extends Block {
 			mediumMarginHorizontally: true,
 			validation: nameOrSurnameCheck,
 			inputValue: this.user.first_name,
+			isValid: true,
 		});
 		this.surnameInput = new Input({
-			inputText: 'Surname',
+			inputText: 'second_name',
 			inputPlaceholder: 'Surname',
 			inputStyle: 'userInputStyle',
 			labelStyle: 'userLabelStyle',
@@ -77,9 +88,10 @@ export default class User extends Block {
 			mediumMarginHorizontally: true,
 			validation: nameOrSurnameCheck,
 			inputValue: this.user.second_name,
+			isValid: true,
 		});
 		this.displayNameInput = new Input({
-			inputText: 'DisplayName',
+			inputText: 'display_name',
 			inputPlaceholder: 'DisplayName',
 			inputStyle: 'userInputStyle',
 			labelStyle: 'userLabelStyle',
@@ -87,9 +99,10 @@ export default class User extends Block {
 			mediumMarginHorizontally: true,
 			validation: nameOrSurnameCheck,
 			inputValue: this.user.display_name,
+			isValid: true,
 		});
 		this.phoneInput = new Input({
-			inputText: 'Phone',
+			inputText: 'phone',
 			inputPlaceholder: 'Phone',
 			inputStyle: 'userInputStyle',
 			labelStyle: 'userLabelStyle',
@@ -97,22 +110,7 @@ export default class User extends Block {
 			mediumMarginHorizontally: true,
 			validation: phoneCheck,
 			inputValue: this.user.phone,
-		});
-		this.passwordInput = new Input({
-			inputText: 'Password',
-			inputPlaceholder: 'Password',
-			inputStyle: 'userInputStyle',
-			inputType: 'password',
-			labelStyle: 'userLabelStyle',
-			mediumMarginHorizontally: true,
-			validation: passwordCheck,
-		});
-		this.button = new Button({
-			buttonStyle: 'defaultButton',
-			buttonText: 'Change user info',
-			events: {
-				click: this.onClickUser.bind(this),
-			},
+			isValid: true,
 		});
 		this.toChat = new Button({
 			buttonStyle: 'roundButton',
@@ -120,16 +118,46 @@ export default class User extends Block {
 				click: this.onClickChat.bind(this),
 			},
 		});
+		this.avatar = new Button({
+			buttonStyle: '',
+		});
+		this.logout = new Text({
+			textStyle: 'profileConfigs__logout',
+			text: 'Logout',
+			events: {
+				click: this.onClickLogout.bind(this),
+			},
+		});
+		this.updateUser = new Text({
+			text: 'Change user info',
+			events: {
+				click: this.onClickUser.bind(this),
+			},
+		});
+		this.updatePassword = new Text({
+			text: 'Change password',
+			events: {
+				click: this.onClickPassword.bind(this),
+			},
+		});
+		this.updateAvatar = new Text({
+			text: 'Change avatar',
+			textStyle: 'updateAvatar',
+			events: {
+				click: this.onClickAvatar.bind(this),
+			},
+		});
 	}
 
 	onClickChat() {
-		console.log('click to Chat');
-		navigateTo('chatPage');
+		this.router.go('/messenger');
+	}
+	onClickPassword() {
+		this.router.go('/404');
 	}
 
-	onClickUser() {
+	async onClickUser() {
 		const { userForm } = document.forms as Form;
-		getFormData(userForm);
 		this.getAllInputs().forEach((input) => {
 			input.validateInput();
 		});
@@ -137,8 +165,81 @@ export default class User extends Block {
 			.map((inpField) => inpField.getIsInputValid())
 			.every((isValidField) => isValidField);
 		if (isValidationPassed) {
-			navigateTo('chatPage');
+			const userData = getFormData(userForm) as UserInfo;
+			const updatedUserData = await this.controller.updateUserInfo(userData);
+			this.setProps(updatedUserData);
 		}
+	}
+
+	async onClickAvatar(event: Event) {
+		event?.preventDefault();
+		const avatarInput = document.getElementById('avatarInput')as HTMLInputElement;
+		const avatarSubmit = document.getElementById('avatarFormSubmit');
+		const myUserForm = document.getElementById('avatarForm') as HTMLFormElement;
+		// myUserForm!.addEventListener('submit', event => {
+		// 	event.preventDefault();
+		// 	console.log('here');
+		// });
+		// myUserForm.addEventListener('submit', event => {
+
+		// })
+
+		// avatarInput!.onchange(()=> {
+
+		// });
+		// avatarInput!.onsubmit(event => {
+		// 	console.log('gsddfs!!!');
+		// });
+		// }
+
+		// avatarInput.onchange = async () => {
+		// const { avatarForm } = document.forms as Form;
+		// 	const form = new FormData(avatarForm);
+		// 	console.log(form);
+		// 	await this.controller.updateUserAvatar(form);
+		// };
+		// avatarSubmit!.onchange = async () => {
+		// 	event.preventDefault();
+		// };
+		const sendAvatar = async (form: FormData) => await this.controller.updateUserAvatar(form);
+		const updateUser = async (updatedData: UserInfo) => this.setProps(updatedData);
+		myUserForm.onsubmit = async function(event) {
+			event.preventDefault();
+			// const fileList = this.filis as FileList;
+			// const data = new FormData(this.files);
+			// const { avatarForm } = document.forms as Form;
+			// avatarForm.append('avatar', this.files);
+
+			// const userData = getFormData(avatarForm) as UserInfo;
+			const form = new FormData(myUserForm);
+
+
+			// const formData = new FormData();
+			// formData.append('avatar', this.files);
+			// const value = Object.fromEntries(formData.entries());
+			// console.log(formData);
+			// console.log(value);
+
+			const updateUserData: UserInfo = await sendAvatar(form);
+			updateUser(updateUserData);
+
+			// };
+			// const host = 'https://ya-praktikum.tech';
+
+		};
+		if(avatarInput){
+			avatarInput!.click();
+		}
+
+		avatarInput.onchange = () => {
+			event.preventDefault();
+			avatarSubmit?.click();
+		};
+		// span[0].parentNode!.replaceChild(input, span[0]);
+		// console.log('here', span[0].parentNode!);
+		// const userData = getFormData(userForm) as UserInfo;
+		// const updatedUserData = await this.controller.updateUserInfo(userData);
+		// this.setProps(updatedUserData);
 	}
 
 	getAllInputs() {
@@ -148,20 +249,40 @@ export default class User extends Block {
 			this.nameInput,
 			this.surnameInput,
 			this.phoneInput,
-			this.passwordInput,
 			this.displayNameInput,
 		];
+	}
+
+	async onClickLogout() {
+		await this.controller.logOut();
+		this.router.go('/');
 	}
 
 	render() {
 		const renderHelper = new RenderHelper();
 		renderHelper.registerPartial(
-			'changeUserInfo',
-			this.button.renderAsHTMLString()
-		);
-		renderHelper.registerPartial(
 			'toChat',
 			this.toChat.renderAsHTMLString()
+		);
+		renderHelper.registerPartial(
+			'avatarUrl',
+			this.avatar.renderAsHTMLString()
+		);
+		renderHelper.registerPartial(
+			'logout',
+			this.logout.renderAsHTMLString()
+		);
+		renderHelper.registerPartial(
+			'changeUserInfo',
+			this.updateUser.renderAsHTMLString()
+		);
+		renderHelper.registerPartial(
+			'changePassword',
+			this.updatePassword.renderAsHTMLString()
+		);
+		renderHelper.registerPartial(
+			'changeAvatar',
+			this.updateAvatar.renderAsHTMLString()
 		);
 		renderHelper.registerPartial(
 			'loginInput',
@@ -187,39 +308,19 @@ export default class User extends Block {
 			'phoneInput',
 			this.phoneInput.renderAsHTMLString()
 		);
-		renderHelper.registerPartial(
-			'passwordInput',
-			this.passwordInput.renderAsHTMLString()
-		);
-		const templateHTML = renderHelper.generate(user);
+		const templateHTML = renderHelper.generate(user, 
+			{displayName: this.user.display_name 
+			|| this.user.first_name + ' ' + this.user.second_name,
+			avatarUrl: baseUrl + '/resources/' + this.user.avatar});
 		return renderHelper.replaceElements(templateHTML, [
-			this.button,
+			this.updateUser,
+			this.updatePassword,
+			this.updateAvatar,
 			this.toChat,
+			this.avatar,
+			this.logout,
 			...this.getAllInputs(),
 		]);
 	}
 }
 
-export function getFormData(form: HTMLFormElement) {
-	const formData: FormData = new FormData(form);
-	const consoleData = [...formData.entries()].reduce(
-		(prev: Record<string, any>, [k, v]) => {
-			prev[k] = v;
-			return prev;
-		},
-		{}
-	);
-	console.log(consoleData);
-}
-
-
-
-// function randomEmail() {
-// 	const chars = 'abcdefghijklmnopqrstuvwxyz1234567890';
-// 	let string = '';
-// 	for (var ii = 0; ii < 15; ii++) {
-// 		string += chars[Math.floor(Math.random() * chars.length)];
-// 	}
-// 	return `${string}"@gmail.com"`;
-
-// }

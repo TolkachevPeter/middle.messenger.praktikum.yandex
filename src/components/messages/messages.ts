@@ -1,61 +1,43 @@
-import messages from './messages.tmpl';
+import notRenderedTemplateRight from './messages.right.tmpl';
+import notRenderedTemplateLeft from './messages.left.tmpl';
 import './messages.less';
 import Button from '../button';
 import Block from '../../commonClasses/Block';
 import RenderHelper from '../../commonClasses/RenderHelper';
-import { noEmptyStringCheck } from '../../global/regex';
 import Input from '../input';
-import { Form } from '../../types/types';
-import { getFormData } from '../../pages/registration/registration';
+import Handlebars from 'handlebars';
 
 
-export default class Messages extends Block {
+
+type MessageProps = {
+	messageText: string,
+	messageTime: string,
+	isMessageAuthor: boolean,
+	events?: { click: ()=> void }
+}
+export default class Message extends Block {
 	rh: RenderHelper;
 	submitMessageButton: Button;
 	renderHelper: RenderHelper;
 	messageInput: Input;
-	constructor() {
-		super('div');
+	templateToRender: string;
+	constructor(props: MessageProps) {
+		super('div', props);
 	}
 
 	componentDidMount() {
-		this.messageInput = new Input({
-			inputPlaceholder: 'Message',
-			inputType: 'text',
-			inputText: 'Message',
-			inputStyle: 'form-message__inputfield_style_default',
-			mediumMarginHorizontally: true,
-			validation: noEmptyStringCheck,
-			isLabelEnabled: false,
-		});
-		this.submitMessageButton = new Button({
-			buttonStyle: 'button_style_round-arrow-right',
-			events: {
-				click: this.onClickSubmitMessage.bind(this),
-			},
-		});
+		this.templateToRender = this.props.isMessageAuthor
+			? notRenderedTemplateRight : notRenderedTemplateLeft;
 	}
 
-	onClickSubmitMessage() {
-		const { messageForm } = document.forms as Form;
-		getFormData(messageForm);
-		this.messageInput.validateInput();
-	}
 
 	render() {
 		const renderHelper = new RenderHelper();
-		renderHelper.registerPartial(
-			'messageInput',
-			this.messageInput.renderAsHTMLString()
-		);
-		renderHelper.registerPartial(
-			'submitMessageButton',
-			this.submitMessageButton.renderAsHTMLString()
-		);
-		const templateHTML = renderHelper.generate(messages);
-		return renderHelper.replaceElements(templateHTML, [
-			this.messageInput,
-			this.submitMessageButton,
-		]);
+		const template = Handlebars.compile(this.templateToRender);
+		const templateHTML = template({
+			messageText: this.props.messageText,
+			messageTime: this.props.messageTime,
+		});
+		return renderHelper.convertHtmlToDom(templateHTML);
 	}
 }

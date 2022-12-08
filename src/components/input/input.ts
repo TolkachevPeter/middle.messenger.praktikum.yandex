@@ -17,7 +17,7 @@ type Props = {
     style_justifyContentSpaceBetween?: boolean;
     isValid?: boolean;
     isLabelEnabled?: boolean;
-    validation?: {
+    validation: {
         regex: RegExp;
         validationMessage: string;
     };
@@ -85,8 +85,13 @@ export default class Input extends Block {
 			.value;
 	}
 
+	setInputValue(inputValue: string) {
+		this.setProps({
+			inputValue,
+		});
+	}
+
 	validateInput(){
-		console.log(this.getElement().querySelector('.input'));
 		this.getElement().querySelector('.input')?.dispatchEvent(new Event('blur'));
 	}
 
@@ -106,8 +111,8 @@ export default class Input extends Block {
 			vbox: this.props.vbox || false,
 			style_justifyContentSpaceBetween:
                 this.props.style_justifyContentSpaceBetween || false,
-			isValid: this.props.isValid || false,
-			validationMessage: this.props.validationMessage || '',
+			isValid: this.isValid || false,
+			validationMessage: this.valid.validationMessage || '',
 			isLabelEnabled: this.props.isLabelEnabled || true,
 		});
 		return renderHelper.convertHtmlToDom(templateHTML);

@@ -2,7 +2,7 @@ import registration from './registration.tmpl';
 import './registration.less';
 import Button from '../../components/button';
 import Block from '../../commonClasses/Block';
-import { Form } from '../../types/types';
+import { Form, singUpUserData } from '../../types/types';
 import Input from '../../components/input/input';
 import {
 	emailCheck,
@@ -12,8 +12,10 @@ import {
 	phoneCheck,
 } from '../../global/regex';
 import Link from '../../components/link';
-import { navigateTo } from '../../router';
 import RenderHelper from '../../commonClasses/RenderHelper';
+import Router from '../../services/router';
+import getFormData from '../../utils/getFormData';
+import RegistrationController from './registration.controller';
 
 export default class Login extends Block {
 	button: Button;
@@ -25,8 +27,14 @@ export default class Login extends Block {
 	phoneInput: Input;
 	passwordSecondInput: Input;
 	linkToLogin: Link;
+	router: Router;
+	controller: RegistrationController;
+	isLoggedIn: boolean;
 	constructor() {
 		super('div');
+		this.router = new Router();
+		this.controller = new RegistrationController();
+		this.isLoggedIn = false;
 	}
 
 	componentDidMount() {
@@ -38,67 +46,74 @@ export default class Login extends Block {
 			},
 		});
 		this.loginInput = new Input({
-			inputText: 'Login',
+			inputText: 'login',
 			inputPlaceholder: 'Login',
 			inputStyle: 'registrationInputStyle',
 			labelStyle: 'registrationLabelStyle',
 			readOnly: false,
 			mediumMarginHorizontally: true,
 			validation: loginCheck,
+			isValid: true
 		});
 		this.emailInput = new Input({
-			inputText: 'Email',
+			inputText: 'email',
 			inputPlaceholder: 'Email',
 			inputStyle: 'registrationInputStyle',
 			labelStyle: 'registrationLabelStyle',
 			readOnly: false,
 			mediumMarginHorizontally: true,
 			validation: emailCheck,
+			isValid: true
 		});
 		this.nameInput = new Input({
-			inputText: 'Name',
+			inputText: 'first_name',
 			inputPlaceholder: 'Name',
 			inputStyle: 'registrationInputStyle',
 			labelStyle: 'registrationLabelStyle',
 			readOnly: false,
 			mediumMarginHorizontally: true,
 			validation: nameOrSurnameCheck,
+			isValid: true
 		});
 		this.surnameInput = new Input({
-			inputText: 'Surname',
+			inputText: 'second_name',
 			inputPlaceholder: 'Surname',
 			inputStyle: 'registrationInputStyle',
 			labelStyle: 'registrationLabelStyle',
 			readOnly: false,
 			mediumMarginHorizontally: true,
 			validation: nameOrSurnameCheck,
+			isValid: true
 		});
 		this.phoneInput = new Input({
-			inputText: 'Phone',
+			inputText: 'phone',
 			inputPlaceholder: 'Phone',
 			inputStyle: 'registrationInputStyle',
 			labelStyle: 'registrationLabelStyle',
 			readOnly: false,
 			mediumMarginHorizontally: true,
 			validation: phoneCheck,
+			isValid: true
 		});
 		this.passwordInput = new Input({
-			inputText: 'Password',
+			inputText: 'password',
 			inputPlaceholder: 'Password',
 			inputStyle: 'loginInputStyle',
 			inputType: 'password',
 			labelStyle: 'loginLabelStyle',
 			mediumMarginHorizontally: true,
 			validation: passwordCheck,
+			isValid: true
 		});
 		this.passwordSecondInput = new Input({
-			inputText: 'Password',
+			inputText: 'password',
 			inputPlaceholder: 'Password',
 			inputStyle: 'loginInputStyle',
 			inputType: 'password',
 			labelStyle: 'loginLabelStyle',
 			mediumMarginHorizontally: true,
 			validation: passwordCheck,
+			isValid: true
 		});
 		this.linkToLogin = new Link({
 			linkText: 'Sign In',
@@ -110,21 +125,24 @@ export default class Login extends Block {
 	}
 
 	onClickLinkToSignIn() {
-		navigateTo('loginPage');
+		this.router.go('/');
 	}
 
-	onClickRegistration() {
+	async onClickRegistration() {
 		event!.preventDefault();
 		const { registrationForm } = document.forms as Form;
-		getFormData(registrationForm);
+		const formData = getFormData(registrationForm) as singUpUserData;
 		this.getAllInputs().forEach((input) => {
 			input.validateInput();
 		});
 		const isValidationPassed = this.getAllInputs()
 			.map((inpField) => inpField.getIsInputValid())
 			.every((isValidField) => isValidField);
+		
 		if (isValidationPassed) {
-			navigateTo('chatPage');
+			await this.controller.signUp(formData);
+
+			this.router.go('/messenger');
 		}
 	}
 
@@ -185,16 +203,4 @@ export default class Login extends Block {
 			...this.getAllInputs(),
 		]);
 	}
-}
-
-export function getFormData(form: HTMLFormElement) {
-	const formData: FormData = new FormData(form);
-	const consoleData = [...formData.entries()].reduce(
-		(prev: Record<string, any>, [k, v]) => {
-			prev[k] = v;
-			return prev;
-		},
-		{}
-	);
-	console.log(consoleData);
 }
