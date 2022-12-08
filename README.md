@@ -24,6 +24,7 @@ https://github.com/TolkachevPeter/middle.messenger.praktikum.yandex/pull/3
 - Возможно улучшить валидацию поля email – слишком строгая проверка сейчас;
 - ect.
 
+
 ## Demo
 
 ```
