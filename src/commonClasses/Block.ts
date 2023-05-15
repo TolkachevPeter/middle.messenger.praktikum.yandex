@@ -52,7 +52,10 @@ export default abstract class Block {
 	}
 
 	hide() {
-		this.getElement().style.display = 'none';
+		const element = this.getElement();
+		if (element) {
+			element.style.display = 'none';
+		}	
 	}
 
 	show() {
