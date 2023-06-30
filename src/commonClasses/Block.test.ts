@@ -44,6 +44,7 @@ describe('Block', () => {
 	it('Throws error when trying to access private prop', () => {
 		expect(() => {
 			// @ts-ignore
+			// eslint-disable-next-line no-unused-vars
 			const prop = block.props._privateProp;
 		}).throw();
 	});
