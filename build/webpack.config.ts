@@ -109,6 +109,20 @@ const config: webpack.Configuration = {
 					'less-loader'
 				],
 			},
+			{
+				test: /\.hbs$/,
+				use: [
+					{
+						loader: path.resolve(PATHS.build, 'hbs-loader.ts'),
+						options: {
+							ignorePartials: true,
+							knownHelpersOnly: false,
+							ignoreHelpers: true,
+						},
+					},
+				],
+				exclude: /(node_modules)/,
+			},
 		],
 	},
 	plugins: [
