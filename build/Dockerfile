@@ -13,10 +13,10 @@ COPY ./src ./src
 COPY ./static ./static
 COPY ./eslintignore ./
 COPY ./eslintrc.js ./
-COPY ./nvmrc ./
 COPY ./server.js ./
 COPY ./tsconfig.json ./
 COPY ./stylelintrc.json ./
+COPY ./.nvmrc ./
 
 RUN npm run build
 
