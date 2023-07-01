@@ -3,19 +3,23 @@ FROM node:16-alpine as build-stage
 
 WORKDIR /app
 
+# required to install dependencies
+RUN apk add --no-cache python3 make
+RUN ln -sf python3 /usr/bin/python
+
 ENV NODE_ENV=production
 
 COPY package*.json ./
-RUN npm ci --include=dev
+RUN npm ci --include=dev --ignore-scripts
 
 COPY ./build ./build
 COPY ./src ./src
 COPY ./static ./static
-COPY ./eslintignore ./
-COPY ./eslintrc.js ./
 COPY ./server.js ./
+COPY ./.eslintignore ./
+COPY ./.eslintrc.js ./
 COPY ./tsconfig.json ./
-COPY ./stylelintrc.json ./
+COPY ./.stylelintrc.json ./
 COPY ./.nvmrc ./
 
 RUN npm run build
