@@ -1,0 +1,9 @@
+services:
+- type: web
+  name: middle.messenger.praktikum.yandex
+  env: docker
+  buildCommand: docker build -t middle.messenger.praktikum.yandex_image -f ./build/Dockerfile .
+  startCommand: docker run -d -p 3000:3000 --name middle.messenger.praktikum.yandex middle.messenger.praktikum.yandex_image
+  envVars:
+  - key: NODE_ENV
+    value: production
