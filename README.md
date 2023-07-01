@@ -1,4 +1,4 @@
-https://github.com/TolkachevPeter/middle.messenger.praktikum.yandex/pull/3
+https://github.com/TolkachevPeter/middle.messenger.praktikum.yandex/pull/4
 
 # Чатик
 
@@ -31,6 +31,11 @@ https://github.com/TolkachevPeter/middle.messenger.praktikum.yandex/pull/3
 https://deploy-preview-3--frabjous-paletas-38af62.netlify.app/
 ```
 
+- запущено на render.com с помощью docker и собрано с помощью Webpack, nginx занимается раздачей проекта:
+```
+https://middle-messenger-praktikum-yandex-98xm.onrender.com/
+```
+
 
 ## Макет
 
@@ -38,13 +43,32 @@ https://deploy-preview-3--frabjous-paletas-38af62.netlify.app/
 https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3A1
 ```
 
-## В работе использовались:
+## Использованные технологии и библиотеки
+```
+HTML
+Less
+JS
+TS
+Parcel
+Webpack
+Express.js
+Handlebars
+UUID
+```
 
-- HTML
-- Less
-- JS
-- TS
-- Parcel
+## Утилиты для разработки:
+```
+Eslint
+Mocha
+Sinon
+Chai
+Typescript
+Husky
+less-loader
+ts-loader
+mini-css-extract-plugin
+webpack
+```
 
 
 ## Установка
@@ -79,6 +103,21 @@ npm run build
 
 ```
 npm run start
+```
+
+
+## Скрипты, включенные в проект:
+
+```
+"start": "npm run build && node server.js" - Собрать проект и запустить сервер node.js
+"buildParcel": "parcel build src/index.html" - Сборка проекта с использованием Parcel
+"devParcel": "parcel src/index.html" - Запуск Parcel в режиме разработки
+"lint": "eslint --fix --ext .ts ./" - Запустить eslint с автоматическим исправлением ошибок
+"test": "mocha --require ts-node/register src/**/*.{spec,test}.ts" - Запустить тесты с использованием Mocha
+"dev": "cross-env NODE_ENV=development webpack serve -c build/webpack.config.ts" - Запуск Webpack в режиме разработки
+"build": "cross-env NODE_ENV=production webpack build -c build/webpack.config.ts" - Сборка проекта с использованием Webpack
+"clean": "rimraf dist" - Очистка каталога сборки
+"prepare": "husky install" - Установка git hooks с использованием Husky
 ```
 
 
