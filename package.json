@@ -7,6 +7,7 @@
     "buildParcel": "parcel build src/index.html",
     "devParcel": "parcel src/index.html",
     "lint": "eslint --fix --ext .ts ./",
+    "stylelint": "stylelint '**/*.less' --fix",
     "test": "mocha --require ts-node/register src/**/*.{spec,test}.ts",
     "dev": "cross-env NODE_ENV=development webpack serve -c build/webpack.config.ts",
     "build": "cross-env NODE_ENV=production webpack build -c build/webpack.config.ts",
@@ -46,7 +47,10 @@
     "parcel": "^2.9.3",
     "sinon": "^15.0.4",
     "style-loader": "^3.3.3",
-    "stylelint": "^7.13.0",
+    "stylelint": "^15.9.0",
+    "stylelint-config-recommended": "^12.0.0",
+    "stylelint-config-recommended-less": "^1.0.4",
+    "stylelint-less": "^1.0.7",
     "ts-loader": "^9.4.4",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
@@ -62,7 +66,11 @@
     "uuid": "^9.0.0"
   },
   "lint-staged": {
-    "*.{ts,tsx}": ["eslint --fix"],
-    "*.{css,scss,less}": ["stylelint --fix"]
-  }  
+    "*.{ts,tsx}": [
+      "eslint --fix"
+    ],
+    "*.{css,scss,less}": [
+      "stylelint --fix"
+    ]
+  }
 }

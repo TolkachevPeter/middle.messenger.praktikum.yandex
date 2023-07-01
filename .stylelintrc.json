@@ -1,9 +1,9 @@
 {
-  "extends": "stylelint-config-standard",
+  "extends": ["stylelint-config-recommended", "stylelint-config-recommended-less"],
+  "plugins": ["stylelint-less"],
   "rules": {
-    "color-hex-case": "lower"
+    "block-no-empty": null,
+    "font-family-no-missing-generic-family-keyword": null
   },
-  "ignoreFiles": [
-    "build/*"
-  ]
-} 
+  "ignoreFiles": ["build/*", "node_modules"]
+}
