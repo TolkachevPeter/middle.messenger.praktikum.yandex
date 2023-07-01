@@ -5,15 +5,18 @@ const sinon = require('sinon');
 import Request from './request';
 
 describe('Request', () => {
+
+	const TEST_URL = 'http://localhost:123/test';
+	
 	describe('.get()', () => {
 		it('должен отправлять GET запрос', () => {
 			const request = new Request();
 			const requestStub = sinon.stub(request, 'request');
 			const expectedOptions = { method: 'GET' };
 
-			request.get('http://localhost:123/test');
+			request.get(TEST_URL);
 
-			sinon.assert.calledWith(requestStub, 'http://localhost:123/test', sinon.match(expectedOptions));
+			sinon.assert.calledWith(requestStub, TEST_URL, sinon.match(expectedOptions));
 			sinon.assert.calledOnce(requestStub);
 			expect(requestStub.returnValues[0]).to.be.a('undefined');
 
@@ -27,9 +30,9 @@ describe('Request', () => {
 			const requestStub = sinon.stub(request, 'request');
 			const expectedOptions = { method: 'POST' };
 
-			request.post('http://localhost:123/test');
+			request.post(TEST_URL);
 
-			sinon.assert.calledWith(requestStub, 'http://localhost:123/test', sinon.match(expectedOptions));
+			sinon.assert.calledWith(requestStub, TEST_URL, sinon.match(expectedOptions));
 			sinon.assert.calledOnce(requestStub);
 			expect(requestStub.returnValues[0]).to.be.a('undefined');
 
@@ -43,9 +46,9 @@ describe('Request', () => {
 			const requestStub = sinon.stub(request, 'request');
 			const expectedOptions = { method: 'PUT' };
 
-			request.put('http://localhost:123/test');
+			request.put(TEST_URL);
 
-			sinon.assert.calledWith(requestStub, 'http://localhost:123/test', sinon.match(expectedOptions));
+			sinon.assert.calledWith(requestStub, TEST_URL, sinon.match(expectedOptions));
 			sinon.assert.calledOnce(requestStub);
 			expect(requestStub.returnValues[0]).to.be.a('undefined');
 
@@ -59,9 +62,9 @@ describe('Request', () => {
 			const requestStub = sinon.stub(request, 'request');
 			const expectedOptions = { method: 'DELETE' };
 
-			request.delete('http://localhost:123/test');
+			request.delete(TEST_URL);
 
-			sinon.assert.calledWith(requestStub, 'http://localhost:123/test', sinon.match(expectedOptions));
+			sinon.assert.calledWith(requestStub, TEST_URL, sinon.match(expectedOptions));
 			sinon.assert.calledOnce(requestStub);
 			expect(requestStub.returnValues[0]).to.be.a('undefined');
 
