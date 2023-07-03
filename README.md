@@ -1,4 +1,3 @@
-https://github.com/TolkachevPeter/middle.messenger.praktikum.yandex/pull/5
 # Чатик
 
 ![](https://img.shields.io/github/languages/top/TolkachevPeter/middle.messenger.praktikum.yandex)
@@ -6,8 +5,6 @@ https://github.com/TolkachevPeter/middle.messenger.praktikum.yandex/pull/5
 [![Netlify Status](https://api.netlify.com/api/v1/badges/7f9f2f99-dee1-441c-bc02-a3eef9478d28/deploy-status)](https://app.netlify.com/sites/frabjous-paletas-38af62/deploys)
 
 
-
-Находится в процессе разработки, в конце 4 спринта будет финальная версия.
 
 Онлайн-веб-чат, построенный на простом Typescript без каких-либо фреймворков, проект в рамках курса «мидл фронтенд разработчик» в Яндекс практикум.
 
@@ -26,14 +23,11 @@ https://github.com/TolkachevPeter/middle.messenger.praktikum.yandex/pull/5
 
 ## Demo
 
-```
-https://deploy-preview-3--frabjous-paletas-38af62.netlify.app/
-```
+- [Netlify Preview](https://deploy-preview-3--frabjous-paletas-38af62.netlify.app/)
 
 - запущено на render.com с помощью docker и собрано с помощью Webpack, nginx занимается раздачей проекта:
-```
-https://middle-messenger-praktikum-yandex-98xm.onrender.com/
-```
+
+- [Render.com Deployment](https://middle-messenger-praktikum-yandex-98xm.onrender.com/)
 
 
 ## Макет
@@ -121,3 +115,17 @@ npm run start
 
 
 ![](https://frabjous-paletas-38af62.netlify.app)
+
+## Как сделать вклад
+
+Мы приветствуем любые вклады. Если вы хотите внести свой вклад, вот как вы можете помочь:
+
+- Репортить баги и предлагать улучшения в нашем [issue tracker](https://github.com/TolkachevPeter/middle.messenger.praktikum.yandex/issues)
+- Предлагать новые идеи и обсуждать текущие в нашем [section for ideas](https://github.com/TolkachevPeter/middle.messenger.praktikum.yandex/discussions/categories/ideas)
+- Вносить изменения через [pull requests](https://github.com/TolkachevPeter/middle.messenger.praktikum.yandex/pulls)
+
+
+## Контакты
+
+Если у вас есть вопросы, не стесняйтесь обращаться к [TolkachevPeter](mailto:peter.tolkachev@gmail.com).
+
