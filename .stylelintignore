@@ -1,0 +1,11 @@
+src/pages/login/login.less
+src/pages/user/user.less
+src/pages/registration/registration.less
+src/pages/chats/chat.less
+src/pages/errors/error.less
+src/components/text/text.less
+src/components/messages/messages.less
+src/components/link/link.less
+src/components/conversation/conversation.less
+src/components/chatList/chatList.less
+src/components/button/button.less

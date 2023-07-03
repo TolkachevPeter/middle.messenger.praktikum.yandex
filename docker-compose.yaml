@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  elk-picture:
+    container_name: middle.messenger.praktikum.yandex
+    build:
+      context: ./build
+      dockerfile: Dockerfile
+    image: middle.messenger.praktikum.yandex
+    env_file:
+      - .env
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+          max-file: "7"
+          max-size: "20m"

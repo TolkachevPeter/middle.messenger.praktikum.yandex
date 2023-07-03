@@ -1,0 +1,14 @@
+*/node_modules
+npm-debug.log
+.git
+.gitignore
+.env
+.env.defaults
+.env*
+*.example
+Dockerfile
+docker*.yaml
+.dockerignore
+nodemon.json
+README.md
+test

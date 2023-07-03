@@ -1,35 +1,71 @@
 {
   "name": "middle-messenger-praktikum",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "source": "./src/index.html",
   "scripts": {
     "start": "npm run build && node server.js",
-    "build": "parcel build src/index.html",
-    "dev": "parcel src/index.html",
-    "lint": "eslint --fix --ext .ts ./"
+    "buildParcel": "parcel build src/index.html",
+    "devParcel": "parcel src/index.html",
+    "lint": "eslint --fix --ext .ts ./",
+    "stylelint": "stylelint '**/*.less' --fix",
+    "test": "mocha --require ts-node/register src/**/*.{spec,test}.ts",
+    "dev": "cross-env NODE_ENV=development webpack serve -c build/webpack.config.ts",
+    "build": "cross-env NODE_ENV=production webpack build -c build/webpack.config.ts",
+    "clean": "rimraf dist",
+    "prepare": "husky install"
   },
   "devDependencies": {
-    "@parcel/transformer-css": "2.5.0",
+    "@parcel/transformer-css": "^2.9.3",
     "@parcel/transformer-less": "2.5.0",
+    "@types/mocha": "^10.0.1",
+    "@types/chai": "^4.3.5",
+    "@types/jest": "^29.5.1",
+    "@types/jsdom": "^21.1.1",
+    "@types/sinon": "^10.0.15",
     "@types/uuid": "^8.3.4",
+    "@types/webpack": "^5.28.1",
     "@typescript-eslint/eslint-plugin": "^5.44.0",
     "chai": "^4.3.7",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.8.1",
     "eslint": "^8.28.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-standard-with-typescript": "^23.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.5.1",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-vue": "^9.8.0",
+    "handlebars-loader": "^1.7.3",
+    "html-webpack-plugin": "^5.5.3",
+    "husky": "^8.0.3",
+    "jsdom": "^22.0.0",
     "less": "^4.1.2",
-    "mocha": "^10.1.0",
-    "parcel": "2.5.0",
-    "stylelint": "^14.8.5",
-    "typescript": "^4.9.3"
+    "less-loader": "^11.1.3",
+    "lint-staged": "^13.2.3",
+    "mini-css-extract-plugin": "^2.7.6",
+    "mocha": "^10.2.0",
+    "parcel": "^2.9.3",
+    "sinon": "^15.0.4",
+    "style-loader": "^3.3.3",
+    "stylelint": "^15.9.0",
+    "stylelint-config-recommended": "^12.0.0",
+    "stylelint-config-recommended-less": "^1.0.4",
+    "stylelint-less": "^1.0.7",
+    "ts-loader": "^9.4.4",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^4.9.3",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.9.2"
   },
   "dependencies": {
     "express": "^4.17.3",
     "handlebars": "^4.7.7",
     "uuid": "^9.0.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix"
+    ],
+    "*.{css,scss,less}": [
+      "stylelint --fix"
+    ]
   }
 }
